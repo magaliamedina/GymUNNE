@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="30dp"
+    tools:context=".Login">
+
+    <ImageView
+        android:id="@+id/imglogoSGASLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        app:srcCompat="@drawable/sgas" />
+
+    <EditText
+        android:id="@+id/txt_emailLogin"
+        android:layout_width="match_parent"
+        android:layout_marginTop="40dp"
+        android:layout_height="wrap_content"
+        android:autofillHints=""
+        android:drawableStart="@drawable/vector_person"
+        android:ems="10"
+        android:textSize="18dp"
+        android:hint="@string/txt_email"
+        android:inputType="textEmailAddress" />
+
+    <EditText
+        android:id="@+id/txt_passLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="23dp"
+        android:autofillHints=""
+        android:textSize="18dp"
+        android:drawableStart="@drawable/vector_lock"
+        android:ems="10"
+        android:hint="@string/txt_password"
+        android:inputType="textPassword" />
+
+    <CheckBox
+        android:id="@+id/cbRecordarUsuario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:layout_marginTop="20dp"
+        android:text="Recordar usuario y contraseña" />
+
+    <Button
+        android:id="@+id/btn_iniciarsesion"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:textSize="18dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/colorPrimary"
+        android:text="@string/btn_iniciar_sesion"
+        android:textColor="#ffffff" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/grey"
+        android:layout_marginTop="30dp"
+        android:text="Ante cualquier consulta comunicarse al: "/>
+        <Button
+            android:id="@+id/btnCallPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onClickLlamada"
+            android:background="#0000"
+            android:text="  379-4439627 "
+            android:stateListAnimator="@null"
+            android:drawableStart="@drawable/ic_phone"/>
+    <!--- para quitarle bordes sombreados android:stateListAnimator="@null"-->
+    <Button
+            android:id="@+id/btnSendEmail"
+            android:layout_width="wrap_content"
+            android:background="#0000"
+            android:layout_height="wrap_content"
+            android:onClick="onClickEmail"
+            android:text="  secretaria.sociales.unne@gmail.com  "
+            android:stateListAnimator="@null"
+            android:textAllCaps="false"
+            android:drawableStart="@drawable/ic_email" />
+
+</LinearLayout>

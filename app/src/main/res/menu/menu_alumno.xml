@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/fragmentListarCuposLibres"
+            android:icon="@drawable/ic_reserve"
+            android:title="Reservar un cupo" />
+        <item
+            android:id="@+id/fragmentMisReservas"
+            android:icon="@drawable/ic_mis_reservas"
+            android:title="Mis reservas" />
+        <item
+            android:id="@+id/consultarViaEmail"
+            android:icon="@drawable/ic_email"
+            android:title="Consultar por email" />
+    </group>
+    <group
+        android:id="@+id/menuInferiorAlumno"
+        android:checkableBehavior="none">
+        <item
+            android:id="@+id/logout"
+            android:icon="@drawable/ic_exit"
+            android:title="Cerrar sesión" />
+    </group>
+</menu>

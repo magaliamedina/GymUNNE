@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".view.EditarCupoLibre">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            app:title="Editar cupo libre"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/grey"
+        android:text="Grupo: " />
+
+    <Spinner
+        android:id="@+id/spinnerEditarCuposLibresGrupos"
+        android:layout_width="wrap_content"
+        android:padding="10dp"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/grey"
+            android:text="Fecha: " />
+        <TextView
+            android:id="@+id/tvEditarCuposLibresFechaReserva"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="@color/grey"
+            android:text="fecha de reserva" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="@color/grey"
+            android:textStyle="bold"
+            android:text="Total de cupos libres: " />
+        <EditText
+            android:id="@+id/etEditarCuposLibresTotalCupos"
+            android:layout_width="30dp"
+            android:textSize="18sp"
+            android:textColor="@color/grey"
+            android:layout_height="wrap_content"
+            android:inputType="number"/>
+    </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="@color/grey"
+                android:textStyle="bold"
+                android:text="Estado: " />
+            <EditText
+                android:id="@+id/etEditarCuposLibresEstado"
+                android:layout_width="30dp"
+                android:textSize="18sp"
+                android:textColor="@color/grey"
+                android:layout_height="wrap_content"
+                android:inputType="number"/>
+            <TextView
+                android:layout_marginLeft="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@color/grey"
+                android:text="(0: Inactivo - 1: Activo) " />
+        </LinearLayout>
+
+
+
+    <Button
+        android:id="@+id/btnEditarCupoLibre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@color/colorPrimary"
+        android:textSize="18sp"
+        android:padding="10dp"
+        android:textColor="@color/white"
+        android:text="Guardar"/>
+    </LinearLayout>
+
+</LinearLayout>

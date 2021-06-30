@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".view.DetallesProfesor">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:title="Datos del profesor" />
+    </com.google.android.material.appbar.AppBarLayout>
+    <TextView
+        android:id="@+id/tvId_PersonaDetalle"
+        style="@style/textos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
+        android:text="ID: "
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
+
+    <TextView
+        android:id="@+id/tvIdDetallePersona"
+        style="@style/textos"
+        android:layout_width="39dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="15dp"
+        android:text="ID"
+        app:layout_constraintStart_toEndOf="@+id/tvId_PersonaDetalle"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
+
+    <TextView
+        android:id="@+id/tvDni_DetallePersona"
+        style="@style/textos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
+        android:text="DNI:"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvId_PersonaDetalle" />
+
+    <TextView
+        android:id="@+id/txtdnipersonadetalle"
+        style="@style/textos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="15dp"
+        android:text="DNI"
+        app:layout_constraintStart_toEndOf="@+id/tvDni_DetallePersona"
+        app:layout_constraintTop_toBottomOf="@+id/tvIdDetallePersona" />
+
+    <TextView
+        android:id="@+id/tvApeYNom_DetallePersona"
+        style="@style/textos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
+        android:text="Apellido y Nombre: "
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDni_DetallePersona" />
+
+    <TextView
+        android:id="@+id/txtApeYNompersonadetalle"
+        style="@style/textos"
+        android:layout_width="146dp"
+        android:layout_height="29dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="93dp"
+        android:text="Apellido y nombre"
+        app:layout_constraintStart_toEndOf="@+id/tvApeYNom_DetallePersona"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
+
+    <TextView
+        android:id="@+id/txtsexo_personadetalle"
+        style="@style/textos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
+        android:text="Sexo:"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvApeYNom_DetallePersona" />
+
+    <TextView
+        android:id="@+id/txtsexopersonadetalle"
+        style="@style/textos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="15dp"
+        android:text="Sexo"
+        app:layout_constraintStart_toEndOf="@+id/txtsexo_personadetalle"
+        app:layout_constraintTop_toBottomOf="@+id/tvApeYNom_DetallePersona" />
+
+    <TextView
+        android:id="@+id/txtfechnac_personadetalle"
+        style="@style/textos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
+        android:text="Fecha de nacimiento:"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtsexo_personadetalle" />
+
+    <TextView
+        android:id="@+id/txtfechnacpersonadetalle"
+        style="@style/textos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="52dp"
+        android:text="Fecha"
+        app:layout_constraintStart_toEndOf="@+id/txtfechnac_personadetalle"
+        app:layout_constraintTop_toBottomOf="@+id/txtApeYNompersonadetalle" />
+
+    <TextView
+        android:id="@+id/txtprovincia_personadetalle"
+        style="@style/textos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
+        android:text="Provincia"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtfechnac_personadetalle" />
+
+    <TextView
+        android:id="@+id/txtprovinciapersonadetalle"
+        style="@style/textos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="15dp"
+        android:text="Provincia:"
+        app:layout_constraintStart_toEndOf="@+id/txtprovincia_personadetalle"
+        app:layout_constraintTop_toBottomOf="@+id/txtfechnac_personadetalle" />
+
+    <TextView
+        android:id="@+id/txtestado_personadetalle"
+        style="@style/textos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
+        android:text="Estado: "
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtprovincia_personadetalle" />
+
+    <TextView
+        android:id="@+id/txtestadopersonadetalle"
+        style="@style/textos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="15dp"
+        android:text="Estado"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/txtestado_personadetalle"
+        app:layout_constraintTop_toBottomOf="@+id/txtprovinciapersonadetalle" />
+
+    <TextView
+        android:id="@+id/txtestadocivil_personadetalle"
+        style="@style/textos"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
+        android:text="Estado civil: "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtestado_personadetalle" />
+
+    <TextView
+        android:id="@+id/txtestadocivilpersonadetalle"
+        style="@style/textos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="15dp"
+        android:text="Estado civil"
+        app:layout_constraintStart_toEndOf="@+id/txtestadocivil_personadetalle"
+        app:layout_constraintTop_toBottomOf="@+id/txtestadopersonadetalle" />
+
+    <TextView
+        android:id="@+id/txtemail_personadetalle"
+        style="@style/textos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
+        android:text="Email:"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtestadocivil_personadetalle" />
+
+    <TextView
+        android:id="@+id/txtemailpersonadetalle"
+        style="@style/textos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="15dp"
+        android:text="Email"
+        app:layout_constraintStart_toEndOf="@+id/txtemail_personadetalle"
+        app:layout_constraintTop_toBottomOf="@+id/txtestadocivil_personadetalle" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

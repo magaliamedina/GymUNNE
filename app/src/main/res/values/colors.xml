@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#4782d3</color>
+    <color name="colorPrimaryDark">#3A6FB8</color> <!-- status bar: color de la barra de arriba de la app -->
+    <color name="colorAccent">#042F6A</color>
+    <color name="white">#ffffff</color>
+    <color name="grey">#292929</color>
+
+    <color name="black">#000000</color>
+    <color name="purple_200">#9C27B0</color>
+    <color name="purple_500">#872298</color>
+    <color name="purple_700">#6B147A</color>
+    <color name="teal_200">#8BC34A</color>
+    <color name="teal_700">#5A8C20</color>
+
+    <!-- para la fuente montserrat y open sans -->
+</resources>

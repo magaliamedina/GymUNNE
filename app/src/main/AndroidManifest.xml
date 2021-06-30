@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.gimnasio_unne">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE  " />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".view.ReservasConfirmadas"
+            android:parentActivityName=".PersonalActivity">
+
+        </activity>
+        <activity android:name=".view.AltaHorario" />
+        <activity android:name=".view.AltaPersonal" />
+        <activity
+            android:name=".view.EditarPersonal"
+            android:parentActivityName=".AdministradorActivity" />
+        <activity
+            android:name=".view.DetallesPersonal"
+            android:parentActivityName=".AdministradorActivity" />
+        <activity
+            android:name=".view.EditarCupoLibre"
+            android:parentActivityName=".PersonalActivity" />
+        <activity
+            android:name=".view.Reservar"
+            android:parentActivityName=".AlumnoActivity" />
+        <activity
+            android:name=".view.EditarProfesor"
+            android:parentActivityName=".AdministradorActivity" />
+        <activity
+            android:name=".PersonalActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".AlumnoActivity"
+            android:label="@string/title_activity_alumno"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".view.AltaProfesor"
+            android:parentActivityName=".AdministradorActivity" />
+        <activity
+            android:name=".view.AltaGrupo"
+            android:parentActivityName=".AdministradorActivity" />
+        <activity
+            android:name=".view.DetallesProfesor"
+            android:parentActivityName=".AdministradorActivity" />
+        <activity
+            android:name=".view.EditarGrupos"
+            android:parentActivityName=".AdministradorActivity" />
+        <activity
+            android:name=".view.DetallesGrupo"
+            android:parentActivityName=".AdministradorActivity" />
+        <activity
+            android:name=".AdministradorActivity"
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Login">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

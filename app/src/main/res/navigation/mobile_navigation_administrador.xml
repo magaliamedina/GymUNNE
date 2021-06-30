@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/fragmentListarPersonas">
+
+    <fragment
+        android:id="@+id/fragmentListarGrupos"
+        android:name="com.example.gimnasio_unne.view.fragments.FragmentListarGrupos"
+        android:label="Grupos"
+        tools:layout="@layout/fragment_listar_grupos" />
+    <fragment
+        android:id="@+id/fragmentListarPersonas"
+        android:name="com.example.gimnasio_unne.view.fragments.FragmentListarProfesores"
+        android:label="Profesores"
+        tools:layout="@layout/fragment_listar_profesor" />
+    <fragment
+        android:id="@+id/fragmentListarPersonal"
+        android:name="com.example.gimnasio_unne.view.fragments.FragmentListarPersonal"
+        android:label="Personal"
+        tools:layout="@layout/fragment_listar_personal" />
+    <fragment
+        android:id="@+id/fragmentHorarios"
+        android:name="com.example.gimnasio_unne.view.fragments.FragmentHorarios"
+        android:label="Horarios"
+        tools:layout="@layout/fragment_horarios" />
+</navigation>

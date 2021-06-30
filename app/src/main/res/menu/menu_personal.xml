@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/fragmentReservasPendientes"
+            android:icon="@drawable/ic_reserve"
+            android:title="Reservas pendientes" />
+        <item
+            android:id="@+id/fragmentAltaCuposLibres"
+            android:icon="@drawable/ic_add"
+            android:title="Nuevo cupo libre"/>
+        <item
+            android:id="@+id/fragmentPersonalCuposLibres"
+            android:icon="@drawable/ic_listar"
+            android:title="Listar cupos"/>
+        <item
+            android:id="@+id/fragmentReportes"
+            android:icon="@drawable/ic_report"
+            android:title="Reportes"/>
+    </group>
+    <group
+        android:id="@+id/menuInferiorPersonal"
+        android:checkableBehavior="none">
+        <item
+            android:id="@+id/logoutPersonal"
+            android:icon="@drawable/ic_exit"
+            android:title="Cerrar sesión" />
+    </group>
+</menu>

@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".view.DetallesPersonal">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            app:title="Datos del personal"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="10dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ID: "
+                android:textAppearance="@style/TextAppearance.AppCompat.Display3"
+                style="@style/textos"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/txtidpersonaldetalle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ID"
+                style="@style/textos"
+                android:textSize="18sp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DNI: "
+                android:textAppearance="@style/TextAppearance.AppCompat.Display3"
+                style="@style/textos"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/txtdnipersonaldetalle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DNI"
+                style="@style/textos"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Apellido: "
+                android:textAppearance="@style/TextAppearance.AppCompat.Display3"
+                style="@style/textos"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/txtapellidopersonaldetalle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Apellido"
+                style="@style/textos"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nombres: "
+                android:textAppearance="@style/TextAppearance.AppCompat.Display3"
+                style="@style/textos"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/txtnombrespersonaldetalle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nombres:"
+                style="@style/textos"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sexo: "
+                android:textAppearance="@style/TextAppearance.AppCompat.Display3"
+                style="@style/textos"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/txtsexopersonaldetalle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Sexo"
+                style="@style/textos"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fecha de nacimiento: "
+                android:textAppearance="@style/TextAppearance.AppCompat.Display3"
+                style="@style/textos"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/txtfechnacpersonaldetalle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Fecha de nacimiento"
+                style="@style/textos" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Provincia: "
+                android:textAppearance="@style/TextAppearance.AppCompat.Display3"
+                style="@style/textos"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/txtprovinciapersonaldetalle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Provincia"
+                style="@style/textos"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Estado: "
+                android:textAppearance="@style/TextAppearance.AppCompat.Display3"
+                style="@style/textos"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/txtestadopersonaldetalle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Estado"
+                android:textStyle="bold"
+                style="@style/textos"
+                android:textColor="@android:color/holo_green_dark"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Estado civil: "
+                android:textAppearance="@style/TextAppearance.AppCompat.Display3"
+                style="@style/textos"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/txtestadocivilpersonaldetalle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Estado civil"
+                style="@style/textos"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Email: "
+                android:textAppearance="@style/TextAppearance.AppCompat.Display3"
+                style="@style/textos"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/txtemailpersonaldetalle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Email"
+                style="@style/textos" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".view.EditarPersonal">
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            app:title="Editar datos del personal"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="@color/grey"
+                android:text="ID: "/>
+            <TextView
+                android:id="@+id/tvideditarPersonal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="número de ID"
+                android:textColor="@color/grey"
+                android:inputType="number"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="@color/grey"
+                android:text="DNI: "/>
+            <EditText
+                android:id="@+id/etDnieditarPersonal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="número de DNI"
+                android:textColor="@color/grey"
+                android:inputType="number"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/etApellidoeditarPersonal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Apellido"
+            android:textColor="@color/grey"
+            android:inputType="text" />
+        <EditText
+            android:id="@+id/etNombreseditarPersonal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nombres"
+            android:inputType="text" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="@color/grey"
+                android:text="Sexo:"/>
+            <Spinner
+                android:id="@+id/spinnerSexosEditarPersonal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="@color/grey"
+                android:text="Provincia:"/>
+            <Spinner
+                android:id="@+id/spinnerProvinciaEditarPersonal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fecha de nacimiento:"
+                style="@style/textos"
+                android:textSize="18sp"/>
+            <Button
+                android:id="@+id/btn_date_editarPersonal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:paddingLeft="10dp"
+                android:textColor="@color/grey"
+                style="?android:spinnerStyle"/>
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/etEstadoCivilEditarPersonal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/grey"
+            android:hint="Estado Civil"
+            android:inputType="text"/>
+
+        <EditText
+            android:id="@+id/etEmailEditarPersonal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email"
+            android:textColor="@color/grey"
+            android:ems="10"
+            android:inputType="textEmailAddress" />
+
+        <EditText
+            android:id="@+id/etPasswordEditarPersonal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Contraseña"
+            android:textColor="@color/grey"
+            android:ems="10"
+            android:inputType="textPassword"/>
+
+        <Button
+            android:id="@+id/btneditarPersonal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@color/colorPrimary"
+            android:text="Modificar"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+</LinearLayout>

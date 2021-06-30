@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group
+        android:id="@+id/menu_top"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/fragmentListarGrupos"
+            android:icon="@drawable/ic_grupos"
+            android:title="Grupos" />
+        <item
+            android:id="@+id/fragmentListarPersonas"
+            android:title="Profesores"
+            android:icon="@drawable/vector_person"
+            />
+        <item
+            android:id="@+id/fragmentListarPersonal"
+            android:title="Personal"
+            android:icon="@drawable/vector_person"
+            />
+        <item
+            android:id="@+id/fragmentHorarios"
+            android:title="Horarios"
+            android:icon="@drawable/ic_time"
+            />
+    </group>
+    <group
+        android:id="@+id/menu_inferior"
+        android:checkableBehavior="none">
+        <item
+            android:id="@+id/logoutadmin"
+            android:title="Cerrar Sesión"
+            android:icon="@drawable/ic_exit"
+            />
+    </group>
+
+</menu>

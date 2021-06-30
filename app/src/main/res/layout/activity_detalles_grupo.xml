@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".view.DetallesGrupo">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:title="Detalle de grupo"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="10dp"
+        android:padding="10dp">
+        <TextView
+            android:id="@+id/txtid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="ID: "
+            android:textColor="@color/grey"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/txthorariogrupodetalle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Horario:"
+            android:textColor="@color/grey"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/txtnombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nombre:"
+            android:textColor="@color/grey"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/txtprof"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Profesor:"
+            android:textColor="@color/grey"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/txtcupototal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Total de cupos:"
+            android:textColor="@color/grey"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tvEstadoGrupoDetalle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Estado:"
+            android:textColor="@color/grey"
+            android:textSize="18sp" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</LinearLayout>
