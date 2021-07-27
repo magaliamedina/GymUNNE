@@ -1,6 +1,7 @@
 package com.example.gimnasio_unne.view;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -36,6 +37,12 @@ public class ReservasConfirmadas extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reservas_confirmadas);
         list = findViewById(R.id.lv_reservasConfirmadas);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         adaptador= new AdaptadorPersonas(getApplicationContext(), arrayList);
         list.setAdapter(adaptador);
         Intent intent =getIntent();
@@ -57,8 +64,8 @@ public class ReservasConfirmadas extends AppCompatActivity {
                             String id= jsonArray.getJSONObject(i).getString("personas_id");
                             String apellido= jsonArray.getJSONObject(i).getString("apellido");
                             String nombres= jsonArray.getJSONObject(i).getString("nombres");
-                            String lu = jsonArray.getJSONObject(i).getString("lu");
-                            personas = new Personas(id, apellido, nombres, lu);
+                            String dni = jsonArray.getJSONObject(i).getString("dni");
+                            personas = new Personas(id, apellido, nombres, dni);
                             arrayList.add(personas);
                             adaptador.notifyDataSetChanged();
                         }

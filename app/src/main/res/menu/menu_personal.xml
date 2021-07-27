@@ -7,7 +7,7 @@
         <item
             android:id="@+id/fragmentReservasPendientes"
             android:icon="@drawable/ic_reserve"
-            android:title="Reservas pendientes" />
+            android:title="Alumnos pendientes" />
         <item
             android:id="@+id/fragmentAltaCuposLibres"
             android:icon="@drawable/ic_add"
@@ -16,6 +16,11 @@
             android:id="@+id/fragmentPersonalCuposLibres"
             android:icon="@drawable/ic_listar"
             android:title="Listar cupos"/>
+
+    </group>
+    <group
+        android:id="@+id/menuReportesPersonal"
+        android:checkableBehavior="none">
         <item
             android:id="@+id/fragmentReportes"
             android:icon="@drawable/ic_report"

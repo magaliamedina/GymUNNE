@@ -7,29 +7,11 @@ public class Personas {
 
     public Personas () {}
 
-    public Personas(String id, String apellido, String nombres, String lu){
+    public Personas(String id, String apellido, String nombres, String dni){
+        this.id=id;
         this.apellido = apellido;
         this.nombres = nombres;
-        this.lu=lu;
-    }
-
-    public Personas(String id, String dni, String apellido, String nombres, String sexo, String fechaNac,
-                    String localidad, String provincia, String estado, String estadoCivil, String usuarioId,
-                    String email, String password, String lu) {
-        this.id = id;
-        this.dni = dni;
-        this.apellido = apellido;
-        this.nombres = nombres;
-        this.sexo = sexo;
-        this.fechaNac = fechaNac;
-        this.localidad = localidad;
-        this.provincia = provincia;
-        this.estado = estado;
-        this.estadoCivil = estadoCivil;
-        this.usuarioId = usuarioId;
-        this.email = email;
-        this.password = password;
-        this.lu = lu;
+        this.dni=dni;
     }
 
     public Personas(String id, String dni, String apellido, String nombres, String sexo, String fechaNac,
