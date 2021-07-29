@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".view.fragments.FragmentReportes">
+    tools:context=".view.fragments.FragmentReportePorSexo">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -13,7 +13,7 @@
         <com.github.mikephil.charting.charts.PieChart
             android:id="@+id/pieChartEdadAlumnos"
             android:layout_width="match_parent"
-            android:layout_height="400dp"/>
+            android:layout_height="500dp"/>
     </androidx.cardview.widget.CardView>
 
     <!--com.github.mikephil.charting.charts.BarChart

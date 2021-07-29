@@ -1,8 +1,6 @@
 package com.example.gimnasio_unne.view.fragments;
 
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -17,39 +15,37 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.gimnasio_unne.R;
-import com.example.gimnasio_unne.model.Horarios;
-import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Description;
+import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 
-public class FragmentReportes extends Fragment {
+public class FragmentReportePorSexo extends Fragment {
 
     private PieChart pieChart;
     //private BarChart barChart;
-    String masculino, femenino, otros, total_alumnos;
+    String masculino, femenino, otros;
     String url="https://medinamagali.com.ar/gimnasio_unne/consulta_sexos.php";
 
-    public FragmentReportes() {
+    public FragmentReportePorSexo() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view= inflater.inflate(R.layout.fragment_reportes, container, false);
+        View view= inflater.inflate(R.layout.fragment_reporte_por_sexo, container, false);
         pieChart=view.findViewById(R.id.pieChartEdadAlumnos);
         //barChart=view.findViewById(R.id.barChartInasistencias);
         mostrarDatos();
@@ -58,20 +54,27 @@ public class FragmentReportes extends Fragment {
 
     private void crearGraficoPastel(String masculino, String femenino, String otros) {
         Description description = new Description();
-        description.setText("grafico de pastel");
+        description.setText("Alumnos por género");
         description.setTextSize(15);
         pieChart.setDescription(description);
+
         final ArrayList<PieEntry> pieEntries=new ArrayList<>();
-        int mas_nro =Integer.parseInt(masculino);
-        int fem_nro = Integer.parseInt(femenino);
-        int otros_nro = Integer.parseInt(otros);
 
-        pieEntries.add(new PieEntry(mas_nro,3));
-        pieEntries.add(new PieEntry(fem_nro,8));
-        pieEntries.add(new PieEntry(otros_nro,3));
+        pieEntries.add(new PieEntry(Float.parseFloat(masculino),"Masculino")); //para la leyenda
+        pieEntries.add(new PieEntry(Float.parseFloat(femenino),"Femenino"));
+        pieEntries.add(new PieEntry(Float.parseFloat(otros),"Otros"));
 
-        PieDataSet pieDataSet=new PieDataSet(pieEntries,"leyenda");
+        PieDataSet pieDataSet=new PieDataSet(pieEntries,""); //leyenda
         pieDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+        pieDataSet.setValueTextSize(20);
+        pieDataSet.setValueTextColor(Color.WHITE);
+        pieDataSet.setValueFormatter(new PercentFormatter()); //agregar porcentaje
+
+        Legend legend = pieChart.getLegend();
+        legend.setForm(Legend.LegendForm.CIRCLE);
+        legend.setTextSize(15);
+        legend.setFormSize(20);//tamaño del ciculo de la leyenda
+        //legend.setFormToTextSpace(2);
 
         PieData pieData= new PieData(pieDataSet);
         pieChart.setData(pieData);
@@ -82,12 +85,12 @@ public class FragmentReportes extends Fragment {
             @Override
             public void onResponse(String response) {
                 try {
-                    Log.d("VOLLEY", response);
+                    //Log.d("VOLLEY", response);
                     JSONArray jsonArray = new JSONArray(response);
                     masculino = jsonArray.getJSONObject(0).getString("masculino");
                     femenino = jsonArray.getJSONObject(1).getString("femenino");
                     otros = jsonArray.getJSONObject(2).getString("otros");
-                    total_alumnos = jsonArray.getJSONObject(3).getString("total_alumnos");
+                    Log.d("pepe",masculino);
                     crearGraficoPastel(masculino, femenino, otros);
                 } catch (JSONException e) {
                     e.printStackTrace();
