@@ -47,13 +47,12 @@ import java.util.Map;
 import cz.msebera.android.httpclient.Header;
 
 public class EditarPersonal extends AppCompatActivity {
-    EditText etdni,etapellido, etnombres, etestadocivil,etemail, etpassword;
-    TextView tvid;
+    EditText etdni,etapellido, etnombres, etestadocivil,etemail, etpassword, etestado;
     Spinner spinnerProvincias, spinnerSexos;
     Button btn, btn_date_editarPersonal;
     private AsyncHttpClient cliente;
     int position;
-    private String idprovincia, sexoBD;
+    private String idprovincia, sexoBD,id;
     String [] sexos;
     DatePickerDialog datePickerDialog;
 
@@ -68,12 +67,13 @@ public class EditarPersonal extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        tvid = findViewById(R.id.tvideditarPersonal);
+        //tvid = findViewById(R.id.tvideditarPersonal);
         etdni = findViewById(R.id.etDnieditarPersonal);
         etapellido= findViewById(R.id.etApellidoeditarPersonal);
         etnombres= findViewById(R.id.etNombreseditarPersonal);
         etestadocivil= findViewById(R.id.etEstadoCivilEditarPersonal);
         etemail= findViewById(R.id.etEmailEditarPersonal);
+        etestado= findViewById(R.id.etEstadoEditarPersonal);
         etpassword=findViewById(R.id.etPasswordEditarPersonal);
         spinnerProvincias = findViewById(R.id.spinnerProvinciaEditarPersonal);
         spinnerSexos = findViewById(R.id.spinnerSexosEditarPersonal);
@@ -83,13 +83,14 @@ public class EditarPersonal extends AppCompatActivity {
 
         Intent intent =getIntent();
         position=intent.getExtras().getInt("position");
-        tvid.setText(FragmentListarPersonal.persons.get(position).getId());
+        id = FragmentListarPersonal.persons.get(position).getId();
         etdni.setText(FragmentListarPersonal.persons.get(position).getDni());
         etapellido.setText(FragmentListarPersonal.persons.get(position).getApellido());
         etnombres.setText(FragmentListarPersonal.persons.get(position).getNombres());
         etestadocivil.setText(FragmentListarPersonal.persons.get(position).getEstadoCivil());
         etemail.setText(FragmentListarPersonal.persons.get(position).getEmail());
         etpassword.setText(FragmentListarPersonal.persons.get(position).getPassword());
+        etestado.setText(FragmentListarPersonal.persons.get(position).getEstado());
         btn_date_editarPersonal.setText(FragmentListarPersonal.persons.get(position).getFechaNac());
 
         String sexo_guardado= FragmentListarPersonal.persons.get(position).getSexo();
@@ -171,6 +172,10 @@ public class EditarPersonal extends AppCompatActivity {
             etpassword.setError("Ingrese contraseña");
             return false;
         }
+        if (etestado.getText().toString().isEmpty())  {
+            etestado.setError("Ingrese estado");
+            return false;
+        }
         return true;
     }
 
@@ -209,14 +214,14 @@ public class EditarPersonal extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> parametros= new HashMap<String, String>();
-                parametros.put("persona_id", tvid.getText().toString());
+                parametros.put("persona_id", id);
                 parametros.put("dni", etdni.getText().toString());
                 parametros.put("apellido", etapellido.getText().toString());
                 parametros.put("nombres", etnombres.getText().toString());
                 parametros.put("sexo_id", sexoBD);
                 parametros.put("fecha_nac", btn_date_editarPersonal.getText().toString()) ;
                 parametros.put("provincia", idprovincia);
-                parametros.put("estado", "1");
+                parametros.put("estado", etestado.getText().toString());
                 parametros.put("estado_civil", etestadocivil.getText().toString());
                 parametros.put("email", etemail.getText().toString());
                 parametros.put("password", etpassword.getText().toString());
@@ -228,7 +233,7 @@ public class EditarPersonal extends AppCompatActivity {
     }
 
     private void llenarSpinnerProvincias() {
-        String url = "https://medinamagali.com.ar/gimnasio_unne/consultarprovincias.php?persona_id="+tvid.getText().toString()+"";
+        String url = "https://medinamagali.com.ar/gimnasio_unne/consultarprovincias.php?persona_id="+id+"";
         cliente.post(url, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {

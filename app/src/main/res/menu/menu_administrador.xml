@@ -27,6 +27,18 @@
             />
     </group>
     <group
+        android:id="@+id/menuReportesPersonal"
+        android:checkableBehavior="none">
+        <item
+            android:id="@+id/fragmentReportesAlumnosPorGenero"
+            android:icon="@drawable/ic_report"
+            android:title="Alumnos por género"/>
+        <item
+            android:id="@+id/fragmentReportesAlumnosPorFacultad"
+            android:icon="@drawable/ic_report"
+            android:title="Alumnos por facultad"/>
+    </group>
+    <group
         android:id="@+id/menu_inferior"
         android:checkableBehavior="none">
         <item

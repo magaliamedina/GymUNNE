@@ -26,7 +26,7 @@
             android:parentActivityName=".AdministradorActivity" />
         <activity
             android:name=".view.DetallesPersonal"
-            android:parentActivityName=".AdministradorActivity" />
+            android:parentActivityName=".AdministradorActivity"/>
         <activity
             android:name=".view.EditarCupoLibre"
             android:parentActivityName=".PersonalActivity" />

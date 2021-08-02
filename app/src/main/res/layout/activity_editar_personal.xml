@@ -25,27 +25,6 @@
         android:layout_height="wrap_content"
         android:padding="15dp"
         android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:textColor="@color/grey"
-                android:text="ID: "/>
-            <TextView
-                android:id="@+id/tvideditarPersonal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:hint="número de ID"
-                android:textColor="@color/grey"
-                android:inputType="number"
-                android:textSize="18sp" />
-        </LinearLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -155,6 +134,32 @@
             android:textColor="@color/grey"
             android:ems="10"
             android:inputType="textPassword"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="@color/grey"
+                android:text="Estado: "/>
+            <EditText
+                android:id="@+id/etEstadoEditarPersonal"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/grey"
+                android:inputType="number"
+                android:textSize="18sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="@color/grey"
+                android:text=" (0: inactivo - 1:activo)"/>
+        </LinearLayout>
+
 
         <Button
             android:id="@+id/btneditarPersonal"

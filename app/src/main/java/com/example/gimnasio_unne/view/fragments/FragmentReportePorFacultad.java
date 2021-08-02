@@ -1,4 +1,4 @@
-package com.example.gimnasio_unne;
+package com.example.gimnasio_unne.view.fragments;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -17,6 +17,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.gimnasio_unne.R;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.Legend;

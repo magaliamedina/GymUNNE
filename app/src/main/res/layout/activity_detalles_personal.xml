@@ -35,25 +35,6 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ID: "
-                android:textAppearance="@style/TextAppearance.AppCompat.Display3"
-                style="@style/textos"
-                android:textStyle="bold" />
-            <TextView
-                android:id="@+id/txtidpersonaldetalle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="ID"
-                style="@style/textos"
-                android:textSize="18sp" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="DNI: "
                 android:textAppearance="@style/TextAppearance.AppCompat.Display3"
                 style="@style/textos"

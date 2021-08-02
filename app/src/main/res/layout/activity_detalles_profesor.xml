@@ -23,28 +23,6 @@
             app:popupTheme="@style/AppTheme.PopupOverlay"
             app:title="Datos del profesor" />
     </com.google.android.material.appbar.AppBarLayout>
-    <TextView
-        android:id="@+id/tvId_PersonaDetalle"
-        style="@style/textos"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="15dp"
-        android:text="ID: "
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
-
-    <TextView
-        android:id="@+id/tvIdDetallePersona"
-        style="@style/textos"
-        android:layout_width="39dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="15dp"
-        android:text="ID"
-        app:layout_constraintStart_toEndOf="@+id/tvId_PersonaDetalle"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
 
     <TextView
         android:id="@+id/tvDni_DetallePersona"
@@ -52,29 +30,29 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="20dp"
         android:text="DNI:"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvId_PersonaDetalle" />
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
 
     <TextView
         android:id="@+id/txtdnipersonadetalle"
         style="@style/textos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="20dp"
         android:text="DNI"
         app:layout_constraintStart_toEndOf="@+id/tvDni_DetallePersona"
-        app:layout_constraintTop_toBottomOf="@+id/tvIdDetallePersona" />
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
 
     <TextView
         android:id="@+id/tvApeYNom_DetallePersona"
         style="@style/textos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="15dp"
         android:text="Apellido y Nombre: "
         android:textStyle="bold"
@@ -87,7 +65,7 @@
         android:layout_width="146dp"
         android:layout_height="29dp"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="93dp"
+        android:layout_marginTop="60dp"
         android:text="Apellido y nombre"
         app:layout_constraintStart_toEndOf="@+id/tvApeYNom_DetallePersona"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FragmentReportePorFacultad">
+    tools:context=".view.fragments.FragmentReportePorFacultad">
         <com.github.mikephil.charting.charts.PieChart
             android:layout_margin="15dp"
             android:id="@+id/pieChartAlumnosPorFacultad"

@@ -25,4 +25,15 @@
         android:name="com.example.gimnasio_unne.view.fragments.FragmentHorarios"
         android:label="Horarios"
         tools:layout="@layout/fragment_horarios" />
+
+    <fragment
+        android:id="@+id/fragmentReportesAlumnosPorGenero"
+        android:name="com.example.gimnasio_unne.view.fragments.FragmentReportePorSexo"
+        android:label="Reporte de alumnos por género"
+        tools:layout="@layout/fragment_reporte_por_sexo" />
+    <fragment
+        android:id="@+id/fragmentReportesAlumnosPorFacultad"
+        android:name="com.example.gimnasio_unne.view.fragments.FragmentReportePorFacultad"
+        android:label="Reporte de alumnos por facultad"
+        tools:layout="@layout/fragment_reporte_por_facultad" />
 </navigation>

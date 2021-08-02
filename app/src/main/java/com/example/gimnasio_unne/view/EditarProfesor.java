@@ -49,7 +49,7 @@ import cz.msebera.android.httpclient.Header;
 
 public class EditarProfesor extends AppCompatActivity {
 
-    EditText etdni,etapellido, etnombres, etestadocivil,etemail, etpassword;
+    EditText etdni,etapellido, etnombres, etestadocivil,etemail, etpassword, etestado;
     Spinner spinnerProvincias, spinnerSexos;
     Button btn, btn_date_editarProfesor;
     private AsyncHttpClient cliente;
@@ -75,6 +75,7 @@ public class EditarProfesor extends AppCompatActivity {
         etestadocivil= findViewById(R.id.etEstadoCivilEditarprofesor);
         etemail= findViewById(R.id.etEmailEditarProfesor);
         etpassword=findViewById(R.id.etPasswordEditarProfesor);
+        etestado= findViewById(R.id.etEstadoEditarProfesor);
         spinnerProvincias = findViewById(R.id.spinnerProvinciaEditarProfesor);
         spinnerSexos = findViewById(R.id.spinnerSexosEditarProfesor);
         btn= findViewById(R.id.btneditarprofesor);
@@ -93,6 +94,7 @@ public class EditarProfesor extends AppCompatActivity {
         etestadocivil.setText(FragmentListarProfesores.persons.get(position).getEstadoCivil());
         etemail.setText(FragmentListarProfesores.persons.get(position).getEmail());
         etpassword.setText(FragmentListarProfesores.persons.get(position).getPassword());
+        etestado.setText(FragmentListarProfesores.persons.get(position).getEstado());
         btn_date_editarProfesor.setText(FragmentListarProfesores.persons.get(position).getFechaNac());
 
         String sexo_guardado= FragmentListarProfesores.persons.get(position).getSexo();
@@ -175,6 +177,10 @@ public class EditarProfesor extends AppCompatActivity {
             etpassword.setError("Ingrese contraseña");
             return false;
         }
+        if (etestado.getText().toString().isEmpty())  {
+            etestado.setError("Ingrese estado");
+            return false;
+        }
         return true;
     }
 
@@ -221,7 +227,7 @@ public class EditarProfesor extends AppCompatActivity {
                 parametros.put("sexo_id", sexoBD);
                 parametros.put("fecha_nac", btn_date_editarProfesor.getText().toString());
                 parametros.put("provincia", idprovincia);
-                parametros.put("estado", "1");
+                parametros.put("estado", etestado.getText().toString());
                 parametros.put("estado_civil", etestadocivil.getText().toString());
                 parametros.put("email", etemail.getText().toString());
                 parametros.put("password", etpassword.getText().toString());

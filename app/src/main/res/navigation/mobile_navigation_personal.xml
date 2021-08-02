@@ -20,15 +20,6 @@
         android:name="com.example.gimnasio_unne.view.fragments.FragmentPersonalCuposLibres"
         android:label="Listado de cupos"
         tools:layout="@layout/fragment_listar_cupos_libres" />
-    <fragment
-        android:id="@+id/fragmentReportesAlumnosPorGenero"
-        android:name="com.example.gimnasio_unne.view.fragments.FragmentReportePorSexo"
-        android:label="Reporte de alumnos por género"
-        tools:layout="@layout/fragment_reporte_por_sexo" />
-    <fragment
-        android:id="@+id/fragmentReportesAlumnosPorFacultad"
-        android:name="com.example.gimnasio_unne.FragmentReportePorFacultad"
-        android:label="Reporte de alumnos por facultad"
-        tools:layout="@layout/fragment_reporte_por_facultad" />
+
 
 </navigation>

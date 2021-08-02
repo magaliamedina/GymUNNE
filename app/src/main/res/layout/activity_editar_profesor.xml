@@ -132,6 +132,30 @@
         android:ems="10"
         android:inputType="textPassword"/>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="@color/grey"
+                android:text="Estado: "/>
+            <EditText
+                android:id="@+id/etEstadoEditarProfesor"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:textSize="18sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="@color/grey"
+                android:text=" (0: inactivo - 1:activo)"/>
+        </LinearLayout>
+
     <Button
         android:id="@+id/btneditarprofesor"
         android:layout_width="match_parent"

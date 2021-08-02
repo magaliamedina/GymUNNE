@@ -27,7 +27,7 @@ public class DetallesProfesor extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        tvid = findViewById(R.id.tvIdDetallePersona);
+        //tvid = findViewById(R.id.tvIdDetallePersona);
         tvdni = findViewById(R.id.txtdnipersonadetalle);
         tvApeYnom= findViewById(R.id.txtApeYNompersonadetalle);
         tvsexo = findViewById(R.id.txtsexopersonadetalle);
@@ -42,7 +42,7 @@ public class DetallesProfesor extends AppCompatActivity {
         Intent intent=getIntent();
         position= intent.getExtras().getInt("position");
 
-        tvid.setText(FragmentListarProfesores.persons.get(position).getId());
+        //tvid.setText(FragmentListarProfesores.persons.get(position).getId());
         tvdni.setText(FragmentListarProfesores.persons.get(position).getDni());
         tvApeYnom.setText(FragmentListarProfesores.persons.get(position).getApellido() + " " +
                 FragmentListarProfesores.persons.get(position).getNombres());

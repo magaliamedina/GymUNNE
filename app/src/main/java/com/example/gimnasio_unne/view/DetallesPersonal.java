@@ -25,7 +25,7 @@ public class DetallesPersonal extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        tvid = findViewById(R.id.txtidpersonaldetalle);
+        //tvid = findViewById(R.id.txtidpersonaldetalle);
         tvdni = findViewById(R.id.txtdnipersonaldetalle);
         tvapellido = findViewById(R.id.txtapellidopersonaldetalle);
         tvnombres = findViewById(R.id.txtnombrespersonaldetalle);
@@ -41,7 +41,7 @@ public class DetallesPersonal extends AppCompatActivity {
         Intent intent=getIntent();
         position= intent.getExtras().getInt("position");
 
-        tvid.setText(FragmentListarPersonal.persons.get(position).getId());
+        //tvid.setText(FragmentListarPersonal.persons.get(position).getId());
         tvdni.setText(FragmentListarPersonal.persons.get(position).getDni());
         tvapellido.setText(FragmentListarPersonal.persons.get(position).getApellido());
         tvnombres.setText(FragmentListarPersonal.persons.get(position).getNombres());
