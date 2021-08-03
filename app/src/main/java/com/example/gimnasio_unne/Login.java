@@ -89,32 +89,37 @@ public class Login extends AppCompatActivity {
                 if (!response.isEmpty()) {
                     try {
                         JSONObject jsonObject = new JSONObject(response);
+                        String estado = jsonObject.getString("estado");
                         String usuario_id = jsonObject.getString("usuario_id");
                         personas_id = jsonObject.getString("personas_id");
                         apellido = jsonObject.getString("apellido");
                         nombres = jsonObject.getString("nombres");
                         lu = jsonObject.getString("lu");
-                        guardarSharedPreferences();
-                        edtUsuario.setText("");
-                        edtPassword.setText("");
-                        guardarSesion(cbRecordarUsuario.isChecked(), usuario_id);
-                        //PERFIL ADMINISTRADOR
-                        if (usuario_id.equals("1")) {
-                            finish();
-                            Intent intent = new Intent(getApplicationContext(), AdministradorActivity.class);
-                            startActivity(intent);
-                        }
-                        //PERFIL ESTUDIANTE
-                        else if (usuario_id.equals("3")) {
-                            finish();
-                            Intent intent = new Intent(getApplicationContext(), AlumnoActivity.class);
-                            startActivity(intent);
-                        }
-                        //PERFIL PERSONAL ADMINISTRATIVO
-                        else if (usuario_id.equals("4")) {
-                            finish();
-                            Intent intent = new Intent(getApplicationContext(), PersonalActivity.class);
-                            startActivity(intent);
+                        if (estado.equals("0")){
+                            Toast.makeText(Login.this, "Usuario dado de baja. Consulte al correo electrónico", Toast.LENGTH_LONG).show();
+                        } else {
+                            guardarSharedPreferences();
+                            edtUsuario.setText("");
+                            edtPassword.setText("");
+                            guardarSesion(cbRecordarUsuario.isChecked(), usuario_id);
+                            //PERFIL ADMINISTRADOR
+                            if (usuario_id.equals("1")) {
+                                finish();
+                                Intent intent = new Intent(getApplicationContext(), AdministradorActivity.class);
+                                startActivity(intent);
+                            }
+                            //PERFIL ESTUDIANTE
+                            else if (usuario_id.equals("3")) {
+                                finish();
+                                Intent intent = new Intent(getApplicationContext(), AlumnoActivity.class);
+                                startActivity(intent);
+                            }
+                            //PERFIL PERSONAL ADMINISTRATIVO
+                            else if (usuario_id.equals("4")) {
+                                finish();
+                                Intent intent = new Intent(getApplicationContext(), PersonalActivity.class);
+                                startActivity(intent);
+                            }
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -169,7 +174,7 @@ public class Login extends AppCompatActivity {
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("nya", nombres + " " + apellido);
         editor.putString("lu", lu);
-        editor.putString("id_alumno", personas_id);
+        editor.putString("personas_id", personas_id);
         editor.apply();
     }
 

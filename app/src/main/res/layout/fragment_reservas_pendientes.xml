@@ -11,7 +11,8 @@
         <ListView
             android:id="@+id/lvListarReservas"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:visibility="invisible" />
 
         <TextView
             android:id="@+id/tvSinReservasPendientes"
@@ -21,7 +22,7 @@
             android:textColor="#F44336"
             android:layout_marginTop="250dp"
             android:visibility="invisible"
-            android:text="No hay más reservas pendientes"
+            android:text="No hay reservas pendientes"
             android:layout_gravity="center_horizontal"/>
 
 </FrameLayout>

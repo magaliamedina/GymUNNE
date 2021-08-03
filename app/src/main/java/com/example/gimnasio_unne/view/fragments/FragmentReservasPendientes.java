@@ -111,6 +111,7 @@ public class FragmentReservasPendientes extends Fragment {
                     String sucess=jsonObject.getString("sucess");
                     JSONArray jsonArray=jsonObject.getJSONArray("listarreservas");
                     if (sucess.equals("1")) {
+                        list.setVisibility(View.VISIBLE);
                         tvSinReservasPendientes.setVisibility(View.INVISIBLE);
                         for (int i=0;i<jsonArray.length();i++) {
                             JSONObject object= jsonArray.getJSONObject(i);
@@ -131,6 +132,7 @@ public class FragmentReservasPendientes extends Fragment {
                     }
                     if(jsonArray.length()==0) {
                         tvSinReservasPendientes.setVisibility(View.VISIBLE);
+                        list.setVisibility(View.INVISIBLE);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

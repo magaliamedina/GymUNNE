@@ -58,9 +58,11 @@ public class Reservar extends AppCompatActivity {
         Intent intent=getIntent();
         position= intent.getExtras().getInt("position");
 
+        //caso normal sin recordar usuario y contraseña
         tvNombreEstudiante.setText("Nombre y apellido del estudiante: " + Login.nombres + " " + Login.apellido);
+        alumno_id= Login.personas_id;
         tvLUEstudiante.setText("LU: " +Login.lu);
-        if(Login.lu.equals("")) {
+        if(Login.nombres.equals("")) {
             getSharedPreferences();
         }
         tvDescripcionGrupo.setText(FragmentListarCuposLibres.arrayCuposLibres.get(position).getGrupo_descripcion());
@@ -143,8 +145,8 @@ public class Reservar extends AppCompatActivity {
     public void getSharedPreferences() {
         SharedPreferences sharedPreferences = this.getSharedPreferences("datosusuario",Context.MODE_PRIVATE);
         tvNombreEstudiante.setText("Nombre y apellido del estudiante: " + sharedPreferences.getString("nya", ""));
-        tvLUEstudiante.setText("LU: " +sharedPreferences.getString("lu", ""));
         alumno_id= sharedPreferences.getString("personas_id", "");
+        tvLUEstudiante.setText("LU: " +sharedPreferences.getString("lu", ""));
     }
 
 }
