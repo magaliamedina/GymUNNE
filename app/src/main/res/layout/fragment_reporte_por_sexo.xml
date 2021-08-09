@@ -16,9 +16,5 @@
             android:layout_height="500dp"/>
     </androidx.cardview.widget.CardView>
 
-    <!--com.github.mikephil.charting.charts.BarChart
-        android:id="@+id/barChartInasistencias"
-        android:layout_width="match_parent"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"/-->
+
 </LinearLayout>

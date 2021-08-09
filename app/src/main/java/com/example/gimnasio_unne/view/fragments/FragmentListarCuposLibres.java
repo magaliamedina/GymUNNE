@@ -1,18 +1,22 @@
 package com.example.gimnasio_unne.view.fragments;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.android.volley.Request;
@@ -21,17 +25,14 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.gimnasio_unne.AlumnoActivity;
 import com.example.gimnasio_unne.Login;
 import com.example.gimnasio_unne.R;
-import com.example.gimnasio_unne.view.EditarCupoLibre;
 import com.example.gimnasio_unne.view.Reservar;
 import com.example.gimnasio_unne.model.CuposLibres;
 import com.example.gimnasio_unne.view.adapter.AdaptadorCuposLibres;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.JSONStringer;
 
 import java.util.ArrayList;
 
@@ -53,11 +54,21 @@ public class FragmentListarCuposLibres extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_listar_cupos_libres, container, false);
         tvReservaRealizada=view.findViewById(R.id.tvReservaRealizada);
         list = view.findViewById(R.id.lvListarCuposLibres);
+        ImageView imgSinConexion=view.findViewById(R.id.imgSinConexion);
+        TextView tvSinConexion1=view.findViewById(R.id.tv_sinConexion1);
+        TextView tvSinConexion2=view.findViewById(R.id.tv_sinConexion2);
+        imgSinConexion.setVisibility(View.INVISIBLE);
+        tvSinConexion1.setVisibility(View.INVISIBLE);
+        tvSinConexion2.setVisibility(View.INVISIBLE);
 
-        adaptador= new AdaptadorCuposLibres(getActivity().getApplicationContext(), arrayCuposLibres);
-        list.setAdapter(adaptador);
+        ConnectivityManager con = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = con.getActiveNetworkInfo();
+        if(networkInfo!=null && networkInfo.isConnected()) {
+            //cargar el webservice
+            adaptador= new AdaptadorCuposLibres(getActivity().getApplicationContext(), arrayCuposLibres);
+            list.setAdapter(adaptador);
 
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
@@ -79,7 +90,16 @@ public class FragmentListarCuposLibres extends Fragment {
                     builder.create().show();
                 }
             }); //fin list.setOnItemClickListener
-        mostrarDatos();
+            mostrarDatos();
+        }
+        else {
+            //mensaje de no hay internet
+            imgSinConexion.setVisibility(View.VISIBLE);
+            tvSinConexion1.setVisibility(View.VISIBLE);
+            tvSinConexion2.setVisibility(View.VISIBLE);
+            Toast.makeText(getActivity().getApplicationContext(), "No se pudo conectar, revise el " +
+                    "acceso a Internet e intente nuevamente", Toast.LENGTH_SHORT).show();
+        }
         return view;
     }
 

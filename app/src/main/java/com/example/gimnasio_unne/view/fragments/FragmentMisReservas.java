@@ -3,6 +3,8 @@ package com.example.gimnasio_unne.view.fragments;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 
 import androidx.cardview.widget.CardView;
@@ -12,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,19 +59,40 @@ public class FragmentMisReservas extends Fragment {
         tvNingunaReserva = view.findViewById(R.id.tvNingunaReserva);
         cvMisReservas= view.findViewById(R.id.cvMisReservas);
         btnCancelarReservaMisReservas = view.findViewById(R.id.btnCancelarReservaMisReservas);
+        //sin conexion a internet
+        ImageView imgSinConexion=view.findViewById(R.id.imgSinConexion);
+        TextView tvSinConexion1=view.findViewById(R.id.tv_sinConexion1);
+        TextView tvSinConexion2=view.findViewById(R.id.tv_sinConexion2);
+        imgSinConexion.setVisibility(View.INVISIBLE);
+        tvSinConexion1.setVisibility(View.INVISIBLE);
+        tvSinConexion2.setVisibility(View.INVISIBLE);
 
-        url = "https://medinamagali.com.ar/gimnasio_unne/mi_reserva.php?personas_id="+ Login.personas_id+"";
-        mostrarDatos();
-        btnCancelarReservaMisReservas.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                cancelarReserva(urlEliminarReserva);
-                tvNingunaReserva.setVisibility(View.VISIBLE);
-                cvMisReservas.setVisibility(View.INVISIBLE);
-                Intent i = new Intent(getActivity().getApplicationContext(), AlumnoActivity.class);
-                startActivity(i);
-            }
-        });
+        ConnectivityManager con = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = con.getActiveNetworkInfo();
+        if(networkInfo!=null && networkInfo.isConnected()) {
+            //mostrar datos
+            url = "https://medinamagali.com.ar/gimnasio_unne/mi_reserva.php?personas_id=" + Login.personas_id + "";
+            mostrarDatos();
+            btnCancelarReservaMisReservas.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    cancelarReserva(urlEliminarReserva);
+                    tvNingunaReserva.setVisibility(View.VISIBLE);
+                    cvMisReservas.setVisibility(View.INVISIBLE);
+                    Intent i = new Intent(getActivity().getApplicationContext(), AlumnoActivity.class);
+                    startActivity(i);
+                }
+            });
+        }
+        else {
+            // no hay internet
+            imgSinConexion.setVisibility(View.VISIBLE);
+            tvSinConexion1.setVisibility(View.VISIBLE);
+            tvSinConexion2.setVisibility(View.VISIBLE);
+            tvNingunaReserva.setVisibility(View.INVISIBLE);
+            Toast.makeText(getActivity().getApplicationContext(), "No se pudo conectar, revise el " +
+                    "acceso a Internet e intente nuevamente", Toast.LENGTH_SHORT).show();
+        }
         return view;
     }
 

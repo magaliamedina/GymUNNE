@@ -9,6 +9,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -51,6 +53,7 @@ public class Login extends AppCompatActivity {
         btnCallPhone=findViewById(R.id.btnCallPhone);
         btnSendMail=findViewById(R.id.btnSendEmail);
         cbRecordarUsuario = findViewById(R.id.cbRecordarUsuario);
+
         inicializarElementos();
         if (revisarSesion()) {
             if (revisarUsuario().equals("1")) { //PERFIL ADMINISTRADOR
@@ -72,11 +75,21 @@ public class Login extends AppCompatActivity {
             public void onClick(View v) {
                 usuario = edtUsuario.getText().toString();
                 password = edtPassword.getText().toString();
-                if (!usuario.isEmpty() && !password.isEmpty()) {
-                    validarUsuario("https://medinamagali.com.ar/gimnasio_unne/validar_usuario.php");
-                } else {
-                    edtUsuario.setError("Ingrese usuario");
-                    edtPassword.setError("Ingrese contraseña");
+                ConnectivityManager con = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo networkInfo = con.getActiveNetworkInfo();
+                if(networkInfo!=null && networkInfo.isConnected()) {
+                    //cargar web service
+                    if (!usuario.isEmpty() && !password.isEmpty()) {
+                        validarUsuario("https://medinamagali.com.ar/gimnasio_unne/validar_usuario.php");
+                    } else {
+                        edtUsuario.setError("Ingrese usuario");
+                        edtPassword.setError("Ingrese contraseña");
+                    }
+                }
+                else {
+                    // no hay internet
+                    Toast.makeText(Login.this, "No se pudo conectar, revise el " +
+                            "acceso a Internet e intente nuevamente", Toast.LENGTH_SHORT).show();
                 }
             }
         });

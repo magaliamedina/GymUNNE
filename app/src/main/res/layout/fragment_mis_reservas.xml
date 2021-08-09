@@ -6,85 +6,95 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".view.fragments.FragmentMisReservas">
 
-<TextView
-    android:id="@+id/tvNingunaReserva"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center_horizontal"
-    android:textColor="#F44336"
-    android:textSize="20sp"
-    android:layout_marginTop="250dp"
-    android:text="No hay ninguna reserva realizada"/>
+    <TextView
+        android:id="@+id/tvNingunaReserva"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="250dp"
+        android:text="No hay ninguna reserva realizada"
+        android:textColor="#F44336"
+        android:textSize="20sp"/>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cvMisReservas"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="invisible"
-        app:cardMaxElevation="4dp"
         android:layout_margin="20dp"
-        app:cardElevation="0dp">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:orientation="vertical">
-    <TextView
-        android:id="@+id/tvListarMisReservasGrupo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Nombre del grupo"
-        android:textColor="@color/grey"
-        android:textSize="18sp"
-        android:layout_centerInParent="true"
-        android:layout_margin="5dp"/>
-    <TextView
-        android:id="@+id/tvListarMisReservasNombreProfesor"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Nombre del profesor"
-        android:textColor="@color/grey"
-        android:textSize="18sp"
-        android:layout_centerInParent="true"
-        android:layout_margin="5dp"/>
-    <TextView
-        android:id="@+id/tvListarMisReservasDiayHora"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Días y horario"
-        android:textColor="@color/grey"
-        android:textSize="18sp"
-        android:layout_centerInParent="true"
-        android:layout_margin="5dp"/>
-    <TextView
-        android:id="@+id/tvListarMisReservasFechaReserva"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Fecha de la reserva"
-        android:textColor="@color/grey"
-        android:textSize="18sp"
-        android:layout_centerInParent="true"
-        android:layout_margin="5dp"/>
-        <TextView
-            android:id="@+id/tvListarMisReservasEstadoReserva"
+        android:visibility="invisible"
+        app:cardElevation="0dp"
+        app:cardMaxElevation="4dp">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Estado de la reserva"
-            android:textColor="@color/grey"
-            android:textSize="18sp"
-            android:layout_centerInParent="true"
-            android:layout_margin="5dp"/>
-        <Button
-            android:id="@+id/btnCancelarReservaMisReservas"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="Cancelar reserva"
-            android:textColor="@color/white"
-            android:background="@color/colorPrimary"
-            android:layout_marginTop="10dp"
-            android:textSize="18sp"/>
-    </LinearLayout>
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/tvListarMisReservasGrupo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_margin="5dp"
+                android:text="Nombre del grupo"
+                android:textColor="@color/grey"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tvListarMisReservasNombreProfesor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_margin="5dp"
+                android:text="Nombre del profesor"
+                android:textColor="@color/grey"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tvListarMisReservasDiayHora"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_margin="5dp"
+                android:text="Días y horario"
+                android:textColor="@color/grey"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tvListarMisReservasFechaReserva"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_margin="5dp"
+                android:text="Fecha de la reserva"
+                android:textColor="@color/grey"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tvListarMisReservasEstadoReserva"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_margin="5dp"
+                android:text="Estado de la reserva"
+                android:textColor="@color/grey"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btnCancelarReservaMisReservas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:background="@color/colorPrimary"
+                android:text="Cancelar reserva"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+        </LinearLayout>
     </androidx.cardview.widget.CardView>
+
+    <include
+        layout="@layout/sin_conexion_internet"/>
 
 </FrameLayout>

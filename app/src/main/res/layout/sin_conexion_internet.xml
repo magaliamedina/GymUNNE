@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginTop="200dp"
+    android:layout_gravity="center_horizontal">
+    <ImageView
+        android:id="@+id/imgSinConexion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@drawable/satelite_sin_internet"/>
+    <TextView
+        android:id="@+id/tv_sinConexion1"
+        android:text="¡Parece que no hay internet!"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        android:textSize="24dp"/>
+    <TextView
+        android:id="@+id/tv_sinConexion2"
+        android:text="Revisa tu conexión para seguir navegando."
+        android:layout_width="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        android:textSize="18dp"/>
+
+</LinearLayout>
