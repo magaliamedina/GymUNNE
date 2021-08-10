@@ -1,6 +1,8 @@
 package com.example.gimnasio_unne.view.fragments;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -64,8 +66,16 @@ public class FragmentAltaCuposLibres extends Fragment {
         btnguardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(validarCampos()) {
-                    altaCuposLibres("http://medinamagali.com.ar/gimnasio_unne/altacupolibre.php");
+                ConnectivityManager con = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo networkInfo = con.getActiveNetworkInfo();
+                if(networkInfo!=null && networkInfo.isConnected()) {
+                    if (validarCampos()) {
+                        altaCuposLibres("http://medinamagali.com.ar/gimnasio_unne/altacupolibre.php");
+                    }
+                }
+                else {
+                    Toast.makeText(getActivity().getApplicationContext(), "No se pudo conectar, revise el " +
+                            "acceso a Internet e intente nuevamente", Toast.LENGTH_SHORT).show();
                 }
             }
         });

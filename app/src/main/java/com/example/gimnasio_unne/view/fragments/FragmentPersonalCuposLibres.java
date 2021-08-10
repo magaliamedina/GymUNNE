@@ -1,7 +1,10 @@
 package com.example.gimnasio_unne.view.fragments;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
@@ -11,7 +14,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -47,41 +52,86 @@ public class FragmentPersonalCuposLibres extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view =inflater.inflate(R.layout.fragment_listar_cupos_libres, container, false);
         list = view.findViewById(R.id.lvListarCuposLibres);
-        adaptador= new AdaptadorCuposLibres(getActivity().getApplicationContext(), arrayCuposLibres);
-        list.setAdapter(adaptador);
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+        //sin internet
+        ImageView imgSinConexion=view.findViewById(R.id.imgSinConexion);
+        TextView tvSinConexion1=view.findViewById(R.id.tv_sinConexion1);
+        TextView tvSinConexion2=view.findViewById(R.id.tv_sinConexion2);
+        imgSinConexion.setVisibility(View.INVISIBLE);
+        tvSinConexion1.setVisibility(View.INVISIBLE);
+        tvSinConexion2.setVisibility(View.INVISIBLE);
 
-                CharSequence[] dialogoItem={"Ver alumnos inscriptos","Editar cupo libre", "Dar de baja cupo libre"};
-                //titulo del alert dialog
-                builder.setTitle(arrayCuposLibres.get(position).getGrupo_descripcion());
-                builder.setItems(dialogoItem, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int i) {
-                        switch (i) {
-                            case 0:
-                                //pasamos position para poder recibir en ReservasConfirmadas
-                                startActivity(new Intent(getActivity().getApplicationContext(), ReservasConfirmadas.class)
-                                        .putExtra("position",position));
-                                break;
-                            case 1:
-                                //pasamos position para poder recibir en EditarCupolibre
-                                startActivity(new Intent(getActivity().getApplicationContext(), EditarCupoLibre.class)
-                                        .putExtra("position",position));
-                                break;
-                            case 2:
-                                darDeBajaCupoLibre(arrayCuposLibres.get(position).getId_cupolibre());
-                                break;
+        if(tieneConexionInternet()) {
+            //cargar el web service
+            adaptador = new AdaptadorCuposLibres(getActivity().getApplicationContext(), arrayCuposLibres);
+            list.setAdapter(adaptador);
+            list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+
+                    CharSequence[] dialogoItem = {"Ver alumnos inscriptos", "Editar cupo libre", "Dar de baja cupo libre"};
+                    //titulo del alert dialog
+                    builder.setTitle(arrayCuposLibres.get(position).getGrupo_descripcion());
+                    builder.setItems(dialogoItem, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int i) {
+                            switch (i) {
+                                case 0:
+                                    //pasamos position para poder recibir en ReservasConfirmadas
+                                    if(tieneConexionInternet()) {
+                                        startActivity(new Intent(getActivity().getApplicationContext(), ReservasConfirmadas.class)
+                                                .putExtra("position", position));
+                                    }
+                                    else {
+                                        Toast.makeText(getActivity().getApplicationContext(), "No se pudo conectar, revise el " +
+                                                "acceso a Internet e intente nuevamente", Toast.LENGTH_SHORT).show();
+                                    }
+                                    break;
+                                case 1:
+                                    //pasamos position para poder recibir en EditarCupolibre
+                                    if (tieneConexionInternet()) {
+                                        startActivity(new Intent(getActivity().getApplicationContext(), EditarCupoLibre.class)
+                                                .putExtra("position", position));
+                                    }
+                                    else {
+                                        Toast.makeText(getActivity().getApplicationContext(), "No se pudo conectar, revise el " +
+                                                "acceso a Internet e intente nuevamente", Toast.LENGTH_SHORT).show();
+                                    }
+                                    break;
+                                case 2:
+                                    if(tieneConexionInternet())
+                                        darDeBajaCupoLibre(arrayCuposLibres.get(position).getId_cupolibre());
+                                    else {
+                                        Toast.makeText(getActivity().getApplicationContext(), "No se pudo conectar, revise el " +
+                                                "acceso a Internet e intente nuevamente", Toast.LENGTH_SHORT).show();
+                                    }
+                                    break;
+                            }
                         }
-                    }
-                });
-                builder.create().show();
-            }
-        });
-        mostrarDatos();
+                    });
+                    builder.create().show();
+                }
+            });
+            mostrarDatos();
+        }
+        else {
+            //mensaje de no hay internet
+            imgSinConexion.setVisibility(View.VISIBLE);
+            tvSinConexion1.setVisibility(View.VISIBLE);
+            tvSinConexion2.setVisibility(View.VISIBLE);
+            Toast.makeText(getActivity().getApplicationContext(), "No se pudo conectar, revise el " +
+                    "acceso a Internet e intente nuevamente", Toast.LENGTH_SHORT).show();
+        }
         return view;
+    }
+
+    private boolean tieneConexionInternet() {
+        ConnectivityManager con = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = con.getActiveNetworkInfo();
+        if(networkInfo!=null && networkInfo.isConnected()) {
+            return true;
+        }
+        return false;
     }
 
     public void darDeBajaCupoLibre(final String id) {

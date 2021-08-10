@@ -25,6 +25,9 @@
             android:text="No hay reservas pendientes"
             android:layout_gravity="center_horizontal"/>
 
+        <include
+            layout="@layout/sin_conexion_internet"/>
+
 </FrameLayout>
 
 

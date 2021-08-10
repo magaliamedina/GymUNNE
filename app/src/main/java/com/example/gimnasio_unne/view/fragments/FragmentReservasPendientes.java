@@ -1,13 +1,17 @@
 package com.example.gimnasio_unne.view.fragments;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -54,52 +58,85 @@ public class FragmentReservasPendientes extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_reservas_pendientes, container, false);
-
-        list = view.findViewById(R.id.lvListarReservas);
-        adaptador= new AdaptadorReservas(getActivity().getApplicationContext(), arrayReservas);
         tvSinReservasPendientes= view.findViewById(R.id.tvSinReservasPendientes);
+        list = view.findViewById(R.id.lvListarReservas);
+        //sin conexion a internet
+        ImageView imgSinConexion=view.findViewById(R.id.imgSinConexion);
+        TextView tvSinConexion1=view.findViewById(R.id.tv_sinConexion1);
+        TextView tvSinConexion2=view.findViewById(R.id.tv_sinConexion2);
+        imgSinConexion.setVisibility(View.INVISIBLE);
+        tvSinConexion1.setVisibility(View.INVISIBLE);
+        tvSinConexion2.setVisibility(View.INVISIBLE);
 
-        list.setAdapter(adaptador);
-
-        //Toast.makeText(getActivity().getApplicationContext(), "se recargo", Toast.LENGTH_SHORT).show();
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, final View view, final int position, long id) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
-                String confirmar_reserva="Confirmar reserva";
-                String cancelar_reserva= "Cancelar reserva";
-                CharSequence[] dialogoItem={confirmar_reserva, cancelar_reserva};
-                //titulo del alert dialog
-                //builder.setTitle(Html.fromHtml("<font color='#FF0000'>Reserva número <b>250</b></font>"));
-                builder.setTitle("Reserva número "+arrayReservas.get(position).getId_reserva());
-                builder.setItems(dialogoItem, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int i) {
-                        switch (i) {
-                            case 0:
-                                //ESTADO CONFIRMADO: modificamos el estado en la base de datos
-                                confirmarCancelarReserva(arrayReservas.get(position).getId_reserva(),"1", "Reserva confirmada exitosamente", total_cupolibre);
-                                /*getFragmentManager().beginTransaction().detach(FragmentReservasPendientes.this)
+        if(tieneConexionInternet()) {
+            //mostrar datos
+            adaptador = new AdaptadorReservas(getActivity().getApplicationContext(), arrayReservas);
+            list.setAdapter(adaptador);
+            list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, final View view, final int position, long id) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+                    String confirmar_reserva = "Confirmar reserva";
+                    String cancelar_reserva = "Cancelar reserva";
+                    CharSequence[] dialogoItem = {confirmar_reserva, cancelar_reserva};
+                    //titulo del alert dialog
+                    //builder.setTitle(Html.fromHtml("<font color='#FF0000'>Reserva número <b>250</b></font>"));
+                    builder.setTitle("Reserva número " + arrayReservas.get(position).getId_reserva());
+                    builder.setItems(dialogoItem, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int i) {
+                            switch (i) {
+                                case 0:
+                                    //ESTADO CONFIRMADO: modificamos el estado en la base de datos
+                                    if(tieneConexionInternet()) {
+                                        confirmarCancelarReserva(arrayReservas.get(position).getId_reserva(), "1", "Reserva confirmada exitosamente", total_cupolibre);
+                                        /*getFragmentManager().beginTransaction().detach(FragmentReservasPendientes.this)
                                         .attach(FragmentReservasPendientes.this).commit();*/
-                                break;
-                            case 1:
-                                //ESTADO CANCELADO: cambiamos el estado o borramos de la bd?
-                                Integer total = Integer.parseInt(total_cupolibre);
-                                total=total +1;
-                                String totalCupoLibreString = total+"";
-                                confirmarCancelarReserva(arrayReservas.get(position).getId_reserva(),"2", "Reserva cancelada", totalCupoLibreString);
-                                break;
-                        }
+                                    } else {
+                                        Toast.makeText(getActivity().getApplicationContext(), "No se pudo conectar, revise el " +
+                                                "acceso a Internet e intente nuevamente", Toast.LENGTH_SHORT).show();
+                                    }
+                                    break;
+                                case 1:
+                                    if (tieneConexionInternet()) {
+                                        //ESTADO CANCELADO: cambiamos el estado o borramos de la bd?
+                                        Integer total = Integer.parseInt(total_cupolibre);
+                                        total = total + 1;
+                                        String totalCupoLibreString = total + "";
+                                        confirmarCancelarReserva(arrayReservas.get(position).getId_reserva(), "2", "Reserva cancelada", totalCupoLibreString);
+                                    } else {
+                                        Toast.makeText(getActivity().getApplicationContext(), "No se pudo conectar, revise el " +
+                                                "acceso a Internet e intente nuevamente", Toast.LENGTH_SHORT).show();
+                                    }
+                                    break;
+                            }
 
-                    }
-                });
-                builder.create().show();
-            }
-        });
-        mostrarDatos();
+                        }
+                    });
+                    builder.create().show();
+                }
+            });
+            mostrarDatos();
+        }
+        else {
+            // no hay internet
+            imgSinConexion.setVisibility(View.VISIBLE);
+            tvSinConexion1.setVisibility(View.VISIBLE);
+            tvSinConexion2.setVisibility(View.VISIBLE);
+            Toast.makeText(getActivity().getApplicationContext(), "No se pudo conectar, revise el " +
+                    "acceso a Internet e intente nuevamente", Toast.LENGTH_SHORT).show();
+        }
         return view;
     }
 
+    private boolean tieneConexionInternet() {
+        ConnectivityManager con = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = con.getActiveNetworkInfo();
+        if(networkInfo!=null && networkInfo.isConnected()) {
+            return true;
+        }
+        return false;
+    }
 
     public void mostrarDatos() {
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
