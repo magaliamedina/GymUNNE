@@ -1,8 +1,11 @@
 package com.example.gimnasio_unne.view.fragments;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
@@ -12,7 +15,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -51,54 +56,81 @@ public class FragmentListarPersonal extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view= inflater.inflate(R.layout.fragment_listar_personal, container, false);
         list = view.findViewById(R.id.lvListarPersonalAdministrativo);
-        FloatingActionButton fab = view.findViewById(R.id.fabPersonalAdmin);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity().getApplication(), AltaProfesor.class);
-                startActivity(intent);
-            }
-        });
+        //sin internet
+        ImageView imgSinConexion=view.findViewById(R.id.imgSinConexion);
+        TextView tvSinConexion1=view.findViewById(R.id.tv_sinConexion1);
+        TextView tvSinConexion2=view.findViewById(R.id.tv_sinConexion2);
+        imgSinConexion.setVisibility(View.INVISIBLE);
+        tvSinConexion1.setVisibility(View.INVISIBLE);
+        tvSinConexion2.setVisibility(View.INVISIBLE);
 
-        adaptador= new AdaptadorPersonas(getActivity().getApplicationContext(), persons);
-        list.setAdapter(adaptador);
+        if(tieneConexionInternet()) { //INICIO IF
+            FloatingActionButton fab = view.findViewById(R.id.fabPersonalAdmin);
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(getActivity().getApplication(), AltaProfesor.class);
+                    startActivity(intent);
+                }
+            });
 
-        //items para editar, eliminar y ver detalles
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
-                ProgressDialog progressDialog=new ProgressDialog(view.getContext());
+            adaptador = new AdaptadorPersonas(getActivity().getApplicationContext(), persons);
+            list.setAdapter(adaptador);
 
-                CharSequence[] dialogoItem={"Ver datos","Editar datos", "Eliminar datos"};
-                builder.setTitle(persons.get(position).getApellido()+" "+persons.get(position).getNombres());
-                builder.setItems(dialogoItem, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int i) {
-                        switch (i) {
-                            case 0:
-                                // pasamos position para poder recibir en detalles
-                                startActivity(new Intent(getActivity().getApplicationContext(), DetallesPersonal.class)
-                                        .putExtra("position",position));
-                                break;
-                            case 1:
-                                //pasamos position para poder recibir en editar
-                                //no lleva el id correcto
-                                startActivity(new Intent(getActivity().getApplicationContext(), EditarPersonal.class)
-                                        .putExtra("position",position));
-                                break;
-                            case 2:
-                                darDeBajaPersona(persons.get(position).getId());
-                                break;
+            //items para editar, eliminar y ver detalles
+            list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+                    ProgressDialog progressDialog = new ProgressDialog(view.getContext());
 
+                    CharSequence[] dialogoItem = {"Ver datos", "Editar datos", "Eliminar datos"};
+                    builder.setTitle(persons.get(position).getApellido() + " " + persons.get(position).getNombres());
+                    builder.setItems(dialogoItem, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int i) {
+                            switch (i) {
+                                case 0:
+                                    // pasamos position para poder recibir en detalles
+                                    startActivity(new Intent(getActivity().getApplicationContext(), DetallesPersonal.class)
+                                            .putExtra("position", position));
+                                    break;
+                                case 1:
+                                    //pasamos position para poder recibir en editar
+                                    //no lleva el id correcto
+                                    startActivity(new Intent(getActivity().getApplicationContext(), EditarPersonal.class)
+                                            .putExtra("position", position));
+                                    break;
+                                case 2:
+                                    darDeBajaPersona(persons.get(position).getId());
+                                    break;
+
+                            }
                         }
-                    }
-                });
-                builder.create().show();
-            }
-        });
-        mostrarDatos(url);
+                    });
+                    builder.create().show();
+                }
+            });
+            mostrarDatos(url);
+        } //FIN IF TIENE CONEXION
+        else {
+            //mensaje de no hay internet
+            imgSinConexion.setVisibility(View.VISIBLE);
+            tvSinConexion1.setVisibility(View.VISIBLE);
+            tvSinConexion2.setVisibility(View.VISIBLE);
+            Toast.makeText(getActivity().getApplicationContext(), "No se pudo conectar, revise el " +
+                    "acceso a Internet e intente nuevamente", Toast.LENGTH_SHORT).show();
+        }
         return view;
+    }
+
+    private boolean tieneConexionInternet() {
+        ConnectivityManager con = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = con.getActiveNetworkInfo();
+        if(networkInfo!=null && networkInfo.isConnected()) {
+            return true;
+        }
+        return false;
     }
 
     public void mostrarDatos(String url) {

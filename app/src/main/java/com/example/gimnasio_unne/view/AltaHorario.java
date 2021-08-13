@@ -3,6 +3,9 @@ package com.example.gimnasio_unne.view;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -44,8 +47,16 @@ public class AltaHorario extends AppCompatActivity {
         btnguardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (validarCampos()) {
-                    altaHorario(url);
+                ConnectivityManager con = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo networkInfo = con.getActiveNetworkInfo();
+                if(networkInfo!=null && networkInfo.isConnected()) {
+                    if (validarCampos()) {
+                        altaHorario(url);
+                    }
+                }
+                else {
+                    Toast.makeText(AltaHorario.this, "No se pudo conectar, revise el " +
+                            "acceso a Internet e intente nuevamente", Toast.LENGTH_SHORT).show();
                 }
             }
         });

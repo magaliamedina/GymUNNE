@@ -4,6 +4,9 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -65,11 +68,20 @@ public class AltaGrupo extends AppCompatActivity {
         btnguardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (validarCampos()) {
-                    altagrupo("http://medinamagali.com.ar/gimnasio_unne/altagrupo.php");
+                ConnectivityManager con = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo networkInfo = con.getActiveNetworkInfo();
+                if(networkInfo!=null && networkInfo.isConnected()) {
+                    if (validarCampos()) {
+                        altagrupo("http://medinamagali.com.ar/gimnasio_unne/altagrupo.php");
+                    }
+                } //FIN IF TIENE CONEXION A INTERNET
+                else {
+                    Toast.makeText(AltaGrupo.this, "No se pudo conectar, revise el " +
+                            "acceso a Internet e intente nuevamente", Toast.LENGTH_SHORT).show();
                 }
             }
         });
+
 
     }
 

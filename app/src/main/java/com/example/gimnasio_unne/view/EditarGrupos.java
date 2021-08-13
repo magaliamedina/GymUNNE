@@ -4,7 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -81,8 +84,16 @@ public class EditarGrupos extends AppCompatActivity {
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(validarCampos()) {
-                    actualizar("https://medinamagali.com.ar/gimnasio_unne/editargrupo.php");
+                ConnectivityManager con = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo networkInfo = con.getActiveNetworkInfo();
+                if(networkInfo!=null && networkInfo.isConnected()) {
+                    if (validarCampos()) {
+                        actualizar("https://medinamagali.com.ar/gimnasio_unne/editargrupo.php");
+                    }
+                }
+                else {
+                    Toast.makeText(EditarGrupos.this, "No se pudo conectar, revise el " +
+                            "acceso a Internet e intente nuevamente", Toast.LENGTH_SHORT).show();
                 }
             }
         });

@@ -1,8 +1,11 @@
 package com.example.gimnasio_unne.view.fragments;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
@@ -12,7 +15,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -53,60 +58,85 @@ public class FragmentListarGrupos extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_listar_grupos, container, false);
-
         list = view.findViewById(R.id.listview);
+        //sin internet
+        ImageView imgSinConexion=view.findViewById(R.id.imgSinConexion);
+        TextView tvSinConexion1=view.findViewById(R.id.tv_sinConexion1);
+        TextView tvSinConexion2=view.findViewById(R.id.tv_sinConexion2);
+        imgSinConexion.setVisibility(View.INVISIBLE);
+        tvSinConexion1.setVisibility(View.INVISIBLE);
+        tvSinConexion2.setVisibility(View.INVISIBLE);
 
-        FloatingActionButton fab = view.findViewById(R.id.fabgrupos);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity().getApplication(), AltaGrupo.class);
-                startActivity(intent);
-            }
-        });
+        if(tieneConexionInternet()) { //INICIO IF
+            FloatingActionButton fab = view.findViewById(R.id.fabgrupos);
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(getActivity().getApplication(), AltaGrupo.class);
+                    startActivity(intent);
+                }
+            });
 
-        adaptador= new AdaptadorGrupos(getActivity().getApplicationContext(), groups);
-        list.setAdapter(adaptador);
+            adaptador = new AdaptadorGrupos(getActivity().getApplicationContext(), groups);
+            list.setAdapter(adaptador);
 
-        //items para editar, eliminar y ver detalles
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
-                ProgressDialog progressDialog=new ProgressDialog(view.getContext());
+            //items para editar, eliminar y ver detalles
+            list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+                    ProgressDialog progressDialog = new ProgressDialog(view.getContext());
                 /*ProgressBar progressBar;
                 progressBar.setProgress(int 1);
                 progressBar.setVisibility(View.GONE);*/
-                CharSequence[] dialogoItem={"Ver datos","Editar datos", "Eliminar datos"};
-                builder.setTitle(groups.get(position).getDescripcion());
-                builder.setItems(dialogoItem, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int i) {
-                        switch (i) {
+                    CharSequence[] dialogoItem = {"Ver datos", "Editar datos", "Eliminar datos"};
+                    builder.setTitle(groups.get(position).getDescripcion());
+                    builder.setItems(dialogoItem, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int i) {
+                            switch (i) {
 
-                            case 0:
-                                //pasamos position para poder recibir en detalles
-                                startActivity(new Intent(getActivity().getApplicationContext(), DetallesGrupo.class)
-                                        .putExtra("position",position));
-                                break;
-                            case 1:
-                                //pasamos position para poder recibir en editar
-                                startActivity(new Intent(getActivity().getApplicationContext(), EditarGrupos.class)
-                                        .putExtra("position",position));
-                                break;
-                            case 2:
-                                //cambiamos de estado al grupo
-                                darDeBajaGrupo(groups.get(position).getId());
-                                break;
+                                case 0:
+                                    //pasamos position para poder recibir en detalles
+                                    startActivity(new Intent(getActivity().getApplicationContext(), DetallesGrupo.class)
+                                            .putExtra("position", position));
+                                    break;
+                                case 1:
+                                    //pasamos position para poder recibir en editar
+                                    startActivity(new Intent(getActivity().getApplicationContext(), EditarGrupos.class)
+                                            .putExtra("position", position));
+                                    break;
+                                case 2:
+                                    //cambiamos de estado al grupo
+                                    darDeBajaGrupo(groups.get(position).getId());
+                                    break;
 
+                            }
                         }
-                    }
-                });
-                builder.create().show();
-            }
-        });
-        mostrarDatos();
+                    });
+                    builder.create().show();
+                }
+            });
+            mostrarDatos();
+        } //FIN IF(tieneConexionIntenet)
+        else {
+            //mensaje de no hay internet
+            imgSinConexion.setVisibility(View.VISIBLE);
+            tvSinConexion1.setVisibility(View.VISIBLE);
+            tvSinConexion2.setVisibility(View.VISIBLE);
+            Toast.makeText(getActivity().getApplicationContext(), "No se pudo conectar, revise el " +
+                    "acceso a Internet e intente nuevamente", Toast.LENGTH_SHORT).show();
+        }
         return view;
+    }
+
+    private boolean tieneConexionInternet() {
+        ConnectivityManager con = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = con.getActiveNetworkInfo();
+        if(networkInfo!=null && networkInfo.isConnected()) {
+            return true;
+        }
+        return false;
     }
 
     public void mostrarDatos() {

@@ -19,4 +19,6 @@
         android:clickable="true"
         android:src="@drawable/ic_add" />
 
+    <include
+        layout="@layout/sin_conexion_internet"/>
 </FrameLayout>

@@ -1,6 +1,9 @@
 package com.example.gimnasio_unne.view.fragments;
 
+import android.content.Context;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -54,8 +57,22 @@ public class FragmentReportePorFacultad extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view= inflater.inflate(R.layout.fragment_reporte_por_facultad, container, false);
         pieChart=view.findViewById(R.id.pieChartAlumnosPorFacultad);
-        mostrarDatos();
+        if (tieneConexionInternet())
+            mostrarDatos();
+        else {
+            Toast.makeText(getActivity().getApplicationContext(), "No se pudo conectar, revise el " +
+                    "acceso a Internet e intente nuevamente", Toast.LENGTH_SHORT).show();
+        }
         return view;
+    }
+
+    private boolean tieneConexionInternet() {
+        ConnectivityManager con = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = con.getActiveNetworkInfo();
+        if(networkInfo!=null && networkInfo.isConnected()) {
+            return true;
+        }
+        return false;
     }
 
     private void crearGraficoPastel(String arquitectura, String artes, String agrarias, String economicas,

@@ -6,7 +6,10 @@ import androidx.appcompat.widget.Toolbar;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -121,8 +124,16 @@ public class EditarPersonal extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(validarCampos()) {
-                    actualizar("http://medinamagali.com.ar/gimnasio_unne/editarpersona.php");
+                ConnectivityManager con = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo networkInfo = con.getActiveNetworkInfo();
+                if(networkInfo!=null && networkInfo.isConnected()) {
+                    if (validarCampos()) {
+                        actualizar("http://medinamagali.com.ar/gimnasio_unne/editarpersona.php");
+                    }
+                }
+                else {
+                    Toast.makeText(EditarPersonal.this, "No se pudo conectar, revise el " +
+                            "acceso a Internet e intente nuevamente", Toast.LENGTH_SHORT).show();
                 }
             }
         });
