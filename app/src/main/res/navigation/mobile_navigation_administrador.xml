@@ -36,4 +36,9 @@
         android:name="com.example.gimnasio_unne.view.fragments.FragmentReportePorFacultad"
         android:label="Reporte de alumnos por facultad"
         tools:layout="@layout/fragment_reporte_por_facultad" />
+    <fragment
+        android:id="@+id/fragmentReporteAlumnosPorGrupo"
+        android:name="com.example.gimnasio_unne.view.fragments.FragmentReporteAlumnosPorGrupo"
+        android:label="Reporte de alumnos por grupo"
+        tools:layout="@layout/fragment_reporte_alumnos_por_grupo" />
 </navigation>

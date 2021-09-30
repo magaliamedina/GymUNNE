@@ -21,10 +21,16 @@ import com.example.gimnasio_unne.R;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.LegendEntry;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
@@ -32,12 +38,15 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.util.ArrayList;
+import java.util.List;
 
 //reporte en base a alumnos por grupo en el mes o de año?
 public class FragmentReporteAlumnosPorGrupo extends Fragment {
 
     private BarChart barChart;
     private String url="https://medinamagali.com.ar/gimnasio_unne/consulta_alumnos_por_grupo.php";
+    private String grupo3, grupo4;
+    private String[] grupos= new String[]{"Grupo 3", "Grupo 4", "Grupo 88", "Grupo 99"};
 
     public FragmentReporteAlumnosPorGrupo() {  }
 
@@ -50,7 +59,9 @@ public class FragmentReporteAlumnosPorGrupo extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view= inflater.inflate(R.layout.fragment_reporte_alumnos_por_grupo, container, false);
         barChart=view.findViewById(R.id.barChartAlumnosPorGrupo);
+
         mostrarDatos();
+
         return view;
     }
 
@@ -59,13 +70,11 @@ public class FragmentReporteAlumnosPorGrupo extends Fragment {
             @Override
             public void onResponse(String response) {
                 try {
-                    //Log.d("VOLLEY", response);
+                    //Log.d("ingresa", response);
                     JSONArray jsonArray = new JSONArray(response);
-                    /*masculino = jsonArray.getJSONObject(0).getString("masculino");
-                    femenino = jsonArray.getJSONObject(1).getString("femenino");
-                    otros = jsonArray.getJSONObject(2).getString("otros");*/
-                    //Log.d("pepe",masculino);
-                    crearGrafico();
+                    grupo4 = jsonArray.getJSONObject(0).getString("grupo4");
+                    grupo3 = jsonArray.getJSONObject(1).getString("grupo3");
+                    crearGraficoBarra();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -80,31 +89,61 @@ public class FragmentReporteAlumnosPorGrupo extends Fragment {
         requestQueue.add(request);
     }
 
-    private void crearGrafico() {
-        Description description = new Description();
+    private void crearGraficoBarra() {
+        //creamos la lista con los valores de entrada
+        List<BarEntry> entradas = new ArrayList<>();
+        entradas.add(new BarEntry(0, Float.parseFloat(grupo4)));
+        entradas.add(new BarEntry(1, Float.parseFloat(grupo3)));
+        entradas.add(new BarEntry(2,6));
+        entradas.add(new BarEntry(3,1));
+
+        //mandamos los datos para crear la gráfica
+        BarDataSet datos = new BarDataSet(entradas ,"");
+
+        BarData data = new BarData(datos);
+
+        //ponemos color a cada barra
+        datos.setColors(ColorTemplate.COLORFUL_COLORS);
+        datos.setValueTextSize(20);
+        datos.setValueTextColor(Color.WHITE);
+
+        //separacion entre las barras
+        data.setBarWidth(0.9f);
+
+        barChart.setData(data);
+
+        //pone las barras centradas
+        barChart.setFitBars(true);
+
+        /*Description description = new Description();
         description.setText("Cantidad de alumnos por grupos");
         description.setTextSize(15);
-        barChart.setDescription(description);
+        barChart.setDescription(description);*/
 
-        final ArrayList<BarEntry> barEntries=new ArrayList<>();
+        //legend(barChart); //metodo leyenda
+        ejeX(barChart.getXAxis());
+    }
 
-        /*barEntries.add(new PieEntry(Float.parseFloat(masculino),"Masculino")); //para la leyenda
-        barEntries.add(new PieEntry(Float.parseFloat(femenino),"Femenino"));
-        barEntries.add(new PieEntry(Float.parseFloat(otros),"Otros"));
-
-        PieDataSet pieDataSet=new PieDataSet(pieEntries,""); //leyenda
-        pieDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
-        pieDataSet.setValueTextSize(20);
-        pieDataSet.setValueTextColor(Color.WHITE);
-        pieDataSet.setValueFormatter(new PercentFormatter()); //agregar porcentaje
-
-        Legend legend = pieChart.getLegend();
+    private void legend(BarChart barChart) {
+        Legend legend = barChart.getLegend();
         legend.setForm(Legend.LegendForm.CIRCLE);
         legend.setTextSize(15);
         legend.setFormSize(20);//tamaño del ciculo de la leyenda
+        legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
         //legend.setFormToTextSpace(2);
+        //datos que van a ir en la leyenda
+        ArrayList<LegendEntry>entries = new ArrayList<>();
+        for(int i=0; i< grupos.length;i++) {
+            LegendEntry entry = new LegendEntry();
+            entry.label= grupos[i];
+            entries.add(entry);
+        }
+        legend.setCustom(entries);
+    }
 
-        PieData pieData= new PieData(pieDataSet);
-        pieChart.setData(pieData);*/
+    private void ejeX(XAxis axis) {
+        axis.setGranularityEnabled(true);
+        axis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        axis.setValueFormatter(new IndexAxisValueFormatter(grupos));
     }
 }

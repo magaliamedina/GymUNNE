@@ -37,6 +37,10 @@
             android:id="@+id/fragmentReportesAlumnosPorFacultad"
             android:icon="@drawable/ic_report"
             android:title="Alumnos por facultad"/>
+        <item
+            android:id="@+id/fragmentReporteAlumnosPorGrupo"
+            android:icon="@drawable/ic_report"
+            android:title="Alumnos por grupo"/>
     </group>
     <group
         android:id="@+id/menu_inferior"
