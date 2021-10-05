@@ -1,6 +1,7 @@
 package com.example.gimnasio_unne.view.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,9 +31,17 @@ public class AdaptadorPersonas extends ArrayAdapter<Personas> {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_personas, null, true);
         TextView tvDNI= view.findViewById(R.id.tvDniPersona);
         TextView tvpersona = view.findViewById(R.id.tvpersona);
+        TextView tvEstado = view.findViewById(R.id.tvEstadoPersona);
 
         tvDNI.setText("DNI: "+arrayListPersons.get(position).getDni());
         tvpersona.setText(arrayListPersons.get(position).getApellido()+" "+arrayListPersons.get(position).getNombres());
+        if (arrayListPersons.get(position).getEstado().equals("0")) {
+            tvEstado.setText("Inactivo");
+            tvEstado.setTextColor(Color.RED);
+        }else {
+            tvEstado.setText("Activo");
+            tvEstado.setTextColor(Color.GREEN);
+        }
         return view;
 
     }

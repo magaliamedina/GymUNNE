@@ -58,8 +58,8 @@ public class FragmentReservasPendientes extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_reservas_pendientes, container, false);
-        tvSinReservasPendientes= view.findViewById(R.id.tvSinReservasPendientes);
         list = view.findViewById(R.id.lvListarReservas);
+        tvSinReservasPendientes= view.findViewById(R.id.tvSinReservasPendientes);
         //sin conexion a internet
         ImageView imgSinConexion=view.findViewById(R.id.imgSinConexion);
         TextView tvSinConexion1=view.findViewById(R.id.tv_sinConexion1);

@@ -243,7 +243,7 @@ public class AltaPersonal extends AppCompatActivity {
                 parametros.put("provincia", idprovincia);
                 parametros.put("estado", "1");
                 parametros.put("estado_civil", etestadocivil.getText().toString());
-                parametros.put("usuario_id", "4"); //usuario profesor
+                parametros.put("usuario_id", "4"); //usuario personal administrativo
                 parametros.put("email", etemail.getText().toString());
                 parametros.put("password", etpassword.getText().toString());
                 return parametros;

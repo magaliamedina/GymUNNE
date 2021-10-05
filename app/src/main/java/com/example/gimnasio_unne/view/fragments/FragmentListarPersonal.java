@@ -27,6 +27,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.gimnasio_unne.view.AltaPersonal;
 import com.example.gimnasio_unne.view.AltaProfesor;
 import com.example.gimnasio_unne.view.DetallesPersonal;
 import com.example.gimnasio_unne.view.EditarPersonal;
@@ -49,7 +50,6 @@ public class FragmentListarPersonal extends Fragment {
     AdaptadorPersonas adaptador;
     public static ArrayList<Personas> persons= new ArrayList<>();
     String url="https://medinamagali.com.ar/gimnasio_unne/listar_personal.php";
-    Personas personas;
     public FragmentListarPersonal() {  }
 
     @Override
@@ -69,7 +69,7 @@ public class FragmentListarPersonal extends Fragment {
             fab.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(getActivity().getApplication(), AltaProfesor.class);
+                    Intent intent = new Intent(getActivity().getApplication(), AltaPersonal.class);
                     startActivity(intent);
                 }
             });

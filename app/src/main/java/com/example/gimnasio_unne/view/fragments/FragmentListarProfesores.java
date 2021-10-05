@@ -49,7 +49,6 @@ public class FragmentListarProfesores extends Fragment {
     AdaptadorPersonas adaptador;
     public static ArrayList<Personas> persons= new ArrayList<>();
     String url="https://medinamagali.com.ar/gimnasio_unne/mostrarpersonas.php";
-    Personas personas;
     public FragmentListarProfesores() {  }
 
     @Override
