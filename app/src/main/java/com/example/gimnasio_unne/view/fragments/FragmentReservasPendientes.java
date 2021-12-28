@@ -3,10 +3,12 @@ package com.example.gimnasio_unne.view.fragments;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,6 +77,7 @@ public class FragmentReservasPendientes extends Fragment {
             list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, final View view, final int position, long id) {
+                    //final int which_item = position;
                     AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
                     String confirmar_reserva = "Confirmar reserva";
                     String cancelar_reserva = "Cancelar reserva";
@@ -82,6 +85,7 @@ public class FragmentReservasPendientes extends Fragment {
                     //titulo del alert dialog
                     //builder.setTitle(Html.fromHtml("<font color='#FF0000'>Reserva número <b>250</b></font>"));
                     builder.setTitle("Reserva número " + arrayReservas.get(position).getId_reserva());
+
                     builder.setItems(dialogoItem, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int i) {
@@ -100,6 +104,7 @@ public class FragmentReservasPendientes extends Fragment {
                                 case 1:
                                     if (tieneConexionInternet()) {
                                         //ESTADO CANCELADO: cambiamos el estado o borramos de la bd?
+                                        //adaptador.notifyDataSetChanged();
                                         Integer total = Integer.parseInt(total_cupolibre);
                                         total = total + 1;
                                         String totalCupoLibreString = total + "";
@@ -110,14 +115,16 @@ public class FragmentReservasPendientes extends Fragment {
                                     }
                                     break;
                             }
-
+                            //para eliminar el elemento del arreglo y refrescar la lista
+                            arrayReservas.remove(position);
+                            adaptador.notifyDataSetChanged();
                         }
                     });
                     builder.create().show();
                 }
             });
             mostrarDatos();
-        }
+        } // cierre de si hay internet
         else {
             // no hay internet
             imgSinConexion.setVisibility(View.VISIBLE);

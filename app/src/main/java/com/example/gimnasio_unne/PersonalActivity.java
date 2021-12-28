@@ -26,6 +26,7 @@ public class PersonalActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     ActionBarDrawerToggle toggle;
+    //NO FUNCIONA PARA LO QUE NECESITO
     FragmentManager fragmentManager;
     FragmentReservasPendientes fragmentReservasPendientes= new FragmentReservasPendientes();
     SharedPreferences preferences;
@@ -69,6 +70,7 @@ public class PersonalActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
+        //NO FUNCIONA
         fragmentManager= getSupportFragmentManager();
         fragmentManager
                 .beginTransaction()

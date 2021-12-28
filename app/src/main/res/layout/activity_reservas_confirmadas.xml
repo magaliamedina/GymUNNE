@@ -27,10 +27,10 @@
         <TextView
             android:id="@+id/tvAlumnosInscriptosAlCupo"
             android:visibility="invisible"
-            android:textColor="#F44336"
+            android:textColor="#F83A2C"
             android:layout_width="wrap_content"
             android:layout_marginTop="200dp"
-            android:layout_marginLeft="70dp"
+            android:layout_marginStart="70dp"
             android:layout_height="wrap_content"
             android:textSize="18sp"
             android:text="No hay alumnos inscriptos al cupo"/>
