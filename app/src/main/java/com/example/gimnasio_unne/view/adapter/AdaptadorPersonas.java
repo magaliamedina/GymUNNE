@@ -13,16 +13,22 @@ import androidx.annotation.NonNull;
 import com.example.gimnasio_unne.R;
 import com.example.gimnasio_unne.model.Personas;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class AdaptadorPersonas extends ArrayAdapter<Personas> {
 
     Context context;
     List<Personas> arrayListPersons;
+    List<Personas> listaOriginal;
+
     public AdaptadorPersonas(@NonNull Context context, List<Personas>arrayListPersons) {
         super(context, R.layout.list_personas, arrayListPersons);
         this.context = context;
         this.arrayListPersons=arrayListPersons;
+        listaOriginal = new ArrayList<>();
+        listaOriginal.addAll(arrayListPersons);
     }
 
     @NonNull
@@ -43,6 +49,30 @@ public class AdaptadorPersonas extends ArrayAdapter<Personas> {
             tvEstado.setTextColor(Color.GREEN);
         }
         return view;
-
     }
+
+    public void  filtrado(final String txtBuscar) {
+        int longitud= txtBuscar.length();
+        if (longitud == 0) {
+            arrayListPersons.clear();
+            arrayListPersons.addAll(listaOriginal);
+        }
+        else {
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                List <Personas> coleccion=arrayListPersons.stream()
+                        .filter(i -> i.getApellido().toLowerCase().contains(txtBuscar.toLowerCase()))
+                        .collect(Collectors.toList());
+                arrayListPersons.clear();
+                arrayListPersons.addAll(coleccion);
+            }
+            else {
+               for (Personas p: listaOriginal){
+                   if(p.getApellido().toLowerCase().contains(txtBuscar.toLowerCase())) {
+                       arrayListPersons.add(p);
+                   }
+               }
+            }
+        }
+        notifyDataSetChanged();
+    }//fin filtrado
 }

@@ -16,6 +16,10 @@
             android:id="@+id/fragmentPersonalCuposLibres"
             android:icon="@drawable/ic_listar"
             android:title="Listar cupos"/>
+        <item
+            android:id="@+id/fragmentListarAlumnos"
+            android:icon="@drawable/ic_listar"
+            android:title="Listado de alumnos"/>
 
     </group>
 
