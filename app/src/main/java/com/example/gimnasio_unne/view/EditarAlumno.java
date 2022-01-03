@@ -18,7 +18,6 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -29,13 +28,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.gimnasio_unne.AdministradorActivity;
-import com.example.gimnasio_unne.AlumnoActivity;
-import com.example.gimnasio_unne.PersonalActivity;
 import com.example.gimnasio_unne.R;
 import com.example.gimnasio_unne.Utiles;
 import com.example.gimnasio_unne.model.Provincias;
-import com.example.gimnasio_unne.view.fragments.FragmentListarPersonal;
-import com.example.gimnasio_unne.view.fragments.FragmentListarProfesores;
+import com.example.gimnasio_unne.view.fragments.FragmentListarAlumnos;
+import com.example.gimnasio_unne.view.fragments.FragmentListarAlumnos;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
@@ -51,11 +48,11 @@ import java.util.Map;
 
 import cz.msebera.android.httpclient.Header;
 
-public class EditarProfesor extends AppCompatActivity {
+public class EditarAlumno extends AppCompatActivity {
 
     EditText etdni,etapellido, etnombres, etestadocivil,etemail, etpassword, etestado;
     Spinner spinnerProvincias, spinnerSexos;
-    Button btn, btn_date_editarProfesor;
+    Button btn, btn_date_editarAlumno;
     private AsyncHttpClient cliente;
     int position;
     private String idprovincia, sexoBD, id;
@@ -66,42 +63,42 @@ public class EditarProfesor extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_editar_profesor);
+        setContentView(R.layout.activity_editar_alumno);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        etdni = findViewById(R.id.etDnieditarprofesor);
-        etapellido= findViewById(R.id.etApellidoeditarprofesor);
-        etnombres= findViewById(R.id.etNombreseditarprofesor);
-        etestadocivil= findViewById(R.id.etEstadoCivilEditarprofesor);
-        etemail= findViewById(R.id.etEmailEditarProfesor);
-        etpassword=findViewById(R.id.etPasswordEditarProfesor);
-        etestado= findViewById(R.id.etEstadoEditarProfesor);
-        spinnerProvincias = findViewById(R.id.spinnerProvinciaEditarProfesor);
-        spinnerSexos = findViewById(R.id.spinnerSexosEditarProfesor);
-        btn= findViewById(R.id.btneditarprofesor);
-        btn_date_editarProfesor= findViewById(R.id.btn_date_editarProfesor);
+        etdni = findViewById(R.id.etDnieditaralumno);
+        etapellido= findViewById(R.id.etApellidoeditaralumno);
+        etnombres= findViewById(R.id.etNombreseditaralumno);
+        etestadocivil= findViewById(R.id.etEstadoCivilEditaralumno);
+        etemail= findViewById(R.id.etEmailEditarAlumno);
+        etpassword=findViewById(R.id.etPasswordEditarAlumno);
+        etestado= findViewById(R.id.etEstadoEditarAlumno);
+        spinnerProvincias = findViewById(R.id.spinnerProvinciaEditarAlumno);
+        spinnerSexos = findViewById(R.id.spinnerSexosEditarAlumno);
+        btn= findViewById(R.id.btneditaralumno);
+        btn_date_editarAlumno= findViewById(R.id.btn_date_editarAlumno);
         cliente = new AsyncHttpClient();
 
         Intent intent =getIntent();
         position=intent.getExtras().getInt("position");
-        id= FragmentListarProfesores.persons.get(position).getId();
-        //tvid.setText(FragmentListarProfesores.persons.get(position).getId());
-        fechaNacimiento= FragmentListarProfesores.persons.get(position).getFechaNac();
+        id= FragmentListarAlumnos.persons.get(position).getId();
+        //tvid.setText(FragmentListarAlumnos.persons.get(position).getId());
+        fechaNacimiento= FragmentListarAlumnos.persons.get(position).getFechaNac();
 
-        etdni.setText(FragmentListarProfesores.persons.get(position).getDni());
-        etapellido.setText(FragmentListarProfesores.persons.get(position).getApellido());
-        etnombres.setText(FragmentListarProfesores.persons.get(position).getNombres());
-        etestadocivil.setText(FragmentListarProfesores.persons.get(position).getEstadoCivil());
-        etemail.setText(FragmentListarProfesores.persons.get(position).getEmail());
-        etpassword.setText(FragmentListarProfesores.persons.get(position).getPassword());
-        etestado.setText(FragmentListarProfesores.persons.get(position).getEstado());
-        btn_date_editarProfesor.setText(FragmentListarProfesores.persons.get(position).getFechaNac());
+        etdni.setText(FragmentListarAlumnos.persons.get(position).getDni());
+        etapellido.setText(FragmentListarAlumnos.persons.get(position).getApellido());
+        etnombres.setText(FragmentListarAlumnos.persons.get(position).getNombres());
+        etestadocivil.setText(FragmentListarAlumnos.persons.get(position).getEstadoCivil());
+        etemail.setText(FragmentListarAlumnos.persons.get(position).getEmail());
+        etpassword.setText(FragmentListarAlumnos.persons.get(position).getPassword());
+        etestado.setText(FragmentListarAlumnos.persons.get(position).getEstado());
+        btn_date_editarAlumno.setText(FragmentListarAlumnos.persons.get(position).getFechaNac());
 
-        String sexo_guardado= FragmentListarProfesores.persons.get(position).getSexo();
+        String sexo_guardado= FragmentListarAlumnos.persons.get(position).getSexo();
         //lo siguiente es para mostrar en orden como esta guardado
         if(sexo_guardado.equals("2")) {
             sexos= new String [] {"Femenino", "Masculino", "Otro"};
@@ -110,7 +107,7 @@ public class EditarProfesor extends AppCompatActivity {
         } else {
             sexos =new String []{"Otro", "Masculino", "Femenino"};
         }
-        ArrayAdapter <String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, sexos);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, sexos);
         spinnerSexos.setAdapter(adapter);
 
         llenarSpinnerProvincias();
@@ -120,7 +117,7 @@ public class EditarProfesor extends AppCompatActivity {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        btn_date_editarProfesor.setOnClickListener(new View.OnClickListener() {
+        btn_date_editarAlumno.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 datePickerDialog.show();
@@ -138,7 +135,7 @@ public class EditarProfesor extends AppCompatActivity {
                     }
                 }
                 else {
-                    Toast.makeText(EditarProfesor.this, "No se pudo conectar, revise el " +
+                    Toast.makeText(EditarAlumno.this, "No se pudo conectar, revise el " +
                             "acceso a Internet e intente nuevamente", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -151,7 +148,7 @@ public class EditarProfesor extends AppCompatActivity {
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 month= month+1;
                 String date= year+"-"+month+"-"+day;
-                btn_date_editarProfesor.setText(date);
+                btn_date_editarAlumno.setText(date);
             }
         };
         Calendar calendar = Calendar.getInstance();
@@ -215,8 +212,8 @@ public class EditarProfesor extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 if(response.length()==0) {
-                    Toast.makeText(EditarProfesor.this, "Profesor modificado correctamente", Toast.LENGTH_LONG).show();
-                    startActivity(new Intent(getApplicationContext(), PersonalActivity.class));
+                    Toast.makeText(EditarAlumno.this, "Alumno modificado correctamente", Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(getApplicationContext(), AdministradorActivity.class));
                 }
                 else {
                     Toast.makeText(getApplicationContext(), "Usuario existente con ese DNI", Toast.LENGTH_SHORT).show();
@@ -225,7 +222,7 @@ public class EditarProfesor extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(EditarProfesor.this, error.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(EditarAlumno.this, error.getMessage(), Toast.LENGTH_LONG).show();
                 progressDialog.dismiss();
             }
         }){
@@ -237,7 +234,7 @@ public class EditarProfesor extends AppCompatActivity {
                 parametros.put("apellido", etapellido.getText().toString());
                 parametros.put("nombres", etnombres.getText().toString());
                 parametros.put("sexo_id", sexoBD);
-                parametros.put("fecha_nac", btn_date_editarProfesor.getText().toString());
+                parametros.put("fecha_nac", btn_date_editarAlumno.getText().toString());
                 parametros.put("provincia", idprovincia);
                 parametros.put("estado", etestado.getText().toString());
                 parametros.put("estado_civil", etestadocivil.getText().toString());
@@ -246,7 +243,7 @@ public class EditarProfesor extends AppCompatActivity {
                 return parametros;
             }
         };
-        RequestQueue requestQueue= Volley.newRequestQueue(EditarProfesor.this);
+        RequestQueue requestQueue= Volley.newRequestQueue(EditarAlumno.this);
         requestQueue.add(request);
     }
 
@@ -293,5 +290,4 @@ public class EditarProfesor extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
 }

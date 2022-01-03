@@ -30,8 +30,11 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.gimnasio_unne.R;
 import com.example.gimnasio_unne.model.Personas;
+import com.example.gimnasio_unne.view.AltaAlumno;
 import com.example.gimnasio_unne.view.AltaProfesor;
+import com.example.gimnasio_unne.view.DetallesAlumno;
 import com.example.gimnasio_unne.view.DetallesProfesor;
+import com.example.gimnasio_unne.view.EditarAlumno;
 import com.example.gimnasio_unne.view.EditarProfesor;
 import com.example.gimnasio_unne.view.adapter.AdaptadorPersonas;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -70,13 +73,13 @@ public class FragmentListarAlumnos extends Fragment implements SearchView.OnQuer
 
         if(tieneConexionInternet()) { //INICIO IF
             FloatingActionButton fab = view.findViewById(R.id.fabalumnos);
-            /*fab.setOnClickListener(new View.OnClickListener() {
+            fab.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(getActivity().getApplication(), AltaAlumno.class);
                     startActivity(intent);
                 }
-            });*/
+            });
 
             adaptador = new AdaptadorPersonas(getActivity().getApplicationContext(), persons);
             list.setAdapter(adaptador);
@@ -97,14 +100,14 @@ public class FragmentListarAlumnos extends Fragment implements SearchView.OnQuer
                                 case 0:
                                     // pasamos position para poder recibir en detalles
                                     //MODIFICAR
-                                    startActivity(new Intent(getActivity().getApplicationContext(), DetallesProfesor.class)
+                                    startActivity(new Intent(getActivity().getApplicationContext(), DetallesAlumno.class)
                                             .putExtra("position", position));
                                     break;
                                 case 1:
                                     //pasamos position para poder recibir en editar
                                     //MODIFICAR
-                                    /*startActivity(new Intent(getActivity().getApplicationContext(), EditarProfesor.class)
-                                            .putExtra("position", position));*/
+                                    startActivity(new Intent(getActivity().getApplicationContext(), EditarAlumno.class)
+                                            .putExtra("position", position));
                                     break;
                                 case 2:
                                     darDeBajaPersona(persons.get(position).getId());

@@ -15,20 +15,27 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".view.ReservasConfirmadas"
-            android:parentActivityName=".PersonalActivity">
-
-        </activity>
+        <activity android:name=".view.DetallesAlumno"
+            android:parentActivityName=".PersonalActivity"/>
+        <activity
+            android:name=".view.EditarAlumno"
+            android:parentActivityName=".PersonalActivity" />
+        <activity
+            android:name=".view.AltaAlumno"
+            android:parentActivityName=".PersonalActivity" />
+        <activity
+            android:name=".view.ReservasConfirmadas"
+            android:parentActivityName=".PersonalActivity" />
         <activity android:name=".view.AltaHorario" />
         <activity
             android:name=".view.AltaPersonal"
-            android:parentActivityName=".AdministradorActivity"/>
+            android:parentActivityName=".AdministradorActivity" />
         <activity
             android:name=".view.EditarPersonal"
             android:parentActivityName=".AdministradorActivity" />
         <activity
             android:name=".view.DetallesPersonal"
-            android:parentActivityName=".AdministradorActivity"/>
+            android:parentActivityName=".AdministradorActivity" />
         <activity
             android:name=".view.EditarCupoLibre"
             android:parentActivityName=".PersonalActivity" />

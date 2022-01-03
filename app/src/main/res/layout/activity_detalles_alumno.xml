@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".view.DetallesAlumno">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:title="Datos del estudiante" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <TextView
+        android:id="@+id/tvDni_DetalleAlumno"
+        style="@style/textos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:text="DNI:"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
+
+    <TextView
+        android:id="@+id/txtdnialumnodetalle"
+        style="@style/textos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="20dp"
+        android:text="DNI"
+        app:layout_constraintStart_toEndOf="@+id/tvDni_DetalleAlumno"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
+
+    <TextView
+        android:id="@+id/tvApeYNom_DetalleAlumno"
+        style="@style/textos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="15dp"
+        android:text="Apellido y Nombre: "
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDni_DetalleAlumno" />
+
+    <TextView
+        android:id="@+id/txtApeYNomalumnodetalle"
+        style="@style/textos"
+        android:layout_width="146dp"
+        android:layout_height="29dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="60dp"
+        android:text="Apellido y nombre"
+        app:layout_constraintStart_toEndOf="@+id/tvApeYNom_DetalleAlumno"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
+
+    <TextView
+        android:id="@+id/txtsexo_alumnodetalle"
+        style="@style/textos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
+        android:text="Sexo:"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvApeYNom_DetalleAlumno" />
+
+    <TextView
+        android:id="@+id/txtsexoalumnodetalle"
+        style="@style/textos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="15dp"
+        android:text="Sexo"
+        app:layout_constraintStart_toEndOf="@+id/txtsexo_alumnodetalle"
+        app:layout_constraintTop_toBottomOf="@+id/tvApeYNom_DetalleAlumno" />
+
+    <TextView
+        android:id="@+id/txtfechnac_alumnodetalle"
+        style="@style/textos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
+        android:text="Fecha de nacimiento:"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtsexo_alumnodetalle" />
+
+    <TextView
+        android:id="@+id/txtfechnacalumnodetalle"
+        style="@style/textos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="52dp"
+        android:text="Fecha"
+        app:layout_constraintStart_toEndOf="@+id/txtfechnac_alumnodetalle"
+        app:layout_constraintTop_toBottomOf="@+id/txtApeYNomalumnodetalle" />
+
+    <TextView
+        android:id="@+id/txtprovincia_alumnodetalle"
+        style="@style/textos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
+        android:text="Provincia"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtfechnac_alumnodetalle" />
+
+    <TextView
+        android:id="@+id/txtprovinciaalumnodetalle"
+        style="@style/textos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="15dp"
+        android:text="Provincia:"
+        app:layout_constraintStart_toEndOf="@+id/txtprovincia_alumnodetalle"
+        app:layout_constraintTop_toBottomOf="@+id/txtfechnac_alumnodetalle" />
+
+    <TextView
+        android:id="@+id/txtestado_alumnodetalle"
+        style="@style/textos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
+        android:text="Estado: "
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtprovincia_alumnodetalle" />
+
+    <TextView
+        android:id="@+id/txtestadoalumnodetalle"
+        style="@style/textos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="15dp"
+        android:text="Estado"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/txtestado_alumnodetalle"
+        app:layout_constraintTop_toBottomOf="@+id/txtprovinciaalumnodetalle" />
+
+    <TextView
+        android:id="@+id/txtestadocivil_alumnodetalle"
+        style="@style/textos"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
+        android:text="Estado civil: "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtestado_alumnodetalle" />
+
+    <TextView
+        android:id="@+id/txtestadocivilalumnodetalle"
+        style="@style/textos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="15dp"
+        android:text="Estado civil"
+        app:layout_constraintStart_toEndOf="@+id/txtestadocivil_alumnodetalle"
+        app:layout_constraintTop_toBottomOf="@+id/txtestadoalumnodetalle" />
+
+    <TextView
+        android:id="@+id/txtemail_alumnodetalle"
+        style="@style/textos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
+        android:text="Email:"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtestadocivil_alumnodetalle" />
+
+    <TextView
+        android:id="@+id/txtemailalumnodetalle"
+        style="@style/textos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="15dp"
+        android:text="Email"
+        app:layout_constraintStart_toEndOf="@+id/txtemail_alumnodetalle"
+        app:layout_constraintTop_toBottomOf="@+id/txtestadocivil_alumnodetalle" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
