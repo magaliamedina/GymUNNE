@@ -33,12 +33,14 @@ public class ReservasConfirmadas extends AppCompatActivity {
     String url;
     AdaptadorPersonas adaptador;
     Personas personas;
+    TextView tv;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reservas_confirmadas);
         list = findViewById(R.id.lv_reservasConfirmadas);
-        TextView tv= findViewById(R.id.tvAlumnosInscriptosAlCupo);
+        tv= findViewById(R.id.tvAlumnosInscriptosAlCupo);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -67,10 +69,15 @@ public class ReservasConfirmadas extends AppCompatActivity {
                             String apellido= jsonArray.getJSONObject(i).getString("apellido");
                             String nombres= jsonArray.getJSONObject(i).getString("nombres");
                             String dni = jsonArray.getJSONObject(i).getString("dni");
-                            personas = new Personas(id, apellido, nombres, dni);
+                            String estado=jsonArray.getJSONObject(i).getString("estado");
+                            personas = new Personas(id, apellido, nombres, dni, estado);
                             arrayList.add(personas);
                             adaptador.notifyDataSetChanged();
                         }
+                    if(jsonArray.length()==0) {
+                        tv.setVisibility(View.VISIBLE);
+                        list.setVisibility(View.INVISIBLE);
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

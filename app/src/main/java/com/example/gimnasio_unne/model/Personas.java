@@ -7,11 +7,12 @@ public class Personas {
 
     public Personas () {}
 
-    public Personas(String id, String apellido, String nombres, String dni){
+    public Personas(String id, String apellido, String nombres, String dni, String estado){
         this.id=id;
         this.apellido = apellido;
         this.nombres = nombres;
         this.dni=dni;
+        this.estado= estado;
     }
 
     public Personas(String id, String dni, String apellido, String nombres, String sexo, String fechaNac,
