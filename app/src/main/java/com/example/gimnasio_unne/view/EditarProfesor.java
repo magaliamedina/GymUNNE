@@ -216,7 +216,7 @@ public class EditarProfesor extends AppCompatActivity {
             public void onResponse(String response) {
                 if(response.length()==0) {
                     Toast.makeText(EditarProfesor.this, "Profesor modificado correctamente", Toast.LENGTH_LONG).show();
-                    startActivity(new Intent(getApplicationContext(), PersonalActivity.class));
+                    startActivity(new Intent(getApplicationContext(), AdministradorActivity.class));
                 }
                 else {
                     Toast.makeText(getApplicationContext(), "Usuario existente con ese DNI", Toast.LENGTH_SHORT).show();

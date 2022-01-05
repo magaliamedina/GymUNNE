@@ -51,7 +51,7 @@ public class AdaptadorPersonas extends ArrayAdapter<Personas> {
         return view;
     }
 
-    public void  filtrado(final String txtBuscar) {
+    public void  filtrado(String txtBuscar) {
         int longitud= txtBuscar.length();
         if (longitud == 0) {
             arrayListPersons.clear();
@@ -66,6 +66,7 @@ public class AdaptadorPersonas extends ArrayAdapter<Personas> {
                 arrayListPersons.addAll(coleccion);
             }
             else {
+
                for (Personas p: listaOriginal){
                    if(p.getApellido().toLowerCase().contains(txtBuscar.toLowerCase())) {
                        arrayListPersons.add(p);

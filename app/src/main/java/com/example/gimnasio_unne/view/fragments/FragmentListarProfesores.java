@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,9 +45,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class FragmentListarProfesores extends Fragment {
+public class FragmentListarProfesores extends Fragment implements SearchView.OnQueryTextListener{
     private ListView list;
     AdaptadorPersonas adaptador;
+    SearchView txtBuscar;
     public static ArrayList<Personas> persons= new ArrayList<>();
     String url="https://medinamagali.com.ar/gimnasio_unne/mostrarpersonas.php";
     public FragmentListarProfesores() {  }
@@ -55,6 +57,8 @@ public class FragmentListarProfesores extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_listar_profesor, container, false);
         list = view.findViewById(R.id.listviewPersonas);
+        txtBuscar= view.findViewById(R.id.txtBuscarProfesor);
+
         //sin internet
         ImageView imgSinConexion=view.findViewById(R.id.imgSinConexion);
         TextView tvSinConexion1=view.findViewById(R.id.tv_sinConexion1);
@@ -75,6 +79,8 @@ public class FragmentListarProfesores extends Fragment {
 
             adaptador = new AdaptadorPersonas(getActivity().getApplicationContext(), persons);
             list.setAdapter(adaptador);
+            mostrarDatos(url);
+            txtBuscar.setOnQueryTextListener(this);
 
             //items para editar, eliminar y ver detalles
             list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -109,7 +115,6 @@ public class FragmentListarProfesores extends Fragment {
                     builder.create().show();
                 }
             });
-            mostrarDatos(url);
         } //FIN IF TIENE CONEXION
         else {
             //mensaje de no hay internet
@@ -199,5 +204,16 @@ public class FragmentListarProfesores extends Fragment {
         };
         RequestQueue requestQueue= Volley.newRequestQueue(getActivity().getApplicationContext());
         requestQueue.add(request);
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        adaptador.filtrado(newText);
+        return false;
     }
 }

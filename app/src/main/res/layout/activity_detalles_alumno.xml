@@ -62,11 +62,13 @@
     <TextView
         android:id="@+id/txtApeYNomalumnodetalle"
         style="@style/textos"
-        android:layout_width="146dp"
-        android:layout_height="29dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="60dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="59dp"
         android:text="Apellido y nombre"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.166"
         app:layout_constraintStart_toEndOf="@+id/tvApeYNom_DetalleAlumno"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
 

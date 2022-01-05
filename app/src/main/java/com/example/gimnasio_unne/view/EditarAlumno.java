@@ -28,6 +28,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.gimnasio_unne.AdministradorActivity;
+import com.example.gimnasio_unne.PersonalActivity;
 import com.example.gimnasio_unne.R;
 import com.example.gimnasio_unne.Utiles;
 import com.example.gimnasio_unne.model.Provincias;
@@ -213,7 +214,7 @@ public class EditarAlumno extends AppCompatActivity {
             public void onResponse(String response) {
                 if(response.length()==0) {
                     Toast.makeText(EditarAlumno.this, "Alumno modificado correctamente", Toast.LENGTH_LONG).show();
-                    startActivity(new Intent(getApplicationContext(), AdministradorActivity.class));
+                    startActivity(new Intent(getApplicationContext(), PersonalActivity.class));
                 }
                 else {
                     Toast.makeText(getApplicationContext(), "Usuario existente con ese DNI", Toast.LENGTH_SHORT).show();

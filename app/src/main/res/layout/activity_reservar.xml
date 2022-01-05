@@ -115,7 +115,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="Días y horario: "
+                android:text="Horario: "
                 android:textColor="@color/grey"
                 android:textStyle="bold"
                 android:textSize="18sp" />
@@ -124,7 +124,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="dias y horario"
+                android:text="horario"
                 android:textColor="@color/grey"
                 android:textSize="18sp" />
         </LinearLayout>

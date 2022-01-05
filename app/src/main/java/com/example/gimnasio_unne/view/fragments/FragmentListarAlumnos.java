@@ -83,6 +83,8 @@ public class FragmentListarAlumnos extends Fragment implements SearchView.OnQuer
 
             adaptador = new AdaptadorPersonas(getActivity().getApplicationContext(), persons);
             list.setAdapter(adaptador);
+            mostrarDatos(url);
+            txtBuscar.setOnQueryTextListener(this);
 
             //items para editar, eliminar y ver detalles
             list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -119,9 +121,6 @@ public class FragmentListarAlumnos extends Fragment implements SearchView.OnQuer
                     builder.create().show();
                 }
             });
-            mostrarDatos(url);
-            txtBuscar.setOnQueryTextListener(this);
-
         } //FIN IF TIENE CONEXION
         else {
             //mensaje de no hay internet

@@ -69,7 +69,7 @@ public class FragmentPersonalCuposLibres extends Fragment {
                 public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
 
-                    CharSequence[] dialogoItem = {"Ver alumnos inscriptos", "Editar cupo libre", "Dar de baja cupo libre"};
+                    CharSequence[] dialogoItem = {"Ver alumnos inscriptos", "Editar cupo", "Dar de baja"};
                     //titulo del alert dialog
                     builder.setTitle(arrayCuposLibres.get(position).getGrupo_descripcion());
                     builder.setItems(dialogoItem, new DialogInterface.OnClickListener() {
