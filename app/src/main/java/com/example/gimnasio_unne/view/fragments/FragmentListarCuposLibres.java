@@ -38,7 +38,7 @@ import java.util.ArrayList;
 
 
 public class FragmentListarCuposLibres extends Fragment {
-
+    //listar cupos para perfil estudiante
     private ListView list;
     public static ArrayList<CuposLibres> arrayCuposLibres= new ArrayList<>();
     String url = "https://medinamagali.com.ar/gimnasio_unne/listarcuposlibres.php?alumno_id="+Login.personas_id+"";

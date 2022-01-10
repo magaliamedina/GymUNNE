@@ -43,7 +43,7 @@ import cz.msebera.android.httpclient.Header;
 public class FragmentAltaCuposLibres extends Fragment {
 
     Spinner spinnerGrupos;
-    EditText etTotalCupos;
+    EditText etTotalCupos, etMes, etAnio;
     TextView tvFechaReserva;
     Button btnguardar;
     private AsyncHttpClient cliente;
@@ -55,6 +55,8 @@ public class FragmentAltaCuposLibres extends Fragment {
         View view = inflater.inflate(R.layout.fragment_alta_cupos_libres, container, false);
         spinnerGrupos = view.findViewById(R.id.spinnerAltaCuposLibresGrupos);
         etTotalCupos=view.findViewById(R.id.etAltaCuposLibresTotalCupos);
+        etMes=view.findViewById(R.id.etAltaCuposLibresMes);
+        etAnio=view.findViewById(R.id.etAltaCuposLibresAnio);
         tvFechaReserva=view.findViewById(R.id.tvAltaCuposLibresFechaReserva);
         btnguardar=view.findViewById(R.id.btnAltaCupoLibre);
 
@@ -85,6 +87,14 @@ public class FragmentAltaCuposLibres extends Fragment {
     public boolean validarCampos() {
         if(etTotalCupos.getText().toString().isEmpty()) {
             etTotalCupos.setError("Ingrese cupo total");
+            return false;
+        }
+        if(etMes.getText().toString().isEmpty()) {
+            etMes.setError("Ingrese mes");
+            return false;
+        }
+        if(etAnio.getText().toString().isEmpty()) {
+            etAnio.setError("Ingrese año");
             return false;
         }
         return true;
@@ -145,6 +155,8 @@ public class FragmentAltaCuposLibres extends Fragment {
             public void onResponse(String response) {
                 Toast.makeText(getActivity().getApplicationContext(), "Alta de grupo exitosa", Toast.LENGTH_SHORT).show();
                 etTotalCupos.setText("");
+                etMes.setText("");
+                etAnio.setText("");
                 tvFechaReserva.setText(Utiles.obtenerFechaActual("GMT-3")
                         + " " +Utiles.obtenerHoraActual("GMT-3"));
             }
@@ -160,6 +172,8 @@ public class FragmentAltaCuposLibres extends Fragment {
                 parametros.put("grupo_id", idgrupo);
                 parametros.put("fecha", tvFechaReserva.getText().toString());
                 parametros.put("total", etTotalCupos.getText().toString());
+                parametros.put("mes", etMes.getText().toString());
+                parametros.put("anio", etAnio.getText().toString());
                 return parametros;
             }
         };

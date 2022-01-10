@@ -114,7 +114,48 @@
                 android:text="(0: Inactivo - 1: Activo) " />
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="@color/grey"
+                android:textStyle="bold"
+                android:text="Mes: " />
+            <EditText
+                android:id="@+id/etEditarCuposLibresMes"
+                android:layout_width="30dp"
+                android:textSize="18sp"
+                android:textColor="@color/grey"
+                android:layout_height="wrap_content"
+                android:inputType="number"/>
+        </LinearLayout>
 
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="@color/grey"
+                android:textStyle="bold"
+                android:text="Año: " />
+            <EditText
+                android:id="@+id/etEditarCuposLibresAnio"
+                android:layout_width="wrap_content"
+                android:textSize="18sp"
+                android:textColor="@color/grey"
+                android:layout_height="wrap_content"
+                android:inputType="number"/>
+        </LinearLayout>
 
     <Button
         android:id="@+id/btnEditarCupoLibre"

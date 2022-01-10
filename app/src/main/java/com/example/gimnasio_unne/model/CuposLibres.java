@@ -2,9 +2,7 @@ package com.example.gimnasio_unne.model;
 
 public class CuposLibres {
     private String id_cupolibre, grupo_descripcion, profesor_nombreYapellido, cupolibre_total,
-            horarios_inicio_fin, grupo_id, fecha_reserva, estado;
-
-    public CuposLibres(){}
+            horarios_inicio_fin, grupo_id, fecha_reserva, estado, mes, anio;
 
     public CuposLibres(String id_cupolibre, String grupo_descripcion, String nombreYapellido, String cupolibre_total,
                        String horarios_inicio_fin, String grupo_id, String fecha_reserva, String estado) {
@@ -16,6 +14,21 @@ public class CuposLibres {
         this.grupo_id= grupo_id;
         this.fecha_reserva=fecha_reserva;
         this.estado=estado;
+    }
+
+    public CuposLibres(String id_cupolibre, String grupo_descripcion, String nombreYapellido, String cupolibre_total,
+                       String horarios_inicio_fin, String grupo_id, String fecha_reserva, String estado, String mes,
+                       String anio) {
+        this.id_cupolibre=id_cupolibre;
+        this.grupo_descripcion = grupo_descripcion;
+        this.profesor_nombreYapellido = nombreYapellido;
+        this.cupolibre_total = cupolibre_total;
+        this.horarios_inicio_fin = horarios_inicio_fin;
+        this.grupo_id= grupo_id;
+        this.fecha_reserva=fecha_reserva;
+        this.estado=estado;
+        this.mes=mes;
+        this.anio=anio;
     }
 
     public String getId_cupolibre() {
@@ -80,5 +93,21 @@ public class CuposLibres {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public String getMes() {
+        return mes;
+    }
+
+    public void setMes(String mes) {
+        this.mes = mes;
+    }
+
+    public String getAnio() {
+        return anio;
+    }
+
+    public void setAnio(String anio) {
+        this.anio = anio;
     }
 }

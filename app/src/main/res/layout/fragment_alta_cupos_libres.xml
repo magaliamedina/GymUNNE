@@ -57,6 +57,42 @@
             android:inputType="number"/>
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:text="Mes: " />
+        <EditText
+            android:id="@+id/etAltaCuposLibresMes"
+            android:layout_width="wrap_content"
+            android:textSize="18sp"
+            android:layout_height="wrap_content"
+            android:inputType="number"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:text="Año: " />
+        <EditText
+            android:id="@+id/etAltaCuposLibresAnio"
+            android:layout_width="50dp"
+            android:textSize="18sp"
+            android:layout_height="wrap_content"
+            android:inputType="number"/>
+    </LinearLayout>
+
     <Button
         android:id="@+id/btnAltaCupoLibre"
         android:layout_width="match_parent"

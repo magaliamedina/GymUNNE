@@ -47,7 +47,7 @@ public class EditarCupoLibre extends AppCompatActivity {
     TextView tvFechaReserva;
     Spinner spinnerGrupos;
     String idgrupo, idcupolibre;
-    EditText etTotalCupos, etEstado;
+    EditText etTotalCupos, etEstado, etmes, etanio;
     Button btnguardar;
 
     @Override
@@ -57,6 +57,8 @@ public class EditarCupoLibre extends AppCompatActivity {
         btnguardar=findViewById(R.id.btnEditarCupoLibre);
         tvFechaReserva=findViewById(R.id.tvEditarCuposLibresFechaReserva);
         etTotalCupos=findViewById(R.id.etEditarCuposLibresTotalCupos);
+        etmes=findViewById(R.id.etEditarCuposLibresMes);
+        etanio=findViewById(R.id.etEditarCuposLibresAnio);
         spinnerGrupos=findViewById(R.id.spinnerEditarCuposLibresGrupos);
         etEstado = findViewById(R.id.etEditarCuposLibresEstado);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -71,6 +73,8 @@ public class EditarCupoLibre extends AppCompatActivity {
         llenarSpinnerGrupo();
         tvFechaReserva.setText(FragmentPersonalCuposLibres.arrayCuposLibres.get(position).getFecha_reserva());
         etEstado.setText(FragmentPersonalCuposLibres.arrayCuposLibres.get(position).getEstado());
+        etmes.setText(FragmentPersonalCuposLibres.arrayCuposLibres.get(position).getMes());
+        etanio.setText(FragmentPersonalCuposLibres.arrayCuposLibres.get(position).getAnio());
         btnguardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,6 +100,14 @@ public class EditarCupoLibre extends AppCompatActivity {
         }
         if(etEstado.getText().toString().isEmpty()) {
             etEstado.setError("Ingrese un estado");
+            return false;
+        }
+        if(etmes.getText().toString().isEmpty()) {
+            etmes.setError("Ingrese un mes");
+            return false;
+        }
+        if(etanio.getText().toString().isEmpty()) {
+            etanio.setError("Ingrese un año");
             return false;
         }
         if(Integer.parseInt(etEstado.getText().toString()) > 1) {
@@ -181,6 +193,9 @@ public class EditarCupoLibre extends AppCompatActivity {
                 parametros.put("grupo_id", idgrupo);
                 parametros.put("total", etTotalCupos.getText().toString());
                 parametros.put("estado", etEstado.getText().toString());
+                parametros.put("mes", etmes.getText().toString());
+                parametros.put("anio", etanio.getText().toString());
+
                 return parametros;
             }
         };

@@ -1,5 +1,6 @@
 package com.example.gimnasio_unne.view.fragments;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -14,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -26,6 +28,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.gimnasio_unne.PersonalActivity;
 import com.example.gimnasio_unne.view.EditarCupoLibre;
 import com.example.gimnasio_unne.R;
 import com.example.gimnasio_unne.model.CuposLibres;
@@ -42,16 +45,19 @@ import java.util.Map;
 
 public class FragmentPersonalCuposLibres extends Fragment {
     private ListView list;
+    private Button btn;
     public static ArrayList<CuposLibres> arrayCuposLibres= new ArrayList<>();
     String url = "https://medinamagali.com.ar/gimnasio_unne/listarcuposlibres_personal.php";
+    String url_limpiar_cupos = "https://medinamagali.com.ar/gimnasio_unne/limpiar_cupos.php";
     AdaptadorCuposLibres adaptador;
     CuposLibres cuposLibres;
     public FragmentPersonalCuposLibres() {
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view =inflater.inflate(R.layout.fragment_listar_cupos_libres, container, false);
-        list = view.findViewById(R.id.lvListarCuposLibres);
+        View view =inflater.inflate(R.layout.fragment_personal_cupos_libres, container, false);
+        list = view.findViewById(R.id.lvPersonalListarCuposLibres);
+        btn = view.findViewById(R.id.btn_limpiar_cupos);
         //sin internet
         ImageView imgSinConexion=view.findViewById(R.id.imgSinConexion);
         TextView tvSinConexion1=view.findViewById(R.id.tv_sinConexion1);
@@ -113,6 +119,13 @@ public class FragmentPersonalCuposLibres extends Fragment {
                 }
             });
             mostrarDatos();
+
+            //limpiar cupos para iniciar el mes
+            btn.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    limpiarCupoMes();
+                }
+            });
         }
         else {
             //mensaje de no hay internet
@@ -123,6 +136,29 @@ public class FragmentPersonalCuposLibres extends Fragment {
                     "acceso a Internet e intente nuevamente", Toast.LENGTH_SHORT).show();
         }
         return view;
+    }
+
+    public void limpiarCupoMes() {
+        /*final ProgressDialog progressDialog= new ProgressDialog(getActivity().getApplicationContext());
+        progressDialog.setMessage("Cargando....");
+        progressDialog.show();*/
+
+        StringRequest request=new StringRequest(Request.Method.POST, url_limpiar_cupos, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Toast.makeText(getActivity().getApplicationContext(), "Cupos actualizados", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getActivity().getApplicationContext(), PersonalActivity.class));
+                //progressDialog.dismiss();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getActivity().getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                //progressDialog.dismiss();
+            }
+        });
+        RequestQueue requestQueue= Volley.newRequestQueue(getActivity().getApplicationContext());
+        requestQueue.add(request);
     }
 
     private boolean tieneConexionInternet() {
@@ -181,8 +217,12 @@ public class FragmentPersonalCuposLibres extends Fragment {
                             String id_grupo = object.getString("grupo_id");
                             String fecha_reserva = object.getString("fecha");
                             String estado = object.getString("estado");
+                            String mes = object.getString("mes");
+                            String anio = object.getString("anio");
+
                             cuposLibres = new CuposLibres(id_cupolibre, grupo_descripcion, nombres+" " + apellido,
-                                    cupolibre_total,"de "+hora_inicio+" a " +  hora_fin, id_grupo, fecha_reserva, estado);
+                                    cupolibre_total,"de "+hora_inicio+" a " +  hora_fin, id_grupo,
+                                    fecha_reserva, estado, mes, anio);
                             arrayCuposLibres.add(cuposLibres);
                             adaptador.notifyDataSetChanged();
                         }
