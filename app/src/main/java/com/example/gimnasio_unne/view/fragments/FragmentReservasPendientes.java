@@ -50,6 +50,7 @@ public class FragmentReservasPendientes extends Fragment {
 
     private ListView list;
     public static ArrayList<Reservas> arrayReservas= new ArrayList<>();
+    //reservas pendientes
     String url = "https://medinamagali.com.ar/gimnasio_unne/listar_reservas.php";
     String urlReserva = "https://medinamagali.com.ar/gimnasio_unne/modificar_reserva.php";
     AdaptadorReservas adaptador;

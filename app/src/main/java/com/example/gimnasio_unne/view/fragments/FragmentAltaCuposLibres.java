@@ -97,6 +97,18 @@ public class FragmentAltaCuposLibres extends Fragment {
             etAnio.setError("Ingrese año");
             return false;
         }
+        Integer mes_nro= Integer.parseInt(etMes.getText().toString());
+        if(mes_nro>12 || mes_nro <1){
+            etMes.setError("Ingrese un mes correcto");
+            return false;
+        }
+        Integer anio_ingresado= Integer.parseInt(etAnio.getText().toString());
+        Integer anio_actual= Integer.parseInt(Utiles.obtenerAnio());
+        //año actual y siguiente unicamente correctos
+        if(!( anio_ingresado.equals(anio_actual+1) || anio_ingresado.equals(anio_actual))){
+            etAnio.setError("Ingrese año actual o siguiente");
+            return false;
+        }
         return true;
     }
 

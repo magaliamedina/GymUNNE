@@ -13,6 +13,10 @@
             android:icon="@drawable/ic_mis_reservas"
             android:title="Mis reservas" />
         <item
+            android:id="@+id/fragmentReservasAnuales"
+            android:icon="@drawable/ic_mis_reservas"
+            android:title="Mis reservas anuales" />
+        <item
             android:id="@+id/consultarViaEmail"
             android:icon="@drawable/ic_email"
             android:title="Consultar por email" />

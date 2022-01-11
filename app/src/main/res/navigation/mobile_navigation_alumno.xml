@@ -17,4 +17,9 @@
         android:name="com.example.gimnasio_unne.view.fragments.FragmentMisReservas"
         android:label="Mis reservas"
         tools:layout="@layout/fragment_mis_reservas" />
+    <fragment
+        android:id="@+id/fragmentReservasAnuales"
+        android:name="com.example.gimnasio_unne.view.fragments.FragmentReservasAnuales"
+        android:label="Mis reservas anuales"
+        tools:layout="@layout/fragment_reservas_anuales" />
 </navigation>

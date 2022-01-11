@@ -14,7 +14,7 @@ import com.example.gimnasio_unne.R;
 import com.example.gimnasio_unne.model.Reservas;
 
 import java.util.List;
-
+//reservas pendientes
 public class AdaptadorReservas extends ArrayAdapter<Reservas> {
     Context context;
     List<Reservas> arrayListReservas;

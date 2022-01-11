@@ -28,5 +28,12 @@ public class Utiles {
         return sdf.format(date);
     }
 
+    //para alta y editar cupo
+    public static String obtenerAnio(){
+        Date date = new Date();
+        SimpleDateFormat getYearFormat = new SimpleDateFormat("yyyy");
+        return getYearFormat.format(date);
+    }
+
 
 }

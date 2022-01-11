@@ -34,6 +34,7 @@ import com.example.gimnasio_unne.R;
 import com.example.gimnasio_unne.model.CuposLibres;
 import com.example.gimnasio_unne.view.ReservasConfirmadas;
 import com.example.gimnasio_unne.view.adapter.AdaptadorCuposLibres;
+import com.example.gimnasio_unne.view.adapter.AdaptadorPersonalCupos;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -49,7 +50,7 @@ public class FragmentPersonalCuposLibres extends Fragment {
     public static ArrayList<CuposLibres> arrayCuposLibres= new ArrayList<>();
     String url = "https://medinamagali.com.ar/gimnasio_unne/listarcuposlibres_personal.php";
     String url_limpiar_cupos = "https://medinamagali.com.ar/gimnasio_unne/limpiar_cupos.php";
-    AdaptadorCuposLibres adaptador;
+    AdaptadorPersonalCupos adaptador;
     CuposLibres cuposLibres;
     public FragmentPersonalCuposLibres() {
     }
@@ -68,7 +69,7 @@ public class FragmentPersonalCuposLibres extends Fragment {
 
         if(tieneConexionInternet()) {
             //cargar el web service
-            adaptador = new AdaptadorCuposLibres(getActivity().getApplicationContext(), arrayCuposLibres);
+            adaptador = new AdaptadorPersonalCupos(getActivity().getApplicationContext(), arrayCuposLibres);
             list.setAdapter(adaptador);
             list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
@@ -123,9 +124,24 @@ public class FragmentPersonalCuposLibres extends Fragment {
             //limpiar cupos para iniciar el mes
             btn.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    limpiarCupoMes();
+                    AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+                    builder.setTitle("Selecciona una respuesta.")
+                            .setMessage("Estas seguro que desea limpiar los cupos?");
+                    builder.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            limpiarCupoMes();
+                        }
+                    });
+                    builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    });
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
                 }
-            });
+            }); //fin del setOnClickListenet
         }
         else {
             //mensaje de no hay internet

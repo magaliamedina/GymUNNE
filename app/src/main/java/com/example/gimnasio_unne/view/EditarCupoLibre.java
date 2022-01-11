@@ -27,6 +27,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.gimnasio_unne.PersonalActivity;
 import com.example.gimnasio_unne.R;
+import com.example.gimnasio_unne.Utiles;
 import com.example.gimnasio_unne.model.Grupos;
 import com.example.gimnasio_unne.view.fragments.FragmentListarCuposLibres;
 import com.example.gimnasio_unne.view.fragments.FragmentPersonalCuposLibres;
@@ -112,6 +113,18 @@ public class EditarCupoLibre extends AppCompatActivity {
         }
         if(Integer.parseInt(etEstado.getText().toString()) > 1) {
             etEstado.setError("Ingrese '0': inactivo o '1': activo");
+            return false;
+        }
+        Integer mes_nro= Integer.parseInt(etmes.getText().toString());
+        if(mes_nro>12 || mes_nro <1){
+            etmes.setError("Ingrese un mes correcto");
+            return false;
+        }
+        Integer anio_ingresado= Integer.parseInt(etanio.getText().toString());
+        Integer anio_actual= Integer.parseInt(Utiles.obtenerAnio());
+        //año actual y siguiente unicamente correctos
+        if(!( anio_ingresado.equals(anio_actual+1) || anio_ingresado.equals(anio_actual))){
+            etanio.setError("Ingrese año actual o siguiente");
             return false;
         }
         return true;
