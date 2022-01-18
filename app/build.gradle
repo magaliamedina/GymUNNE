@@ -60,4 +60,7 @@ dependencies {
 
     //para grafico de barras tortas URL:
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0-alpha'
+
+    //para implementar PDF
+    implementation 'com.itextpdf:itextg:5.5.10'
 }

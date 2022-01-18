@@ -5,10 +5,70 @@
     android:layout_height="match_parent"
     tools:context=".view.fragments.FragmentReporteAlumnosPorGrupo">
 
-    <com.github.mikephil.charting.charts.BarChart
-        android:layout_margin="15dp"
-        android:id="@+id/barChartAlumnosPorGrupo"
-       android:layout_width="match_parent"
-       android:layout_height="400dp"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="20dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Anual"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:text="Descargar PDF" />
+            </LinearLayout>
+
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/barChartAlumnosPorGrupo"
+                android:layout_width="match_parent"
+                android:layout_height="450dp"
+                android:layout_margin="15dp" >
+
+            </com.github.mikephil.charting.charts.BarChart>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:text="Mes:"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <Spinner
+                    android:id="@+id/spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp" />
+
+                <com.github.mikephil.charting.charts.BarChart
+                    android:id="@+id/barChartAlumnosPorGrupoPorMes"
+                    android:layout_width="match_parent"
+                    android:layout_height="450dp"
+                    android:layout_margin="15dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </ScrollView>
 
 </FrameLayout>

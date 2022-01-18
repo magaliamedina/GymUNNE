@@ -37,18 +37,23 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-//reporte en base a alumnos por grupo en el mes o de año?
+//reporte en base a alumnos por grupo de todos los años
 public class FragmentReporteAlumnosPorGrupo extends Fragment {
 
     private BarChart barChart;
-    private String url="https://medinamagali.com.ar/gimnasio_unne/consulta_alumnos_por_grupo.php";
-    private String grupo1, grupo2;
-    private String[] cupos;
-    private String[] grupos= new String[]{"Grupo 1", "Grupo 2", "Grupo 88", "Grupo 99"};
+    private String URL="https://medinamagali.com.ar/gimnasio_unne/consulta_alumnos_por_grupo.php";
+    private String total_reservas;
+    private String[] grupos;
+    //para el spinner
+    private String[] meses = new String[] {"enero", "febrero", "marzo", "abril", "mayo", "junio",
+            "julio", "agosto", "setiembre", "octubre", "noviembre", "diciembre"};
+    //creamos la lista con los valores de entrada
+    List<BarEntry> entradas = new ArrayList<>();
 
     public FragmentReporteAlumnosPorGrupo() {  }
 
@@ -66,17 +71,20 @@ public class FragmentReporteAlumnosPorGrupo extends Fragment {
     }
 
     public void mostrarDatos() {
-        StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+        StringRequest request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
                     JSONArray jsonArray = new JSONArray(response);
+                    grupos= new String[jsonArray.length()];
                     for (int i=0;i<jsonArray.length();i++) {
-                        //cupos[i] = jsonArray.getJSONObject(i).getString("cupos"+(i+1));
-                        grupo1 = jsonArray.getJSONObject(0).getString("cupos1");
-                        grupo2 = jsonArray.getJSONObject(1).getString("cupos2");
+                        total_reservas = jsonArray.getJSONObject(i).getString("total_reservas");
+                        grupos[i] = jsonArray.getJSONObject(i).getString("descripcion") ;
+                        entradas.add(new BarEntry(i, Float.parseFloat(total_reservas)));
                     }
                     crearGraficoBarra();
+                    legend(barChart); //metodo leyenda
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -92,15 +100,6 @@ public class FragmentReporteAlumnosPorGrupo extends Fragment {
     }
 
     private void crearGraficoBarra() {
-        //creamos la lista con los valores de entrada
-        List<BarEntry> entradas = new ArrayList<>();
-        entradas.add(new BarEntry(0, Float.parseFloat(grupo1)));
-        entradas.add(new BarEntry(1, Float.parseFloat(grupo2)));
-        /*entradas.add(new BarEntry(0, Float.parseFloat(cupos[0])));
-        entradas.add(new BarEntry(1, Float.parseFloat(cupos[1])));*/
-        entradas.add(new BarEntry(2,6));
-        entradas.add(new BarEntry(3,1));
-
         //mandamos los datos para crear la gráfica
         BarDataSet datos = new BarDataSet(entradas ,"");
 
@@ -108,33 +107,33 @@ public class FragmentReporteAlumnosPorGrupo extends Fragment {
 
         //ponemos color a cada barra
         datos.setColors(ColorTemplate.COLORFUL_COLORS);
-        datos.setValueTextSize(20);
-        datos.setValueTextColor(Color.WHITE);
+        datos.setValueTextSize(18);
+        datos.setValueTextColor(Color.BLACK);
 
         //separacion entre las barras
-        data.setBarWidth(0.9f);
+        data.setBarWidth(0.45f);
 
         barChart.setData(data);
 
-        //pone las barras centradas
-        barChart.setFitBars(true);
+        barChart.setFitBars(true); //pone las barras centradas
+        barChart.setDrawGridBackground(true); //las lineas que sean horizontales unicamente
+        barChart.getLegend().setEnabled(false); //no mostrar las leyendas
 
-        /*Description description = new Description();
-        description.setText("Cantidad de alumnos por grupos");
-        description.setTextSize(15);
-        barChart.setDescription(description);*/
+        Description description = new Description();
+        description.setText(""); //para que no muestre descripcion
+        barChart.setDescription(description);
 
-        //legend(barChart); //metodo leyenda
         ejeX(barChart.getXAxis());
+        ejeY(barChart.getAxisRight()); //que muestre a la izquierda
     }
 
     private void legend(BarChart barChart) {
         Legend legend = barChart.getLegend();
         legend.setForm(Legend.LegendForm.CIRCLE);
-        legend.setTextSize(15);
+        legend.setTextSize(20);
         legend.setFormSize(20);//tamaño del ciculo de la leyenda
         legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
-        //legend.setFormToTextSpace(2);
+        legend.setFormToTextSpace(2);
         //datos que van a ir en la leyenda
         ArrayList<LegendEntry>entries = new ArrayList<>();
         for(int i=0; i< grupos.length;i++) {
@@ -149,5 +148,10 @@ public class FragmentReporteAlumnosPorGrupo extends Fragment {
         axis.setGranularityEnabled(true);
         axis.setPosition(XAxis.XAxisPosition.BOTTOM);
         axis.setValueFormatter(new IndexAxisValueFormatter(grupos));
+    }
+
+    private void ejeY(YAxis axis) {
+        axis.setAxisMinimum(0);
+        axis.setEnabled(false); //que no aparezca la barra derecha
     }
 }
