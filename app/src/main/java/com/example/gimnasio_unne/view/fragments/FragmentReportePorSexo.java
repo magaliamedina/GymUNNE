@@ -50,8 +50,9 @@ public class FragmentReportePorSexo extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view= inflater.inflate(R.layout.fragment_reporte_por_sexo, container, false);
         pieChart=view.findViewById(R.id.pieChartEdadAlumnos);
-        if(tieneConexionInternet())
+        if(tieneConexionInternet()) {
             mostrarDatos();
+        }
         else {
             Toast.makeText(getActivity().getApplicationContext(), "No se pudo conectar, revise el " +
                     "acceso a Internet e intente nuevamente", Toast.LENGTH_SHORT).show();
@@ -75,7 +76,6 @@ public class FragmentReportePorSexo extends Fragment {
         pieChart.setDescription(description);
 
         final ArrayList<PieEntry> pieEntries=new ArrayList<>();
-
         pieEntries.add(new PieEntry(Float.parseFloat(masculino),"Masculino")); //para la leyenda
         pieEntries.add(new PieEntry(Float.parseFloat(femenino),"Femenino"));
         pieEntries.add(new PieEntry(Float.parseFloat(otros),"Otros"));
@@ -94,6 +94,9 @@ public class FragmentReportePorSexo extends Fragment {
 
         PieData pieData= new PieData(pieDataSet);
         pieChart.setData(pieData);
+        //LAS 2 siguientes lineas son para que cargue los datos sin hacer clic en el grafico
+        pieChart.notifyDataSetChanged();
+        pieChart.invalidate();
     }
 
     public void mostrarDatos() {
@@ -101,12 +104,10 @@ public class FragmentReportePorSexo extends Fragment {
             @Override
             public void onResponse(String response) {
                 try {
-                    //Log.d("VOLLEY", response);
                     JSONArray jsonArray = new JSONArray(response);
                     masculino = jsonArray.getJSONObject(0).getString("masculino");
                     femenino = jsonArray.getJSONObject(1).getString("femenino");
                     otros = jsonArray.getJSONObject(2).getString("otros");
-                    Log.d("pepe",masculino);
                     crearGraficoPastel(masculino, femenino, otros);
                 } catch (JSONException e) {
                     e.printStackTrace();

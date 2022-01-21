@@ -145,7 +145,6 @@ public class FragmentReporteAlumnosPorGrupo extends Fragment {
 
         //separacion entre las barras
         data.setBarWidth(0.45f);
-
         barChart.setData(data);
 
         barChart.setFitBars(true); //pone las barras centradas
@@ -158,7 +157,9 @@ public class FragmentReporteAlumnosPorGrupo extends Fragment {
 
         ejeX(barChart.getXAxis());
         ejeY(barChart.getAxisRight()); //que muestre a la izquierda
-
+        //LAS 2 siguientes lineas son para que cargue los datos sin hacer clic en el grafico
+        barChart.notifyDataSetChanged();
+        barChart.invalidate();
     }
 
     private void legend(BarChart barChart) {

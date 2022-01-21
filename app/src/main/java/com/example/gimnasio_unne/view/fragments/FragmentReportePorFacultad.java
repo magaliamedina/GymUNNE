@@ -96,6 +96,7 @@ public class FragmentReportePorFacultad extends Fragment {
         pieEntries.add(new PieEntry(Float.parseFloat(odontologia),"Odontologia"));
         pieEntries.add(new PieEntry(Float.parseFloat(criminalistica),"Criminalistica"));
 
+        //personalizacion del grafico- etiquetas
         PieDataSet pieDataSet=new PieDataSet(pieEntries,"");
         pieDataSet.setColors(COLORS);
         pieDataSet.setValueTextSize(20);
@@ -110,6 +111,9 @@ public class FragmentReportePorFacultad extends Fragment {
 
         PieData pieData= new PieData(pieDataSet);
         pieChart.setData(pieData);
+        //LAS 2 siguientes lineas son para que cargue los datos sin hacer clic en el grafico
+        pieChart.notifyDataSetChanged();
+        pieChart.invalidate();
     }
 
     public void mostrarDatos() {
