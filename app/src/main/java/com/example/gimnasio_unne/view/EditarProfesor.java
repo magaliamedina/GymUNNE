@@ -104,11 +104,9 @@ public class EditarProfesor extends AppCompatActivity {
         String sexo_guardado= FragmentListarProfesores.persons.get(position).getSexo();
         //lo siguiente es para mostrar en orden como esta guardado
         if(sexo_guardado.equals("2")) {
-            sexos= new String [] {"Femenino", "Masculino", "Otro"};
+            sexos= new String [] {"Femenino", "Masculino"};
         } else if(sexo_guardado.equals("1")) {
-            sexos = new String [] {"Masculino", "Femenino", "Otro"};
-        } else {
-            sexos =new String []{"Otro", "Masculino", "Femenino"};
+            sexos = new String [] {"Masculino", "Femenino"};
         }
         ArrayAdapter <String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, sexos);
         spinnerSexos.setAdapter(adapter);
@@ -203,9 +201,6 @@ public class EditarProfesor extends AppCompatActivity {
         }
         else if(seleccion.equals("Femenino")) {
             sexoBD="2";
-        }
-        else if(seleccion.equals("Otro")) {
-            sexoBD="3";
         }
 
         final ProgressDialog progressDialog= new ProgressDialog(this);

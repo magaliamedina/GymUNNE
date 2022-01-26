@@ -94,6 +94,17 @@
         app:layout_constraintTop_toBottomOf="@+id/tvApeYNom_DetallePersona" />
 
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="12dp"
+        android:text="(Como figura en el documento)"
+        android:textColor="@color/grey"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/txtsexopersonadetalle"
+        app:layout_constraintTop_toBottomOf="@+id/txtApeYNompersonadetalle" />
+
+    <TextView
         android:id="@+id/txtfechnac_personadetalle"
         style="@style/textos"
         android:layout_width="wrap_content"

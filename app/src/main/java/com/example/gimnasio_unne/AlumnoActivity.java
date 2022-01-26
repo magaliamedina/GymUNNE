@@ -69,6 +69,7 @@ public class AlumnoActivity extends AppCompatActivity {
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 //es el identificador del menu que se encuenta en menu/menu_alumno
+                R.id.fragmentMiPerfil,
         R.id.fragmentListarCuposLibres, R.id.fragmentMisReservas, R.id.fragmentReservasAnuales,
                 R.id.consultarViaEmail, R.id.logout)
                 .setDrawerLayout(drawer)

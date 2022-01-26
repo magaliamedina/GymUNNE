@@ -81,6 +81,7 @@
                 android:text="Nombres:"
                 style="@style/textos"/>
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -94,10 +95,17 @@
                 android:textStyle="bold" />
             <TextView
                 android:id="@+id/txtsexopersonaldetalle"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Sexo"
                 style="@style/textos"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/grey"
+                android:textSize="14sp"
+                android:layout_marginLeft="10dp"
+                android:text="(Como figura en el documento)"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"

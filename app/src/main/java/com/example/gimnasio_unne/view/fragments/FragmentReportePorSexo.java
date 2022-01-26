@@ -39,8 +39,7 @@ import java.util.ArrayList;
 public class FragmentReportePorSexo extends Fragment {
 
     private PieChart pieChart;
-    //private BarChart barChart;
-    String masculino, femenino, otros;
+    String masculino, femenino;
     String url="https://medinamagali.com.ar/gimnasio_unne/consulta_sexos.php";
 
     public FragmentReportePorSexo() {
@@ -69,7 +68,7 @@ public class FragmentReportePorSexo extends Fragment {
         return false;
     }
 
-    private void crearGraficoPastel(String masculino, String femenino, String otros) {
+    private void crearGraficoPastel(String masculino, String femenino) {
         Description description = new Description();
         description.setText("Alumnos por género");
         description.setTextSize(15);
@@ -78,7 +77,6 @@ public class FragmentReportePorSexo extends Fragment {
         final ArrayList<PieEntry> pieEntries=new ArrayList<>();
         pieEntries.add(new PieEntry(Float.parseFloat(masculino),"Masculino")); //para la leyenda
         pieEntries.add(new PieEntry(Float.parseFloat(femenino),"Femenino"));
-        pieEntries.add(new PieEntry(Float.parseFloat(otros),"Otros"));
 
         PieDataSet pieDataSet=new PieDataSet(pieEntries,""); //leyenda
         pieDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
@@ -107,8 +105,7 @@ public class FragmentReportePorSexo extends Fragment {
                     JSONArray jsonArray = new JSONArray(response);
                     masculino = jsonArray.getJSONObject(0).getString("masculino");
                     femenino = jsonArray.getJSONObject(1).getString("femenino");
-                    otros = jsonArray.getJSONObject(2).getString("otros");
-                    crearGraficoPastel(masculino, femenino, otros);
+                    crearGraficoPastel(masculino, femenino);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

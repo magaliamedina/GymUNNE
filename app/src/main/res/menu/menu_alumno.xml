@@ -5,6 +5,10 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/fragmentMiPerfil"
+            android:icon="@drawable/vector_person"
+            android:title="Mi perfil" />
+        <item
             android:id="@+id/fragmentListarCuposLibres"
             android:icon="@drawable/ic_reserve"
             android:title="Reservar un cupo" />

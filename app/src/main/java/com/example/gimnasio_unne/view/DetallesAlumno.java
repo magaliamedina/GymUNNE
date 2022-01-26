@@ -49,8 +49,6 @@ public class DetallesAlumno extends AppCompatActivity {
             tvsexo.setText("Masculino");
         } else if (FragmentListarAlumnos.persons.get(position).getSexo().equals("2")) {
             tvsexo.setText("Femenino");
-        } else if (FragmentListarAlumnos.persons.get(position).getSexo().equals("3")){
-            tvsexo.setText("Otro");
         }
         tvfechaNac.setText( FragmentListarAlumnos.persons.get(position).getFechaNac());
         //tvlocalidad.setText("Localidad: " + FragmentListarAlumnos.persons.get(position).getLocalidad());

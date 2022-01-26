@@ -54,6 +54,14 @@
             android:hint="@string/txt_nombres"
             android:inputType="textPersonName"
             android:importantForAutofill="no" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/grey"
+            android:textSize="14sp"
+            android:paddingTop="20dp"
+            android:text="Completá este dato como figura en el documento"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

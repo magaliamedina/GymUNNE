@@ -50,8 +50,6 @@ public class DetallesProfesor extends AppCompatActivity {
             tvsexo.setText("Masculino");
         } else if (FragmentListarProfesores.persons.get(position).getSexo().equals("2")) {
             tvsexo.setText("Femenino");
-        } else if (FragmentListarProfesores.persons.get(position).getSexo().equals("3")){
-            tvsexo.setText("Otro");
         }
         tvfechaNac.setText( FragmentListarProfesores.persons.get(position).getFechaNac());
         //tvlocalidad.setText("Localidad: " + FragmentListarProfesores.persons.get(position).getLocalidad());

@@ -6,11 +6,16 @@
     app:startDestination="@id/fragmentListarCuposLibres">
 
     <fragment
+        android:id="@+id/fragmentMiPerfil"
+        android:name="com.example.gimnasio_unne.view.fragments.FragmentMiPerfil"
+        android:label="Mi perfil"
+        tools:layout="@layout/fragment_mi_perfil" >
+    </fragment>
+    <fragment
         android:id="@+id/fragmentListarCuposLibres"
         android:name="com.example.gimnasio_unne.view.fragments.FragmentListarCuposLibres"
         android:label="Reservar un cupo"
         tools:layout="@layout/fragment_listar_cupos_libres" >
-
     </fragment>
     <fragment
         android:id="@+id/fragmentMisReservas"

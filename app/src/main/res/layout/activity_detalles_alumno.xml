@@ -64,11 +64,10 @@
         style="@style/textos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="59dp"
+        android:layout_marginTop="58dp"
         android:text="Apellido y nombre"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.166"
+        app:layout_constraintHorizontal_bias="0.086"
         app:layout_constraintStart_toEndOf="@+id/tvApeYNom_DetalleAlumno"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
 
@@ -94,6 +93,17 @@
         android:text="Sexo"
         app:layout_constraintStart_toEndOf="@+id/txtsexo_alumnodetalle"
         app:layout_constraintTop_toBottomOf="@+id/tvApeYNom_DetalleAlumno" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="19dp"
+        android:layout_marginTop="18dp"
+        android:text="(Como figura en el documento)"
+        android:textColor="@color/grey"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/txtsexoalumnodetalle"
+        app:layout_constraintTop_toBottomOf="@+id/txtApeYNomalumnodetalle" />
 
     <TextView
         android:id="@+id/txtfechnac_alumnodetalle"

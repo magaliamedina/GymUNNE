@@ -2,6 +2,7 @@ package com.example.gimnasio_unne.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -102,11 +103,9 @@ public class EditarAlumno extends AppCompatActivity {
         String sexo_guardado= FragmentListarAlumnos.persons.get(position).getSexo();
         //lo siguiente es para mostrar en orden como esta guardado
         if(sexo_guardado.equals("2")) {
-            sexos= new String [] {"Femenino", "Masculino", "Otro"};
+            sexos= new String [] {"Femenino", "Masculino"};
         } else if(sexo_guardado.equals("1")) {
-            sexos = new String [] {"Masculino", "Femenino", "Otro"};
-        } else {
-            sexos =new String []{"Otro", "Masculino", "Femenino"};
+            sexos = new String [] {"Masculino", "Femenino"};
         }
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, sexos);
         spinnerSexos.setAdapter(adapter);
@@ -202,10 +201,6 @@ public class EditarAlumno extends AppCompatActivity {
         else if(seleccion.equals("Femenino")) {
             sexoBD="2";
         }
-        else if(seleccion.equals("Otro")) {
-            sexoBD="3";
-        }
-
         final ProgressDialog progressDialog= new ProgressDialog(this);
 
         StringRequest request=new StringRequest(Request.Method.POST, URL
@@ -214,7 +209,11 @@ public class EditarAlumno extends AppCompatActivity {
             public void onResponse(String response) {
                 if(response.length()==0) {
                     Toast.makeText(EditarAlumno.this, "Alumno modificado correctamente", Toast.LENGTH_LONG).show();
-                    startActivity(new Intent(getApplicationContext(), PersonalActivity.class));
+                    //startActivity(new Intent(getApplicationContext(), PersonalActivity.class));
+                    finish();
+                    /*getSupportFragmentManager().beginTransaction()
+                            .add(android.R.id.content, new FragmentListarAlumnos())
+                            .commit();*/
                 }
                 else {
                     Toast.makeText(getApplicationContext(), "Usuario existente con ese DNI", Toast.LENGTH_SHORT).show();

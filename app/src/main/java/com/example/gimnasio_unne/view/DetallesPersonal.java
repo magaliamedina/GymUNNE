@@ -49,8 +49,6 @@ public class DetallesPersonal extends AppCompatActivity {
             tvsexo.setText("Masculino");
         } else if (FragmentListarPersonal.persons.get(position).getSexo().equals("2")) {
             tvsexo.setText("Femenino");
-        } else if (FragmentListarPersonal.persons.get(position).getSexo().equals("3")){
-            tvsexo.setText("Otro");
         }
         tvfechaNac.setText(FragmentListarPersonal.persons.get(position).getFechaNac());
         //tvlocalidad.setText("Localidad: " + FragmentListarPersonal.persons.get(position).getLocalidad());
