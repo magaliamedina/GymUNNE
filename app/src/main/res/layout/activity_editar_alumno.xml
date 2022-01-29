@@ -170,7 +170,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:background="@color/colorPrimary"
-            android:text="Modificar"
+            android:text="guardar cambios"
             android:textColor="#FFFFFF"
             android:textSize="18sp" />
 

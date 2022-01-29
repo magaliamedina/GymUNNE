@@ -13,6 +13,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -38,7 +39,8 @@ import java.util.Map;
 public class Login extends AppCompatActivity {
     EditText edtUsuario, edtPassword;
     Button btnLogin, btnCallPhone, btnSendMail;
-    public static String usuario = "", password = "", personas_id = "", apellido = "", nombres = "", lu = "";
+    public static String usuario = "", password = "", personas_id = "", apellido = "", nombres = "", lu = "",
+            sexo="", pcia="", estadocivil="", dni="", email="", facultad="";
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
     CheckBox cbRecordarUsuario;
@@ -108,6 +110,14 @@ public class Login extends AppCompatActivity {
                         apellido = jsonObject.getString("apellido");
                         nombres = jsonObject.getString("nombres");
                         lu = jsonObject.getString("lu");
+                        //agregado para mi perfil
+                        dni= jsonObject.getString("dni");
+                        sexo =jsonObject.getString("sexo_id");
+                        pcia= jsonObject.getString("provincia");
+                        estadocivil= jsonObject.getString("estado_civil");
+                        email= jsonObject.getString("email");
+                        facultad= jsonObject.getString("facultad_id");
+
                         if (estado.equals("0")){
                             Toast.makeText(Login.this, "Usuario dado de baja. Consulte al correo electrónico", Toast.LENGTH_LONG).show();
                         } else {
@@ -188,6 +198,14 @@ public class Login extends AppCompatActivity {
         editor.putString("nya", nombres + " " + apellido);
         editor.putString("lu", lu);
         editor.putString("personas_id", personas_id);
+        //agregados para mi perfil
+        editor.putString("dni", dni);
+        editor.putString("sexo", sexo);
+        editor.putString("provincia", pcia);
+        editor.putString("estado_civil", estadocivil);
+        editor.putString("email", email);
+        editor.putString("facultad_id", facultad);
+
         editor.apply();
     }
 
