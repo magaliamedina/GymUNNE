@@ -40,7 +40,7 @@ public class Login extends AppCompatActivity {
     EditText edtUsuario, edtPassword;
     Button btnLogin, btnCallPhone, btnSendMail;
     public static String usuario = "", password = "", personas_id = "", apellido = "", nombres = "", lu = "",
-            sexo="", pcia="", estadocivil="", dni="", email="", facultad="";
+            sexo="", pcia="", estadocivil="", dni="", email="", facultad="", fecha_nac="";
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
     CheckBox cbRecordarUsuario;
@@ -117,6 +117,7 @@ public class Login extends AppCompatActivity {
                         estadocivil= jsonObject.getString("estado_civil");
                         email= jsonObject.getString("email");
                         facultad= jsonObject.getString("facultad_id");
+                        fecha_nac= jsonObject.getString("fecha_nacimiento");
 
                         if (estado.equals("0")){
                             Toast.makeText(Login.this, "Usuario dado de baja. Consulte al correo electrónico", Toast.LENGTH_LONG).show();
@@ -205,7 +206,9 @@ public class Login extends AppCompatActivity {
         editor.putString("estado_civil", estadocivil);
         editor.putString("email", email);
         editor.putString("facultad_id", facultad);
-
+        editor.putString("fecha_nac", fecha_nac);
+        //agregado para cambiar password
+        editor.putString("password", password);
         editor.apply();
     }
 

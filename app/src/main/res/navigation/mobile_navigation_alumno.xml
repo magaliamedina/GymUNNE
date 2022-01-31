@@ -20,11 +20,17 @@
     <fragment
         android:id="@+id/fragmentMisReservas"
         android:name="com.example.gimnasio_unne.view.fragments.FragmentMisReservas"
-        android:label="Mis reservas"
+        android:label="Mi reserva"
         tools:layout="@layout/fragment_mis_reservas" />
     <fragment
         android:id="@+id/fragmentReservasAnuales"
         android:name="com.example.gimnasio_unne.view.fragments.FragmentReservasAnuales"
         android:label="Mis reservas anuales"
         tools:layout="@layout/fragment_reservas_anuales" />
+
+    <fragment
+        android:id="@+id/fragmentCambiarPassword"
+        android:name="com.example.gimnasio_unne.view.fragments.FragmentCambiarPassword"
+        android:label="Cambiar contraseña"
+        tools:layout="@layout/fragment_cambiar_password" />
 </navigation>

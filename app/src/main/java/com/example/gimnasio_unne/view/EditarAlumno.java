@@ -88,7 +88,6 @@ public class EditarAlumno extends AppCompatActivity {
         Intent intent =getIntent();
         position=intent.getExtras().getInt("position");
         id= FragmentListarAlumnos.persons.get(position).getId();
-        //tvid.setText(FragmentListarAlumnos.persons.get(position).getId());
         fechaNacimiento= FragmentListarAlumnos.persons.get(position).getFechaNac();
 
         etdni.setText(FragmentListarAlumnos.persons.get(position).getDni());

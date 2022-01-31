@@ -20,10 +20,19 @@
             android:id="@+id/fragmentReservasAnuales"
             android:icon="@drawable/ic_mis_reservas"
             android:title="Mis reservas anuales" />
+    </group>
+    <group
+        android:id="@+id/menuInternoAlumno"
+        android:checkableBehavior="none">
+        <item
+            android:id="@+id/fragmentCambiarPassword"
+            android:icon="@drawable/vector_lock"
+            android:title="Cambiar contraseña" />
         <item
             android:id="@+id/consultarViaEmail"
             android:icon="@drawable/ic_email"
             android:title="Consultar por email" />
+
     </group>
     <group
         android:id="@+id/menuInferiorAlumno"

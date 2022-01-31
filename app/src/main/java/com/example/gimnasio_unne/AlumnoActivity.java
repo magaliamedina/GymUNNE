@@ -71,7 +71,7 @@ public class AlumnoActivity extends AppCompatActivity {
                 //es el identificador del menu que se encuenta en menu/menu_alumno
                 R.id.fragmentMiPerfil,
         R.id.fragmentListarCuposLibres, R.id.fragmentMisReservas, R.id.fragmentReservasAnuales,
-                R.id.consultarViaEmail, R.id.logout)
+                R.id.fragmentCambiarPassword,  R.id.consultarViaEmail, R.id.logout)
                 .setDrawerLayout(drawer)
                 .build();
         //nav_host_fragment_alumno se encuentra en content_alumno
