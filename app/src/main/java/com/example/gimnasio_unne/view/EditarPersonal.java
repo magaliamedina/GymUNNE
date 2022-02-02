@@ -204,6 +204,7 @@ public class EditarPersonal extends AppCompatActivity {
             public void onResponse(String response) {
                 if(response.length()==0) {
                     Toast.makeText(EditarPersonal.this, "Personal modificado correctamente", Toast.LENGTH_LONG).show();
+                    finish();
                     startActivity(new Intent(getApplicationContext(), AdministradorActivity.class));
                 }
                 else {

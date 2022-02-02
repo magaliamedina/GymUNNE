@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,6 +50,7 @@ import java.util.Map;
 public class FragmentReservasPendientes extends Fragment {
 
     private ListView list;
+    private ProgressBar progressBar;
     public static ArrayList<Reservas> arrayReservas= new ArrayList<>();
     //reservas pendientes
     String url = "https://medinamagali.com.ar/gimnasio_unne/listar_reservas.php";
@@ -62,6 +64,7 @@ public class FragmentReservasPendientes extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_reservas_pendientes, container, false);
         list = view.findViewById(R.id.lvListarReservas);
+        progressBar=view.findViewById(R.id.progressBarReservasPendientes);
         tvSinReservasPendientes= view.findViewById(R.id.tvSinReservasPendientes);
         //sin conexion a internet
         ImageView imgSinConexion=view.findViewById(R.id.imgSinConexion);
@@ -80,13 +83,15 @@ public class FragmentReservasPendientes extends Fragment {
                 public void onItemClick(AdapterView<?> parent, final View view, final int position, long id) {
                     //final int which_item = position;
                     AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
-                    String confirmar_reserva = "Confirmar reserva";
-                    String cancelar_reserva = "Cancelar reserva";
-                    CharSequence[] dialogoItem = {confirmar_reserva, cancelar_reserva};
+                    //String confirmar_reserva = "Confirmar reserva";
+                   // String cancelar_reserva = "Cancelar reserva";
+                    //CharSequence[] dialogoItem = {confirmar_reserva, cancelar_reserva};
+                    CharSequence[] dialogoItem = {
+                            Html.fromHtml("<font color='#1D9619'><b>Confirmar reserva</b></font>"),
+                            Html.fromHtml("<font color='#FF0000'><b>Cancelar reserva</b></font>")};
                     //titulo del alert dialog
                     //builder.setTitle(Html.fromHtml("<font color='#FF0000'>Reserva número <b>250</b></font>"));
-                    builder.setTitle("Reserva número " + arrayReservas.get(position).getId_reserva());
-
+                    builder.setTitle("Reserva N°" + arrayReservas.get(position).getId_reserva());
                     builder.setItems(dialogoItem, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int i) {
@@ -152,6 +157,7 @@ public class FragmentReservasPendientes extends Fragment {
             public void onResponse(String response) {
                 arrayReservas.clear();
                 try {
+                    progressBar.setVisibility(View.GONE);
                     JSONObject jsonObject = new JSONObject(response);
                     String sucess=jsonObject.getString("sucess");
                     JSONArray jsonArray=jsonObject.getJSONArray("listarreservas");

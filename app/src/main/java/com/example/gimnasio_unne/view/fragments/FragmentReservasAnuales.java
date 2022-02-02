@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +41,7 @@ import java.util.ArrayList;
 public class FragmentReservasAnuales extends Fragment {
 
     private ListView list;
+    private ProgressBar progressBar;
     public static ArrayList<Reservas> arrayReservas= new ArrayList<>();
     String url = "https://medinamagali.com.ar/gimnasio_unne/listar_reservasanuales_alumno.php?alumno_id="+ Login.personas_id;
     AdaptadorReservasAnuales adaptador;
@@ -53,6 +55,7 @@ public class FragmentReservasAnuales extends Fragment {
         View view= inflater.inflate(R.layout.fragment_reservas_anuales, container, false);
         list = view.findViewById(R.id.lvReservasAnuales);
         tvSinReservas= view.findViewById(R.id.tvSinReservasAnuales);
+        progressBar=view.findViewById(R.id.progressBarReservasAnuales);
         //sin conexion a internet
         ImageView imgSinConexion=view.findViewById(R.id.imgSinConexion);
         TextView tvSinConexion1=view.findViewById(R.id.tv_sinConexion1);
@@ -86,6 +89,7 @@ public class FragmentReservasAnuales extends Fragment {
             public void onResponse(String response) {
                 arrayReservas.clear();
                 try {
+                    progressBar.setVisibility(View.GONE);
                     JSONObject jsonObject = new JSONObject(response);
                     String sucess=jsonObject.getString("sucess");
                     JSONArray jsonArray=jsonObject.getJSONArray("reservas");

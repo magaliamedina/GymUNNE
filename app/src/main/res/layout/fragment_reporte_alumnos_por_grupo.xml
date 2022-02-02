@@ -5,6 +5,13 @@
     android:layout_height="match_parent"
     tools:context=".view.fragments.FragmentReporteAlumnosPorGrupo">
 
+    <ProgressBar
+        android:id="@+id/progressBarReportePorGrupo"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -29,10 +36,16 @@
 
                 <Button
                     android:id="@+id/btnGenerarPDF"
-                    android:layout_width="wrap_content"
+                    android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="30dp"
-                    android:text="Descargar PDF" />
+                    android:background="@color/colorPrimary"
+                    android:text="Descargar PDF"
+                    android:textColor="@color/white"
+                    android:drawableStart="@drawable/ic_pdf"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:textSize="18sp" />
             </LinearLayout>
 
             <com.github.mikephil.charting.charts.BarChart

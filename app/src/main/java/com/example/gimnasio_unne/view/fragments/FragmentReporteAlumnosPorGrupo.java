@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -61,6 +62,7 @@ public class FragmentReporteAlumnosPorGrupo extends Fragment {
     private String total_reservas;
     private String[] grupos;
     private Button btnGenerar;
+    private ProgressBar progressBar;
     //para el spinner
     private String[] meses = new String[] {"enero", "febrero", "marzo", "abril", "mayo", "junio",
             "julio", "agosto", "setiembre", "octubre", "noviembre", "diciembre"};
@@ -79,6 +81,7 @@ public class FragmentReporteAlumnosPorGrupo extends Fragment {
         View view= inflater.inflate(R.layout.fragment_reporte_alumnos_por_grupo, container, false);
         barChart=view.findViewById(R.id.barChartAlumnosPorGrupo);
         btnGenerar=view.findViewById(R.id.btnGenerarPDF);
+        progressBar=view.findViewById(R.id.progressBarReportePorGrupo);
         mostrarDatos();
 
         //Permisos
@@ -108,6 +111,7 @@ public class FragmentReporteAlumnosPorGrupo extends Fragment {
             @Override
             public void onResponse(String response) {
                 try {
+                    progressBar.setVisibility(View.GONE);
                     JSONArray jsonArray = new JSONArray(response);
                     grupos= new String[jsonArray.length()];
                     for (int i=0;i<jsonArray.length();i++) {

@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,6 +45,7 @@ public class FragmentMisReservas extends Fragment {
     CardView cvMisReservas;
     Button btnCancelarReservaMisReservas;
     String urlEliminarReserva= "https://medinamagali.com.ar/gimnasio_unne/cancelar_reserva.php";
+    private ProgressBar progressBar;
 
     public FragmentMisReservas() {
     }
@@ -59,6 +61,7 @@ public class FragmentMisReservas extends Fragment {
         tvNingunaReserva = view.findViewById(R.id.tvNingunaReserva);
         cvMisReservas= view.findViewById(R.id.cvMisReservas);
         btnCancelarReservaMisReservas = view.findViewById(R.id.btnCancelarReservaMisReservas);
+        progressBar=view.findViewById(R.id.progressBarMiReserva);
         //sin conexion a internet
         ImageView imgSinConexion=view.findViewById(R.id.imgSinConexion);
         TextView tvSinConexion1=view.findViewById(R.id.tv_sinConexion1);
@@ -124,6 +127,7 @@ public class FragmentMisReservas extends Fragment {
             @Override
             public void onResponse(String response) {
                 try {
+                    progressBar.setVisibility(View.GONE);
                     JSONObject jsonObject = new JSONObject(response);
                     String sucess=jsonObject.getString("sucess");
                     if (sucess.equals("1")) {

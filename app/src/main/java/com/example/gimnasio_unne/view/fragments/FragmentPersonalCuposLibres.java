@@ -18,6 +18,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,6 +47,7 @@ import java.util.Map;
 
 public class FragmentPersonalCuposLibres extends Fragment {
     private ListView list;
+    private ProgressBar progressBar;
     private Button btn;
     public static ArrayList<CuposLibres> arrayCuposLibres= new ArrayList<>();
     String url = "https://medinamagali.com.ar/gimnasio_unne/listarcuposlibres_personal.php";
@@ -58,6 +60,7 @@ public class FragmentPersonalCuposLibres extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view =inflater.inflate(R.layout.fragment_personal_cupos_libres, container, false);
         list = view.findViewById(R.id.lvPersonalListarCuposLibres);
+        progressBar=view.findViewById(R.id.progressBarPersonalCupos);
         btn = view.findViewById(R.id.btn_limpiar_cupos);
         //sin internet
         ImageView imgSinConexion=view.findViewById(R.id.imgSinConexion);
@@ -97,6 +100,7 @@ public class FragmentPersonalCuposLibres extends Fragment {
                                 case 1:
                                     //pasamos position para poder recibir en EditarCupolibre
                                     if (tieneConexionInternet()) {
+                                        getActivity().onBackPressed();
                                         startActivity(new Intent(getActivity().getApplicationContext(), EditarCupoLibre.class)
                                                 .putExtra("position", position));
                                     }
@@ -216,6 +220,7 @@ public class FragmentPersonalCuposLibres extends Fragment {
             public void onResponse(String response) {
                 arrayCuposLibres.clear();
                 try {
+                    progressBar.setVisibility(View.GONE);
                     JSONObject jsonObject = new JSONObject(response);
                     String sucess=jsonObject.getString("sucess");
                     JSONArray jsonArray=jsonObject.getJSONArray("cuposlibres");

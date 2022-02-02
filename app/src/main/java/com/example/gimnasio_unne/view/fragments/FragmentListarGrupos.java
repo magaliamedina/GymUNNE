@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +28,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.gimnasio_unne.GenerarPDF;
 import com.example.gimnasio_unne.view.adapter.AdaptadorGrupos;
 import com.example.gimnasio_unne.view.AltaGrupo;
 import com.example.gimnasio_unne.view.DetallesGrupo;
@@ -47,6 +49,7 @@ import java.util.Map;
 public class FragmentListarGrupos extends Fragment {
 
     private ListView list;
+    private ProgressBar progressBar;
     AdaptadorGrupos adaptador;
     public static ArrayList<Grupos>groups= new ArrayList<>();
     String url="https://medinamagali.com.ar/gimnasio_unne/mostrargrupos.php";
@@ -59,6 +62,7 @@ public class FragmentListarGrupos extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_listar_grupos, container, false);
         list = view.findViewById(R.id.listview);
+        progressBar=view.findViewById(R.id.progressBarGrupos);
         //sin internet
         ImageView imgSinConexion=view.findViewById(R.id.imgSinConexion);
         TextView tvSinConexion1=view.findViewById(R.id.tv_sinConexion1);
@@ -89,7 +93,7 @@ public class FragmentListarGrupos extends Fragment {
                 /*ProgressBar progressBar;
                 progressBar.setProgress(int 1);
                 progressBar.setVisibility(View.GONE);*/
-                    CharSequence[] dialogoItem = {"Ver datos", "Editar datos", "Eliminar datos"};
+                    CharSequence[] dialogoItem = {"Ver datos", "Editar datos", "Dar de baja"};
                     builder.setTitle(groups.get(position).getDescripcion());
                     builder.setItems(dialogoItem, new DialogInterface.OnClickListener() {
                         @Override
@@ -103,6 +107,7 @@ public class FragmentListarGrupos extends Fragment {
                                     break;
                                 case 1:
                                     //pasamos position para poder recibir en editar
+                                    getActivity().onBackPressed();
                                     startActivity(new Intent(getActivity().getApplicationContext(), EditarGrupos.class)
                                             .putExtra("position", position));
                                     break;
@@ -145,6 +150,7 @@ public class FragmentListarGrupos extends Fragment {
             public void onResponse(String response) {
                 groups.clear();
                 try {
+                    progressBar.setVisibility(View.GONE);
                     JSONObject jsonObject = new JSONObject(response);
                     String sucess=jsonObject.getString("sucess");
                     JSONArray jsonArray=jsonObject.getJSONArray("grupos");

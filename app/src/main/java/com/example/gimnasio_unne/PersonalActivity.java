@@ -63,7 +63,7 @@ public class PersonalActivity extends AppCompatActivity {
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 //identificador del menu que se encuentra en menu_personal y mobile_navigation_personal
                 R.id.fragmentReservasPendientes, R.id.fragmentAltaCuposLibres, R.id.fragmentPersonalCuposLibres,
-                R.id.fragmentListarAlumnos, R.id.logoutPersonal)
+                R.id.fragmentListarAlumnos, R.id.fragmentCambiarPassword, R.id.logoutPersonal)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_personal);

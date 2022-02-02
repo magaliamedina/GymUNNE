@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,6 +47,7 @@ import java.util.Map;
 
 public class FragmentHorarios extends Fragment {
     private ListView list;
+    private ProgressBar progressBar;
     AdaptadorHorarios adaptador;
     public static ArrayList<Horarios> horariosArrayList= new ArrayList<>();
     String url="https://medinamagali.com.ar/gimnasio_unne/listar_horarios.php";
@@ -58,6 +60,7 @@ public class FragmentHorarios extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view= inflater.inflate(R.layout.fragment_horarios, container, false);
         list = view.findViewById(R.id.listview);
+        progressBar=view.findViewById(R.id.progressBarHorarios);
         //sin internet
         ImageView imgSinConexion=view.findViewById(R.id.imgSinConexion);
         TextView tvSinConexion1=view.findViewById(R.id.tv_sinConexion1);
@@ -160,6 +163,7 @@ public class FragmentHorarios extends Fragment {
             public void onResponse(String response) {
                 horariosArrayList.clear();
                 try {
+                    progressBar.setVisibility(View.GONE);
                     JSONArray jsonArray = new JSONArray(response);
                     for (int i= 0; i< jsonArray.length();i++){
                         String id= jsonArray.getJSONObject(i).getString("horario_id");

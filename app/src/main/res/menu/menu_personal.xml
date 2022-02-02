@@ -7,7 +7,7 @@
         <item
             android:id="@+id/fragmentReservasPendientes"
             android:icon="@drawable/ic_reserve"
-            android:title="Alumnos pendientes" />
+            android:title="Pendientes" />
         <item
             android:id="@+id/fragmentAltaCuposLibres"
             android:icon="@drawable/ic_add"
@@ -15,7 +15,7 @@
         <item
             android:id="@+id/fragmentPersonalCuposLibres"
             android:icon="@drawable/ic_listar"
-            android:title="Listar cupos"/>
+            android:title="Listado de cupos"/>
         <item
             android:id="@+id/fragmentListarAlumnos"
             android:icon="@drawable/ic_listar"
@@ -26,6 +26,10 @@
     <group
         android:id="@+id/menuInferiorPersonal"
         android:checkableBehavior="none">
+        <item
+            android:id="@+id/fragmentCambiarPassword"
+            android:icon="@drawable/vector_lock"
+            android:title="Cambiar contraseña" />
         <item
             android:id="@+id/logoutPersonal"
             android:icon="@drawable/ic_exit"

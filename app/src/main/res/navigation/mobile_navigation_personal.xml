@@ -26,5 +26,11 @@
         android:label="Listado de alumnos"
         tools:layout="@layout/fragment_listar_alumnos" />
 
+    <fragment
+        android:id="@+id/fragmentCambiarPassword"
+        android:name="com.example.gimnasio_unne.view.fragments.FragmentCambiarPassword"
+        android:label="Cambiar contraseña"
+        tools:layout="@layout/fragment_cambiar_password" />
+
 
 </navigation>

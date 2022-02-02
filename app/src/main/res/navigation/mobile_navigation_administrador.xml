@@ -41,4 +41,10 @@
         android:name="com.example.gimnasio_unne.view.fragments.FragmentReporteAlumnosPorGrupo"
         android:label="Reporte de alumnos por grupo"
         tools:layout="@layout/fragment_reporte_alumnos_por_grupo" />
+
+    <fragment
+        android:id="@+id/fragmentCambiarPassword"
+        android:name="com.example.gimnasio_unne.view.fragments.FragmentCambiarPassword"
+        android:label="Cambiar contraseña"
+        tools:layout="@layout/fragment_cambiar_password" />
 </navigation>

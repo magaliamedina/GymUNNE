@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -47,6 +48,7 @@ public class FragmentAltaCuposLibres extends Fragment {
     TextView tvFechaReserva;
     Button btnguardar;
     private AsyncHttpClient cliente;
+    private ProgressBar progressBar;
     String idgrupo;
     public FragmentAltaCuposLibres() {  }
 
@@ -59,6 +61,7 @@ public class FragmentAltaCuposLibres extends Fragment {
         etAnio=view.findViewById(R.id.etAltaCuposLibresAnio);
         tvFechaReserva=view.findViewById(R.id.tvAltaCuposLibresFechaReserva);
         btnguardar=view.findViewById(R.id.btnAltaCupoLibre);
+        progressBar=view.findViewById(R.id.progressBarAltaCupo);
 
         cliente = new AsyncHttpClient();
         llenarSpinnerGrupo();
@@ -129,6 +132,7 @@ public class FragmentAltaCuposLibres extends Fragment {
     private void cargarSpinnerGrupos(String respuesta) {
         final ArrayList<Grupos> listaGrupos = new ArrayList<Grupos>();
         try {
+            progressBar.setVisibility(View.GONE);
             JSONObject jsonObject = new JSONObject(respuesta);
             JSONArray jsonArray=jsonObject.getJSONArray("gruposdisponibles");
             for (int i= 0; i< jsonArray.length();i++){

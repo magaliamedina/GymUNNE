@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -50,6 +51,7 @@ import java.util.Map;
 
 public class FragmentListarAlumnos extends Fragment implements SearchView.OnQueryTextListener{
     private ListView list;
+    private ProgressBar progressBar;
     AdaptadorPersonas adaptador;
     public static ArrayList<Personas> persons= new ArrayList<>();
     String url="https://medinamagali.com.ar/gimnasio_unne/listar_alumnos.php";
@@ -61,6 +63,7 @@ public class FragmentListarAlumnos extends Fragment implements SearchView.OnQuer
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view= inflater.inflate(R.layout.fragment_listar_alumnos, container, false);
         list = view.findViewById(R.id.listviewAlumnos);
+        progressBar=view.findViewById(R.id.progressBarAlumnos);
         txtBuscar= view.findViewById(R.id.txtBuscarAlumno);
 
         //sin internet
@@ -93,7 +96,7 @@ public class FragmentListarAlumnos extends Fragment implements SearchView.OnQuer
                     AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
                     ProgressDialog progressDialog = new ProgressDialog(view.getContext());
 
-                    CharSequence[] dialogoItem = {"Ver datos", "Editar datos", "Eliminar datos"};
+                    CharSequence[] dialogoItem = {"Ver datos", "Editar datos", "Dar de baja"};
                     builder.setTitle(persons.get(position).getApellido() + " " + persons.get(position).getNombres());
                     builder.setItems(dialogoItem, new DialogInterface.OnClickListener() {
                         @Override
@@ -108,6 +111,7 @@ public class FragmentListarAlumnos extends Fragment implements SearchView.OnQuer
                                 case 1:
                                     //pasamos position para poder recibir en editar
                                     //MODIFICAR
+                                    getActivity().onBackPressed();
                                     startActivity(new Intent(getActivity().getApplicationContext(), EditarAlumno.class)
                                             .putExtra("position", position));
                                     break;
@@ -151,6 +155,7 @@ public class FragmentListarAlumnos extends Fragment implements SearchView.OnQuer
             public void onResponse(String response) {
                 persons.clear();
                 try {
+                    progressBar.setVisibility(View.GONE);
                     JSONObject jsonObject = new JSONObject(response);
                     String sucess=jsonObject.getString("sucess");
                     JSONArray jsonArray=jsonObject.getJSONArray("personas");

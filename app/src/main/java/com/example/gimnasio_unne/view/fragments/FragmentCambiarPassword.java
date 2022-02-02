@@ -31,6 +31,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import java.util.HashMap;
 import java.util.Map;
 
+//PARA TODOS LOS PERFILES DE USUARIOS
 public class FragmentCambiarPassword extends Fragment {
 
     TextInputLayout etActual, etNueva, etConfirmar;
@@ -84,6 +85,7 @@ public class FragmentCambiarPassword extends Fragment {
                 if(response.equals("Modificado correctamente"))
                     mensaje ="Contraseña modificada correctamente";
                 Toast.makeText(getActivity().getApplicationContext(), mensaje, Toast.LENGTH_LONG).show();
+                limpiarCampos();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -109,5 +111,11 @@ public class FragmentCambiarPassword extends Fragment {
         SharedPreferences sharedPreferences = getActivity().getApplicationContext().getSharedPreferences("datosusuario", Context.MODE_PRIVATE);
         password= sharedPreferences.getString("password", "");
         persona_id= sharedPreferences.getString("personas_id", "");
+    }
+
+    private void limpiarCampos() {
+        etActual.getEditText().getText().clear();
+        etNueva.getEditText().getText().clear();
+        etConfirmar.getEditText().getText().clear();
     }
 }

@@ -46,6 +46,10 @@
         android:id="@+id/menu_inferior"
         android:checkableBehavior="none">
         <item
+            android:id="@+id/fragmentCambiarPassword"
+            android:icon="@drawable/vector_lock"
+            android:title="Cambiar contraseña" />
+        <item
             android:id="@+id/logoutadmin"
             android:title="Cerrar Sesión"
             android:icon="@drawable/ic_exit"

@@ -59,14 +59,17 @@ public class Login extends AppCompatActivity {
         inicializarElementos();
         if (revisarSesion()) {
             if (revisarUsuario().equals("1")) { //PERFIL ADMINISTRADOR
+                finish();
                 Intent intent = new Intent(getApplicationContext(), AdministradorActivity.class);
                 startActivity(intent);
             }
             if (revisarUsuario().equals("3")) { //PERFIL ESTUDIANTE
+                finish();
                 Intent intent = new Intent(getApplicationContext(), AlumnoActivity.class);
                 startActivity(intent);
             }
             if (revisarUsuario().equals("4")) { //PERFIL PERSONAL ADMINISTRATIVO
+                finish();
                 Intent intent = new Intent(getApplicationContext(), PersonalActivity.class);
                 startActivity(intent);
             }

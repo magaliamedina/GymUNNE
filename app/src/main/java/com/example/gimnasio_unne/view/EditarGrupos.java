@@ -128,6 +128,7 @@ public class EditarGrupos extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 Toast.makeText(EditarGrupos.this, "Grupo modificado correctamente", Toast.LENGTH_LONG).show();
+                finish();
                 startActivity(new Intent(getApplicationContext(), AdministradorActivity.class));
                 progressDialog.dismiss();
             }

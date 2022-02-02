@@ -17,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.android.volley.Request;
@@ -40,6 +41,7 @@ import java.util.ArrayList;
 public class FragmentListarCuposLibres extends Fragment {
     //listar cupos para perfil estudiante
     private ListView list;
+    private ProgressBar progressBar;
     public static ArrayList<CuposLibres> arrayCuposLibres= new ArrayList<>();
     String url = "https://medinamagali.com.ar/gimnasio_unne/listarcuposlibres.php?alumno_id="+Login.personas_id+"";
 
@@ -54,6 +56,7 @@ public class FragmentListarCuposLibres extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_listar_cupos_libres, container, false);
         tvReservaRealizada=view.findViewById(R.id.tvReservaRealizada);
         list = view.findViewById(R.id.lvListarCuposLibres);
+        progressBar=view.findViewById(R.id.progressBarCuposLibres);
         ImageView imgSinConexion=view.findViewById(R.id.imgSinConexion);
         TextView tvSinConexion1=view.findViewById(R.id.tv_sinConexion1);
         TextView tvSinConexion2=view.findViewById(R.id.tv_sinConexion2);
@@ -112,6 +115,7 @@ public class FragmentListarCuposLibres extends Fragment {
                     JSONObject jsonObject = new JSONObject(response);
                     String sucess=jsonObject.getString("sucess");
                     if (sucess.equals("1")) {
+                        progressBar.setVisibility(View.GONE);
                         list.setVisibility(View.VISIBLE);
                         JSONArray jsonArray=jsonObject.getJSONArray("cuposlibres");
                         for (int i=0;i<jsonArray.length();i++) {

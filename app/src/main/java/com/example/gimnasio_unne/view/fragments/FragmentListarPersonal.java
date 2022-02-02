@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,6 +48,7 @@ import java.util.Map;
 
 public class FragmentListarPersonal extends Fragment {
     private ListView list;
+    private ProgressBar progressBar;
     AdaptadorPersonas adaptador;
     public static ArrayList<Personas> persons= new ArrayList<>();
     String url="https://medinamagali.com.ar/gimnasio_unne/listar_personal.php";
@@ -56,6 +58,7 @@ public class FragmentListarPersonal extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view= inflater.inflate(R.layout.fragment_listar_personal, container, false);
         list = view.findViewById(R.id.lvListarPersonalAdministrativo);
+        progressBar=view.findViewById(R.id.progressBarPersonal);
         //sin internet
         ImageView imgSinConexion=view.findViewById(R.id.imgSinConexion);
         TextView tvSinConexion1=view.findViewById(R.id.tv_sinConexion1);
@@ -84,7 +87,7 @@ public class FragmentListarPersonal extends Fragment {
                     AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
                     ProgressDialog progressDialog = new ProgressDialog(view.getContext());
 
-                    CharSequence[] dialogoItem = {"Ver datos", "Editar datos", "Eliminar datos"};
+                    CharSequence[] dialogoItem = {"Ver datos", "Editar datos", "Dar de baja"};
                     builder.setTitle(persons.get(position).getApellido() + " " + persons.get(position).getNombres());
                     builder.setItems(dialogoItem, new DialogInterface.OnClickListener() {
                         @Override
@@ -98,6 +101,7 @@ public class FragmentListarPersonal extends Fragment {
                                 case 1:
                                     //pasamos position para poder recibir en editar
                                     //no lleva el id correcto
+                                    getActivity().onBackPressed();
                                     startActivity(new Intent(getActivity().getApplicationContext(), EditarPersonal.class)
                                             .putExtra("position", position));
                                     break;
@@ -139,6 +143,7 @@ public class FragmentListarPersonal extends Fragment {
             public void onResponse(String response) {
                 persons.clear();
                 try {
+                    progressBar.setVisibility(View.GONE);
                     JSONObject jsonObject = new JSONObject(response);
                     String sucess=jsonObject.getString("sucess");
                     JSONArray jsonArray=jsonObject.getJSONArray("personas");

@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -39,6 +40,7 @@ import java.util.ArrayList;
 public class FragmentReportePorSexo extends Fragment {
 
     private PieChart pieChart;
+    private ProgressBar progressBar;
     String masculino, femenino;
     String url="https://medinamagali.com.ar/gimnasio_unne/consulta_sexos.php";
 
@@ -49,6 +51,7 @@ public class FragmentReportePorSexo extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view= inflater.inflate(R.layout.fragment_reporte_por_sexo, container, false);
         pieChart=view.findViewById(R.id.pieChartEdadAlumnos);
+        progressBar=view.findViewById(R.id.progressBarReportePorSexo);
         if(tieneConexionInternet()) {
             mostrarDatos();
         }
@@ -102,6 +105,7 @@ public class FragmentReportePorSexo extends Fragment {
             @Override
             public void onResponse(String response) {
                 try {
+                    progressBar.setVisibility(View.GONE);
                     JSONArray jsonArray = new JSONArray(response);
                     masculino = jsonArray.getJSONObject(0).getString("masculino");
                     femenino = jsonArray.getJSONObject(1).getString("femenino");

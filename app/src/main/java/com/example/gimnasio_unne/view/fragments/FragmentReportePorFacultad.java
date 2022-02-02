@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -39,6 +40,7 @@ import java.util.ArrayList;
 public class FragmentReportePorFacultad extends Fragment {
 
     private PieChart pieChart;
+    private ProgressBar progressBar;
     String arquitectura, artes, agrarias, economicas, exactas, veterinarias, derecho,
             humanidades, ingenieria, medicina, odontologia, criminalistica;
     String url="https://medinamagali.com.ar/gimnasio_unne/consulta_alumnos_facultad.php";
@@ -57,6 +59,7 @@ public class FragmentReportePorFacultad extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view= inflater.inflate(R.layout.fragment_reporte_por_facultad, container, false);
         pieChart=view.findViewById(R.id.pieChartAlumnosPorFacultad);
+        progressBar=view.findViewById(R.id.progressBarReportePorFacultad);
         if (tieneConexionInternet())
             mostrarDatos();
         else {
@@ -121,7 +124,7 @@ public class FragmentReportePorFacultad extends Fragment {
             @Override
             public void onResponse(String response) {
                 try {
-                    //Log.d("VOLLEYFacultad", response);
+                    progressBar.setVisibility(View.GONE);
                     JSONArray jsonArray = new JSONArray(response);
                     arquitectura = jsonArray.getJSONObject(0).getString("arquitectura");
                     artes = jsonArray.getJSONObject(1).getString("artes");

@@ -211,6 +211,7 @@ public class EditarProfesor extends AppCompatActivity {
             public void onResponse(String response) {
                 if(response.length()==0) {
                     Toast.makeText(EditarProfesor.this, "Profesor modificado correctamente", Toast.LENGTH_LONG).show();
+                    finish();
                     startActivity(new Intent(getApplicationContext(), AdministradorActivity.class));
                 }
                 else {
