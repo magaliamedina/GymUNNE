@@ -1,12 +1,14 @@
 package com.example.gimnasio_unne.view;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -41,6 +43,11 @@ public class RecuperarContrasenia extends AppCompatActivity {
         etCorreo=findViewById(R.id.etCorreoRecuperarPass);
         btn= findViewById(R.id.btn_enviar_correo);
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -49,9 +56,9 @@ public class RecuperarContrasenia extends AppCompatActivity {
                 if(networkInfo!=null && networkInfo.isConnected()) {
                     if(etCorreo.getText().toString().isEmpty()) {
                         etCorreo.setError("Ingrese un correo electrónico");
-                    } else  enviarCorreo();
-                    //Intent intent = new Intent(getApplicationContext(), RecuperarContrasenia.class);
-                    //startActivity(intent);
+                    } else if(!Patterns.EMAIL_ADDRESS.matcher(etCorreo.getText()).matches()) { //si no es correo electronico valido
+                        etCorreo.setError("Formato de correo electrónico incorrecto");
+                        } else enviarCorreo();
                 }
                 else {
                     // no hay internet
@@ -68,6 +75,9 @@ public class RecuperarContrasenia extends AppCompatActivity {
             public void onResponse(String response) {
                 if(response.equals("SUCESS")) {
                     Toast.makeText(RecuperarContrasenia.this, "Mire su casilla de mensajes", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getApplicationContext(), RecuperarContrasenia2.class);
+                    startActivity(intent);
+                    finish();
                 } else {
                     Toast.makeText(RecuperarContrasenia.this, "No se encuentra registrado ese correo electrónico", Toast.LENGTH_SHORT).show();
                 }
