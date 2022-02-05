@@ -29,6 +29,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.gimnasio_unne.view.RecuperarContrasenia;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -38,7 +39,7 @@ import java.util.Map;
 
 public class Login extends AppCompatActivity {
     EditText edtUsuario, edtPassword;
-    Button btnLogin, btnCallPhone, btnSendMail;
+    Button btnLogin, btnCallPhone, btnSendMail, btn_recuperar_password;
     public static String usuario = "", password = "", personas_id = "", apellido = "", nombres = "", lu = "",
             sexo="", pcia="", estadocivil="", dni="", email="", facultad="", fecha_nac="";
     SharedPreferences preferences;
@@ -54,6 +55,7 @@ public class Login extends AppCompatActivity {
         btnLogin = findViewById(R.id.btn_iniciarsesion);
         btnCallPhone=findViewById(R.id.btnCallPhone);
         btnSendMail=findViewById(R.id.btnSendEmail);
+        btn_recuperar_password= findViewById(R.id.btn_recuperar_password);
         cbRecordarUsuario = findViewById(R.id.cbRecordarUsuario);
 
         inicializarElementos();
@@ -90,6 +92,23 @@ public class Login extends AppCompatActivity {
                         edtUsuario.setError("Ingrese usuario");
                         edtPassword.setError("Ingrese contraseña");
                     }
+                }
+                else {
+                    // no hay internet
+                    Toast.makeText(Login.this, "No se pudo conectar, revise el " +
+                            "acceso a Internet e intente nuevamente", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        btn_recuperar_password.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ConnectivityManager con = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo networkInfo = con.getActiveNetworkInfo();
+                if(networkInfo!=null && networkInfo.isConnected()) {
+                    Intent intent = new Intent(getApplicationContext(), RecuperarContrasenia.class);
+                    startActivity(intent);
                 }
                 else {
                     // no hay internet

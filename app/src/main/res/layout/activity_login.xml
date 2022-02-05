@@ -12,7 +12,7 @@
         android:id="@+id/imglogoSGASLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="35dp"
         app:srcCompat="@drawable/sgas" />
 
     <EditText
@@ -57,13 +57,26 @@
         android:text="@string/btn_iniciar_sesion"
         android:textColor="#ffffff" />
 
+    <Button
+        android:id="@+id/btn_recuperar_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimary"
+        android:layout_gravity="center_horizontal"
+        android:stateListAnimator="@null"
+        android:textAllCaps="false"
+        android:background="#0000"
+        android:layout_marginTop="10dp"
+        android:text="Recuperar mi contraseña"/>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/grey"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
+        android:textStyle="bold"
         android:text="Ante cualquier consulta comunicarse al: "/>
-        <Button
+    <Button
             android:id="@+id/btnCallPhone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
