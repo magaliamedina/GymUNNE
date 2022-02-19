@@ -24,36 +24,26 @@
             android:name=".view.RecuperarContrasenia"
             android:parentActivityName=".Login"></activity>
         <activity
-            android:name=".view.DetallesAlumno"
-            android:parentActivityName=".PersonalActivity" />
+            android:name=".view.DetallesAlumno" />
         <activity
-            android:name=".view.EditarAlumno"
-            android:parentActivityName=".PersonalActivity" />
+            android:name=".view.EditarAlumno" />
         <activity
-            android:name=".view.AltaAlumno"
-            android:parentActivityName=".PersonalActivity" />
+            android:name=".view.AltaAlumno"/>
         <activity
-            android:name=".view.ReservasConfirmadas"
-            android:parentActivityName=".PersonalActivity" />
+            android:name=".view.ReservasConfirmadas" />
         <activity android:name=".view.AltaHorario" />
         <activity
-            android:name=".view.AltaPersonal"
-            android:parentActivityName=".AdministradorActivity" />
+            android:name=".view.AltaPersonal" />
         <activity
-            android:name=".view.EditarPersonal"
-            android:parentActivityName=".AdministradorActivity" />
+            android:name=".view.EditarPersonal" />
         <activity
-            android:name=".view.DetallesPersonal"
-            android:parentActivityName=".AdministradorActivity" />
+            android:name=".view.DetallesPersonal" />
         <activity
-            android:name=".view.EditarCupoLibre"
-            android:parentActivityName=".PersonalActivity" />
+            android:name=".view.EditarCupoLibre"/>
         <activity
-            android:name=".view.Reservar"
-            android:parentActivityName=".AlumnoActivity" />
+            android:name=".view.Reservar"/>
         <activity
-            android:name=".view.EditarProfesor"
-            android:parentActivityName=".AdministradorActivity" />
+            android:name=".view.EditarProfesor" />
         <activity
             android:name=".PersonalActivity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -65,17 +55,13 @@
             android:name=".view.AltaProfesor"
             android:parentActivityName=".AdministradorActivity" />
         <activity
-            android:name=".view.AltaGrupo"
-            android:parentActivityName=".AdministradorActivity" />
+            android:name=".view.AltaGrupo" />
         <activity
-            android:name=".view.DetallesProfesor"
-            android:parentActivityName=".AdministradorActivity" />
+            android:name=".view.DetallesProfesor"/>
         <activity
-            android:name=".view.EditarGrupos"
-            android:parentActivityName=".AdministradorActivity" />
+            android:name=".view.EditarGrupos"/>
         <activity
-            android:name=".view.DetallesGrupo"
-            android:parentActivityName=".AdministradorActivity" />
+            android:name=".view.DetallesGrupo" />
         <activity
             android:name=".AdministradorActivity"
             android:label="@string/title_activity_main"

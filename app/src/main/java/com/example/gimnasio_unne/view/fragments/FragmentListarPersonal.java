@@ -101,7 +101,6 @@ public class FragmentListarPersonal extends Fragment {
                                 case 1:
                                     //pasamos position para poder recibir en editar
                                     //no lleva el id correcto
-                                    getActivity().onBackPressed();
                                     startActivity(new Intent(getActivity().getApplicationContext(), EditarPersonal.class)
                                             .putExtra("position", position));
                                     break;

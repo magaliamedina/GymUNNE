@@ -1,5 +1,6 @@
 package com.example.gimnasio_unne.view;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -7,6 +8,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -103,6 +105,17 @@ public class AltaHorario extends AppCompatActivity {
         };
         requestQueue = Volley.newRequestQueue(AltaHorario.this);
         requestQueue.add(stringRequest);
+    }
+
+    //para el boton atras
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }

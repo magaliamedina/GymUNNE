@@ -97,6 +97,7 @@ public class FragmentListarCuposLibres extends Fragment {
         }
         else {
             //mensaje de no hay internet
+            progressBar.setVisibility(View.GONE);
             imgSinConexion.setVisibility(View.VISIBLE);
             tvSinConexion1.setVisibility(View.VISIBLE);
             tvSinConexion2.setVisibility(View.VISIBLE);
@@ -137,6 +138,7 @@ public class FragmentListarCuposLibres extends Fragment {
                         }
                     }
                     if(sucess.equals("2")) {
+                        progressBar.setVisibility(View.GONE);
                         tvReservaRealizada.setVisibility(View.VISIBLE);
                     }
                 } catch (JSONException e) {

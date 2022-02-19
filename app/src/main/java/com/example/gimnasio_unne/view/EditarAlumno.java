@@ -1,5 +1,6 @@
 package com.example.gimnasio_unne.view;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentTransaction;
@@ -12,6 +13,7 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -210,9 +212,6 @@ public class EditarAlumno extends AppCompatActivity {
                     Toast.makeText(EditarAlumno.this, "Alumno modificado correctamente", Toast.LENGTH_LONG).show();
                     //startActivity(new Intent(getApplicationContext(), PersonalActivity.class));
                     finish();
-                    /*getSupportFragmentManager().beginTransaction()
-                            .add(android.R.id.content, new FragmentListarAlumnos())
-                            .commit();*/
                 }
                 else {
                     Toast.makeText(getApplicationContext(), "Usuario existente con ese DNI", Toast.LENGTH_SHORT).show();
@@ -288,5 +287,16 @@ public class EditarAlumno extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    //para el boton atras
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

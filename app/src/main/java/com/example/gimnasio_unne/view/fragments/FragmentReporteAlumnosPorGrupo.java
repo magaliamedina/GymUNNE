@@ -33,6 +33,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.gimnasio_unne.AdministradorActivity;
 import com.example.gimnasio_unne.GenerarPDF;
 import com.example.gimnasio_unne.R;
+import com.example.gimnasio_unne.Utiles;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.Legend;
@@ -72,6 +73,7 @@ public class FragmentReporteAlumnosPorGrupo extends Fragment {
     private ProgressBar progressBar;
     //para el spinner
     private Spinner spinner;
+    private Integer mes_seleccionado;
     //creamos la lista con los valores de entrada
     List<BarEntry> entradas = new ArrayList<>();
     List<BarEntry> entradas2 = new ArrayList<>();
@@ -88,10 +90,10 @@ public class FragmentReporteAlumnosPorGrupo extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view= inflater.inflate(R.layout.fragment_reporte_alumnos_por_grupo, container, false);
         barChart=view.findViewById(R.id.barChartAlumnosPorGrupo);
-        barChartMeses=view.findViewById(R.id.barChartAlumnosPorGrupoPorMes);
+        //barChartMeses=view.findViewById(R.id.barChartAlumnosPorGrupoPorMes);
         btnGenerar=view.findViewById(R.id.btnGenerarPDF);
         progressBar=view.findViewById(R.id.progressBarReportePorGrupo);
-        spinner= view.findViewById(R.id.spinnerMesReporte);
+        //spinner= view.findViewById(R.id.spinnerMesReporte);
         mostrarDatos();
 
         //Permisos
@@ -102,8 +104,9 @@ public class FragmentReporteAlumnosPorGrupo extends Fragment {
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,},1000);
         }
 
-        spinnerMeses();
-        mostrarDatosGruposPorMeses();
+        //spinnerMeses();
+        //mostrarDatosGruposPorMeses();
+        //Toast.makeText(getActivity().getApplicationContext(), mes_seleccionado+"mes", Toast.LENGTH_SHORT).show();
 
         //Genera el documento
         GenerarPDF generarPDF = new GenerarPDF();
@@ -126,7 +129,8 @@ public class FragmentReporteAlumnosPorGrupo extends Fragment {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getActivity().getApplicationContext(), parent.getItemAtPosition(position).toString(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity().getApplicationContext(), parent.getItemAtPosition(position).toString(), Toast.LENGTH_SHORT).show();
+                mes_seleccionado = spinner.getSelectedItemPosition() + 1;
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -149,7 +153,6 @@ public class FragmentReporteAlumnosPorGrupo extends Fragment {
                     }
                     crearGraficoBarraMeses();
                     legend(barChartMeses); //metodo leyenda
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -165,7 +168,7 @@ public class FragmentReporteAlumnosPorGrupo extends Fragment {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> parametros= new HashMap<String, String>();
                 parametros.put("mes", "1");
-                parametros.put("anio", "2022");
+                parametros.put("anio", Utiles.obtenerAnio());
                 return parametros;
             }
         };
@@ -184,11 +187,10 @@ public class FragmentReporteAlumnosPorGrupo extends Fragment {
                     for (int i=0;i<jsonArray.length();i++) {
                         total_reservas = jsonArray.getJSONObject(i).getString("total_reservas");
                         grupos[i] = jsonArray.getJSONObject(i).getString("descripcion") ;
-                        entradas.add(new BarEntry(i, Float.parseFloat(total_reservas)));
+                        entradas.add(new BarEntry(i, Integer.parseInt(total_reservas)));
                     }
                     crearGraficoBarra();
                     legend(barChart); //metodo leyenda
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -265,10 +267,6 @@ public class FragmentReporteAlumnosPorGrupo extends Fragment {
 
     private void legend(BarChart barChart) {
         Legend legend = barChart.getLegend();
-        legend.setForm(Legend.LegendForm.CIRCLE);
-        legend.setTextSize(20);
-        legend.setFormSize(20);//tamaño del ciculo de la leyenda
-        legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
         legend.setFormToTextSpace(2);
         //datos que van a ir en la leyenda
         ArrayList<LegendEntry>entries = new ArrayList<>();

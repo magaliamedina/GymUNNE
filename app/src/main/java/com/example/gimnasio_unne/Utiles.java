@@ -28,12 +28,18 @@ public class Utiles {
         return sdf.format(date);
     }
 
-    //para alta y editar cupo
+    //para alta, editar cupo y alumnosPorGrupo
     public static String obtenerAnio(){
         Date date = new Date();
         SimpleDateFormat getYearFormat = new SimpleDateFormat("yyyy");
         return getYearFormat.format(date);
     }
 
+    //para alumnosPorGrupoMes
+    public static String obtenerMesActual(){
+        Date date = new Date();
+        SimpleDateFormat getYearFormat = new SimpleDateFormat("MM");
+        return getYearFormat.format(date);
+    }
 
 }

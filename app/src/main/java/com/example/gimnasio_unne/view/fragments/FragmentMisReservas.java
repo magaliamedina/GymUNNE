@@ -69,6 +69,7 @@ public class FragmentMisReservas extends Fragment {
         imgSinConexion.setVisibility(View.INVISIBLE);
         tvSinConexion1.setVisibility(View.INVISIBLE);
         tvSinConexion2.setVisibility(View.INVISIBLE);
+        tvNingunaReserva.setVisibility(View.INVISIBLE);
 
         ConnectivityManager con = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = con.getActiveNetworkInfo();
@@ -89,6 +90,7 @@ public class FragmentMisReservas extends Fragment {
         }
         else {
             // no hay internet
+            progressBar.setVisibility(View.GONE);
             imgSinConexion.setVisibility(View.VISIBLE);
             tvSinConexion1.setVisibility(View.VISIBLE);
             tvSinConexion2.setVisibility(View.VISIBLE);

@@ -1,11 +1,13 @@
 package com.example.gimnasio_unne.view;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.example.gimnasio_unne.R;
@@ -63,5 +65,16 @@ public class DetallesProfesor extends AppCompatActivity {
         }
         tvestadocivil.setText(FragmentListarProfesores.persons.get(position).getEstadoCivil());
         tvemail.setText(FragmentListarProfesores.persons.get(position).getEmail());
+    }
+
+    //para el boton atras
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

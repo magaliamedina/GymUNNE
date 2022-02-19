@@ -63,7 +63,7 @@
                 android:layout_marginTop="25dp"
                 android:orientation="vertical">
 
-                <LinearLayout
+                <!--LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -85,7 +85,7 @@
                 <com.github.mikephil.charting.charts.BarChart
                     android:id="@+id/barChartAlumnosPorGrupoPorMes"
                     android:layout_width="match_parent"
-                    android:layout_height="450dp"/>
+                    android:layout_height="450dp"/-->
             </LinearLayout>
         </LinearLayout>
 

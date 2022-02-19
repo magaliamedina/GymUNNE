@@ -93,6 +93,7 @@ public class FragmentPersonalCuposLibres extends Fragment {
                                                 .putExtra("position", position));
                                     }
                                     else {
+                                        progressBar.setVisibility(View.GONE);
                                         Toast.makeText(getActivity().getApplicationContext(), "No se pudo conectar, revise el " +
                                                 "acceso a Internet e intente nuevamente", Toast.LENGTH_SHORT).show();
                                     }
@@ -100,11 +101,11 @@ public class FragmentPersonalCuposLibres extends Fragment {
                                 case 1:
                                     //pasamos position para poder recibir en EditarCupolibre
                                     if (tieneConexionInternet()) {
-                                        getActivity().onBackPressed();
                                         startActivity(new Intent(getActivity().getApplicationContext(), EditarCupoLibre.class)
                                                 .putExtra("position", position));
                                     }
                                     else {
+                                        progressBar.setVisibility(View.GONE);
                                         Toast.makeText(getActivity().getApplicationContext(), "No se pudo conectar, revise el " +
                                                 "acceso a Internet e intente nuevamente", Toast.LENGTH_SHORT).show();
                                     }
@@ -113,6 +114,7 @@ public class FragmentPersonalCuposLibres extends Fragment {
                                     if(tieneConexionInternet())
                                         darDeBajaCupoLibre(arrayCuposLibres.get(position).getId_cupolibre());
                                     else {
+                                        progressBar.setVisibility(View.GONE);
                                         Toast.makeText(getActivity().getApplicationContext(), "No se pudo conectar, revise el " +
                                                 "acceso a Internet e intente nuevamente", Toast.LENGTH_SHORT).show();
                                     }
@@ -149,6 +151,8 @@ public class FragmentPersonalCuposLibres extends Fragment {
         }
         else {
             //mensaje de no hay internet
+            progressBar.setVisibility(View.GONE);
+            btn.setVisibility(View.GONE);
             imgSinConexion.setVisibility(View.VISIBLE);
             tvSinConexion1.setVisibility(View.VISIBLE);
             tvSinConexion2.setVisibility(View.VISIBLE);

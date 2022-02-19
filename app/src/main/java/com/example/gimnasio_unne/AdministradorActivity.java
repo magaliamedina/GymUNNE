@@ -56,7 +56,7 @@ public class AdministradorActivity extends AppCompatActivity {
 
         //se cargan los id de los fragments que se van a mostrar
         mAppBarConfiguration = new AppBarConfiguration.Builder(R.id.fragmentListarGrupos, R.id.fragmentListarPersonas,
-                R.id.fragmentListarPersonal, R.id.fragmentHorarios, R.id.fragmentReportesAlumnosPorGenero,
+                R.id.fragmentListarPersonal, R.id.fragmentHorarios, R.id.fragmentCupos, R.id.fragmentReportesAlumnosPorGenero,
                 R.id.fragmentReportesAlumnosPorFacultad,R.id.fragmentReporteAlumnosPorGrupo,
                 R.id.fragmentCambiarPassword, R.id.logoutadmin)
                 .setDrawerLayout(drawer)

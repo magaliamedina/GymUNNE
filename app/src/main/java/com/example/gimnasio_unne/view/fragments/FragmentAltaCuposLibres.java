@@ -79,6 +79,7 @@ public class FragmentAltaCuposLibres extends Fragment {
                     }
                 }
                 else {
+                    progressBar.setVisibility(View.GONE);
                     Toast.makeText(getActivity().getApplicationContext(), "No se pudo conectar, revise el " +
                             "acceso a Internet e intente nuevamente", Toast.LENGTH_SHORT).show();
                 }

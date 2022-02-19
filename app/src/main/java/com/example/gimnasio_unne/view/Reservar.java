@@ -1,5 +1,6 @@
 package com.example.gimnasio_unne.view;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -9,6 +10,7 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -157,6 +159,17 @@ public class Reservar extends AppCompatActivity {
         tvNombreEstudiante.setText("Nombre y apellido del estudiante: " + sharedPreferences.getString("nya", ""));
         alumno_id= sharedPreferences.getString("personas_id", "");
         tvLUEstudiante.setText("LU: " +sharedPreferences.getString("lu", ""));
+    }
+
+    //para el boton atras
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }

@@ -133,6 +133,7 @@ public class FragmentReservasPendientes extends Fragment {
         } // cierre de si hay internet
         else {
             // no hay internet
+            progressBar.setVisibility(View.GONE);
             imgSinConexion.setVisibility(View.VISIBLE);
             tvSinConexion1.setVisibility(View.VISIBLE);
             tvSinConexion2.setVisibility(View.VISIBLE);

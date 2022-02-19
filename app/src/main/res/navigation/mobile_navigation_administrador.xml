@@ -25,6 +25,11 @@
         android:name="com.example.gimnasio_unne.view.fragments.FragmentHorarios"
         android:label="Horarios"
         tools:layout="@layout/fragment_horarios" />
+    <fragment
+        android:id="@+id/fragmentCupos"
+        android:name="com.example.gimnasio_unne.view.fragments.FragmentPersonalCuposLibres"
+        android:label="Cupos"
+        tools:layout="@layout/fragment_personal_cupos_libres" />
 
     <fragment
         android:id="@+id/fragmentReportesAlumnosPorGenero"

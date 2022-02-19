@@ -107,7 +107,6 @@ public class FragmentListarGrupos extends Fragment {
                                     break;
                                 case 1:
                                     //pasamos position para poder recibir en editar
-                                    getActivity().onBackPressed();
                                     startActivity(new Intent(getActivity().getApplicationContext(), EditarGrupos.class)
                                             .putExtra("position", position));
                                     break;

@@ -111,7 +111,6 @@ public class FragmentListarAlumnos extends Fragment implements SearchView.OnQuer
                                 case 1:
                                     //pasamos position para poder recibir en editar
                                     //MODIFICAR
-                                    getActivity().onBackPressed();
                                     startActivity(new Intent(getActivity().getApplicationContext(), EditarAlumno.class)
                                             .putExtra("position", position));
                                     break;
@@ -128,6 +127,7 @@ public class FragmentListarAlumnos extends Fragment implements SearchView.OnQuer
         } //FIN IF TIENE CONEXION
         else {
             //mensaje de no hay internet
+            progressBar.setVisibility(View.GONE);
             imgSinConexion.setVisibility(View.VISIBLE);
             tvSinConexion1.setVisibility(View.VISIBLE);
             tvSinConexion2.setVisibility(View.VISIBLE);
