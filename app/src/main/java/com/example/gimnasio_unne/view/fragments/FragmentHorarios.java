@@ -139,6 +139,7 @@ public class FragmentHorarios extends Fragment {
         } //FIN IF TIENE CONEXION
         else{
             //mensaje de no hay internet
+            progressBar.setVisibility(View.GONE);
             imgSinConexion.setVisibility(View.VISIBLE);
             tvSinConexion1.setVisibility(View.VISIBLE);
             tvSinConexion2.setVisibility(View.VISIBLE);

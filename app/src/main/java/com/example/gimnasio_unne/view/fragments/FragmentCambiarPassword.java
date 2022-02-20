@@ -90,7 +90,8 @@ public class FragmentCambiarPassword extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getActivity().getApplicationContext(), "ERROR!", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity().getApplicationContext(), "No se pudo conectar, revise el " +
+                        "acceso a Internet e intente nuevamente", Toast.LENGTH_LONG).show();
             }
         }){
             @Override

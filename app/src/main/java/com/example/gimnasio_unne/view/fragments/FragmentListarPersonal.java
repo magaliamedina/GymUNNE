@@ -105,7 +105,12 @@ public class FragmentListarPersonal extends Fragment {
                                             .putExtra("position", position));
                                     break;
                                 case 2:
-                                    darDeBajaPersona(persons.get(position).getId());
+                                    if(tieneConexionInternet())
+                                        darDeBajaPersona(persons.get(position).getId());
+                                    else
+                                    Toast.makeText(getActivity().getApplicationContext(), "No se pudo conectar, revise el " +
+                                            "acceso a Internet e intente nuevamente", Toast.LENGTH_SHORT).show();
+
                                     break;
 
                             }
@@ -118,6 +123,7 @@ public class FragmentListarPersonal extends Fragment {
         } //FIN IF TIENE CONEXION
         else {
             //mensaje de no hay internet
+            progressBar.setVisibility(View.GONE);
             imgSinConexion.setVisibility(View.VISIBLE);
             tvSinConexion1.setVisibility(View.VISIBLE);
             tvSinConexion2.setVisibility(View.VISIBLE);

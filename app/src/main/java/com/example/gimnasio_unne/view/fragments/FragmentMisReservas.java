@@ -80,11 +80,16 @@ public class FragmentMisReservas extends Fragment {
             btnCancelarReservaMisReservas.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    cancelarReserva(urlEliminarReserva);
-                    tvNingunaReserva.setVisibility(View.VISIBLE);
-                    cvMisReservas.setVisibility(View.INVISIBLE);
-                    Intent i = new Intent(getActivity().getApplicationContext(), AlumnoActivity.class);
-                    startActivity(i);
+                    if (tieneConexionInternet()) {
+                        cancelarReserva(urlEliminarReserva);
+                        tvNingunaReserva.setVisibility(View.VISIBLE);
+                        cvMisReservas.setVisibility(View.INVISIBLE);
+                        Intent i = new Intent(getActivity().getApplicationContext(), AlumnoActivity.class);
+                        startActivity(i);
+                    } else {
+                        Toast.makeText(getActivity().getApplicationContext(), "No se pudo conectar, revise el " +
+                                "acceso a Internet e intente nuevamente", Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
         }
@@ -137,6 +142,8 @@ public class FragmentMisReservas extends Fragment {
                         if(jsonArray.length()>0) { //si hay en el arreglo "mis reservas" por lo menos un elemento
                             cvMisReservas.setVisibility(View.VISIBLE);
                             tvNingunaReserva.setVisibility(View.INVISIBLE);
+                        } else{
+                            tvNingunaReserva.setVisibility(View.VISIBLE);
                         }
                         for (int i=0;i<jsonArray.length();i++) {
                             JSONObject object= jsonArray.getJSONObject(i);
@@ -155,7 +162,7 @@ public class FragmentMisReservas extends Fragment {
                             String id_cupolibre = object.getString("id_cupolibre");
                             id_reserva = object.getString("id_reserva");
                         }
-                }
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -168,6 +175,15 @@ public class FragmentMisReservas extends Fragment {
         });
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         requestQueue.add(request);
+    }
+
+    private boolean tieneConexionInternet() {
+        ConnectivityManager con = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = con.getActiveNetworkInfo();
+        if(networkInfo!=null && networkInfo.isConnected()) {
+            return true;
+        }
+        return false;
     }
 
 }

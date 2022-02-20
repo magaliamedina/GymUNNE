@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -40,7 +41,7 @@ public class DetallesGrupo extends AppCompatActivity {
 
         if(tieneConexionInternet()) { //INICIO IF
 
-            tvid = findViewById(R.id.txtid);
+            //tvid = findViewById(R.id.txtid);
             tvhorario = findViewById(R.id.txthorariogrupodetalle);
             tvnombre = findViewById(R.id.txtnombre);
             tvprof = findViewById(R.id.txtprof);
@@ -51,15 +52,17 @@ public class DetallesGrupo extends AppCompatActivity {
             Intent intent = getIntent();
             position = intent.getExtras().getInt("position");
 
-            tvid.setText("ID " + FragmentListarGrupos.groups.get(position).getId());
-            tvhorario.setText("Horario " + FragmentListarGrupos.groups.get(position).getHorario());
-            tvnombre.setText("Nombre " + FragmentListarGrupos.groups.get(position).getDescripcion());
-            tvprof.setText("Profesor " + FragmentListarGrupos.groups.get(position).getProf());
-            tvtcupototal.setText("Cupo total " + FragmentListarGrupos.groups.get(position).getCupototal());
+            //.setText("ID " + FragmentListarGrupos.groups.get(position).getId());
+            tvhorario.setText( FragmentListarGrupos.groups.get(position).getHorario());
+            tvnombre.setText( FragmentListarGrupos.groups.get(position).getDescripcion());
+            tvprof.setText(FragmentListarGrupos.groups.get(position).getProf());
+            tvtcupototal.setText( FragmentListarGrupos.groups.get(position).getCupototal());
             if (FragmentListarGrupos.groups.get(position).getEstado().equals("0")) {
-                tvestado.setText("Estado: INACTIVO");
+                tvestado.setText("INACTIVO");
+                tvestado.setTextColor(Color.RED);
             } else {
-                tvestado.setText("Estado: ACTIVO");
+                tvestado.setText("ACTIVO");
+                tvestado.setTextColor(Color.GREEN);
             }
         } //FIN IF TIENE CONEXION
         else {

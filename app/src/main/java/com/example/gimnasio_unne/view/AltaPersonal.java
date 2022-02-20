@@ -7,7 +7,11 @@ import androidx.appcompat.widget.Toolbar;
 import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -94,8 +98,13 @@ public class AltaPersonal extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(validarCampos()) {
-                    altapersona("http://medinamagali.com.ar/gimnasio_unne/altapersona.php");
+                if(tieneConexionInternet()) {
+                    if (validarCampos()) {
+                        altapersona("http://medinamagali.com.ar/gimnasio_unne/altapersona.php");
+                    }
+                }else{
+                    Toast.makeText(getApplicationContext(), "No se pudo conectar, revise el " +
+                            "acceso a Internet e intente nuevamente", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -149,6 +158,10 @@ public class AltaPersonal extends AppCompatActivity {
         }
         if (etpassword.getText().toString().isEmpty())  {
             etpassword.setError("Ingrese contraseña");
+            return false;
+        }
+        if(!Patterns.EMAIL_ADDRESS.matcher(etemail.getText()).matches()) { //si no es correo electronico valido
+            etemail.setError("Ingrese un correo válido");
             return false;
         }
         return true;
@@ -264,5 +277,14 @@ public class AltaPersonal extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private boolean tieneConexionInternet() {
+        ConnectivityManager con = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = con.getActiveNetworkInfo();
+        if(networkInfo!=null && networkInfo.isConnected()) {
+            return true;
+        }
+        return false;
     }
 }

@@ -115,7 +115,12 @@ public class FragmentListarAlumnos extends Fragment implements SearchView.OnQuer
                                             .putExtra("position", position));
                                     break;
                                 case 2:
-                                    darDeBajaPersona(persons.get(position).getId());
+                                    if(tieneConexionInternet())
+                                        darDeBajaPersona(persons.get(position).getId());
+                                    else
+                                    Toast.makeText(getActivity().getApplicationContext(), "No se pudo conectar, revise el " +
+                                            "acceso a Internet e intente nuevamente", Toast.LENGTH_SHORT).show();
+
                                     break;
 
                             }
@@ -228,6 +233,5 @@ public class FragmentListarAlumnos extends Fragment implements SearchView.OnQuer
         }
         return false;
     }
-
 
 }

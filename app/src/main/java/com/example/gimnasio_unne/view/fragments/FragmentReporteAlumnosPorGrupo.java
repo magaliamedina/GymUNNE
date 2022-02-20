@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 
 import androidx.core.app.ActivityCompat;
@@ -94,7 +96,6 @@ public class FragmentReporteAlumnosPorGrupo extends Fragment {
         btnGenerar=view.findViewById(R.id.btnGenerarPDF);
         progressBar=view.findViewById(R.id.progressBarReportePorGrupo);
         //spinner= view.findViewById(R.id.spinnerMesReporte);
-        mostrarDatos();
 
         //Permisos
         if(ActivityCompat.checkSelfPermission(getActivity().getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -110,15 +111,22 @@ public class FragmentReporteAlumnosPorGrupo extends Fragment {
 
         //Genera el documento
         GenerarPDF generarPDF = new GenerarPDF();
-        btnGenerar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                barChart.buildDrawingCache();
-                Bitmap bm = barChart.getDrawingCache();
-                generarPDF.crearPDF(bm);
-                Toast.makeText(getActivity().getApplicationContext(), "Se generó el PDF en la carpeta de Descargas", Toast.LENGTH_SHORT).show();
-            }
-        });
+        if (tieneConexionInternet()) {
+            mostrarDatos();
+            btnGenerar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    barChart.buildDrawingCache();
+                    Bitmap bm = barChart.getDrawingCache();
+                    generarPDF.crearPDF(bm);
+                    Toast.makeText(getActivity().getApplicationContext(), "Se generó el PDF en la carpeta de Descargas", Toast.LENGTH_SHORT).show();
+                }
+            });
+        } else {
+            progressBar.setVisibility(View.GONE);
+            Toast.makeText(getActivity().getApplicationContext(), "No se pudo conectar, revise el " +
+                    "acceso a Internet e intente nuevamente", Toast.LENGTH_SHORT).show();
+        }
         return view;
     }
 
@@ -287,6 +295,15 @@ public class FragmentReporteAlumnosPorGrupo extends Fragment {
     private void ejeY(YAxis axis) {
         axis.setAxisMinimum(0);
         axis.setEnabled(false); //que no aparezca la barra derecha
+    }
+
+    private boolean tieneConexionInternet() {
+        ConnectivityManager con = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = con.getActiveNetworkInfo();
+        if(networkInfo!=null && networkInfo.isConnected()) {
+            return true;
+        }
+        return false;
     }
 
 

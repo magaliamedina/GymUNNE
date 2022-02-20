@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -185,6 +186,10 @@ public class EditarPersonal extends AppCompatActivity {
         }
         if (etestado.getText().toString().isEmpty())  {
             etestado.setError("Ingrese estado");
+            return false;
+        }
+        if(!Patterns.EMAIL_ADDRESS.matcher(etemail.getText()).matches()) { //si no es correo electronico valido
+            etemail.setError("Ingrese un correo válido");
             return false;
         }
         return true;

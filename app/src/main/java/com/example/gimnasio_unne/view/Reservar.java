@@ -83,11 +83,16 @@ public class Reservar extends AppCompatActivity {
             btnReservarCupoLibre.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    reservarCupoLibre("https://medinamagali.com.ar/gimnasio_unne/reservar_cupo_libre.php");
-                    descontarCupoLibre("https://medinamagali.com.ar/gimnasio_unne/descontar_cupo_libre.php");
-                    finish();
-                    Intent i = new Intent(getApplicationContext(), AlumnoActivity.class);
-                    startActivity(i);
+                    if (tieneConexionInternet()) {
+                        reservarCupoLibre("https://medinamagali.com.ar/gimnasio_unne/reservar_cupo_libre.php");
+                        descontarCupoLibre("https://medinamagali.com.ar/gimnasio_unne/descontar_cupo_libre.php");
+                        finish();
+                        Intent i = new Intent(getApplicationContext(), AlumnoActivity.class);
+                        startActivity(i);
+                    } else {
+                        Toast.makeText(getApplicationContext(), "No se pudo conectar, revise el " +
+                                "acceso a Internet e intente nuevamente", Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
         }
@@ -170,6 +175,15 @@ public class Reservar extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private boolean tieneConexionInternet() {
+        ConnectivityManager con = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = con.getActiveNetworkInfo();
+        if(networkInfo!=null && networkInfo.isConnected()) {
+            return true;
+        }
+        return false;
     }
 
 }
