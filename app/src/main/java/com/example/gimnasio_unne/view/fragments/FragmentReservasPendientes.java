@@ -78,10 +78,11 @@ public class FragmentReservasPendientes extends Fragment {
             //mostrar datos
             adaptador = new AdaptadorReservas(getActivity().getApplicationContext(), arrayReservas);
             list.setAdapter(adaptador);
+            //mostrarDatos();
             list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, final View view, final int position, long id) {
-                    //final int which_item = position;
+                    int which_item = position;
                     AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
                     //String confirmar_reserva = "Confirmar reserva";
                    // String cancelar_reserva = "Cancelar reserva";
@@ -100,8 +101,9 @@ public class FragmentReservasPendientes extends Fragment {
                                     //ESTADO CONFIRMADO: modificamos el estado en la base de datos
                                     if(tieneConexionInternet()) {
                                         confirmarCancelarReserva(arrayReservas.get(position).getId_reserva(), "1", "Reserva confirmada exitosamente", total_cupolibre);
-                                        /*getFragmentManager().beginTransaction().detach(FragmentReservasPendientes.this)
-                                        .attach(FragmentReservasPendientes.this).commit();*/
+                                        //para eliminar el elemento del arreglo y refrescar la lista
+                                        arrayReservas.remove(which_item);
+                                        adaptador.notifyDataSetChanged();
                                     } else {
                                         Toast.makeText(getActivity().getApplicationContext(), "No se pudo conectar, revise el " +
                                                 "acceso a Internet e intente nuevamente", Toast.LENGTH_SHORT).show();
@@ -110,20 +112,19 @@ public class FragmentReservasPendientes extends Fragment {
                                 case 1:
                                     if (tieneConexionInternet()) {
                                         //ESTADO CANCELADO: cambiamos el estado o borramos de la bd?
-                                        //adaptador.notifyDataSetChanged();
                                         Integer total = Integer.parseInt(total_cupolibre);
                                         total = total + 1;
                                         String totalCupoLibreString = total + "";
                                         confirmarCancelarReserva(arrayReservas.get(position).getId_reserva(), "2", "Reserva cancelada", totalCupoLibreString);
+                                        //para eliminar el elemento del arreglo y refrescar la lista
+                                        arrayReservas.remove(which_item);
+                                        adaptador.notifyDataSetChanged();
                                     } else {
                                         Toast.makeText(getActivity().getApplicationContext(), "No se pudo conectar, revise el " +
                                                 "acceso a Internet e intente nuevamente", Toast.LENGTH_SHORT).show();
                                     }
                                     break;
                             }
-                            //para eliminar el elemento del arreglo y refrescar la lista
-                            arrayReservas.remove(position);
-                            adaptador.notifyDataSetChanged();
                         }
                     });
                     builder.create().show();

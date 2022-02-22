@@ -84,8 +84,6 @@ public class FragmentMisReservas extends Fragment {
                         cancelarReserva(urlEliminarReserva);
                         tvNingunaReserva.setVisibility(View.VISIBLE);
                         cvMisReservas.setVisibility(View.INVISIBLE);
-                        Intent i = new Intent(getActivity().getApplicationContext(), AlumnoActivity.class);
-                        startActivity(i);
                     } else {
                         Toast.makeText(getActivity().getApplicationContext(), "No se pudo conectar, revise el " +
                                 "acceso a Internet e intente nuevamente", Toast.LENGTH_SHORT).show();

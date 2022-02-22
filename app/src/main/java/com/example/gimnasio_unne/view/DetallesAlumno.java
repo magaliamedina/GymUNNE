@@ -15,7 +15,7 @@ import com.example.gimnasio_unne.view.fragments.FragmentListarAlumnos;
 
 public class DetallesAlumno extends AppCompatActivity {
     TextView tvid, tvdni, tvApeYnom, tvsexo, tvfechaNac, tvlocalidad, tvprovincia, tvestado,tvestadocivil,
-            tvemail;
+            tvemail, tvlu;
     int position;
     
     @Override
@@ -38,6 +38,7 @@ public class DetallesAlumno extends AppCompatActivity {
         tvestado = findViewById(R.id.txtestadoalumnodetalle);
         tvestadocivil = findViewById(R.id.txtestadocivilalumnodetalle);
         tvemail = findViewById(R.id.txtemailalumnodetalle);
+        tvlu = findViewById(R.id.txtLualumnodetalle);
 
         //recibimos los parametros de Home
         Intent intent=getIntent();
@@ -64,6 +65,7 @@ public class DetallesAlumno extends AppCompatActivity {
         }
         tvestadocivil.setText(FragmentListarAlumnos.persons.get(position).getEstadoCivil());
         tvemail.setText(FragmentListarAlumnos.persons.get(position).getEmail());
+        tvlu.setText(FragmentListarAlumnos.persons.get(position).getLu());
     }
 
     @Override

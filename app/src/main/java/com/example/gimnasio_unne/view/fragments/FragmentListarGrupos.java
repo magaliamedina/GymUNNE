@@ -58,6 +58,14 @@ public class FragmentListarGrupos extends Fragment {
     public FragmentListarGrupos() {
     }
 
+    //para volver a refrescar la lista del fragment
+    @Override
+    public void onResume() {
+        super.onResume();
+        mostrarDatos();
+        adaptador.notifyDataSetChanged();
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_listar_grupos, container, false);

@@ -55,7 +55,7 @@ import cz.msebera.android.httpclient.Header;
 
 public class EditarAlumno extends AppCompatActivity {
 
-    EditText etdni,etapellido, etnombres, etestadocivil,etemail, etpassword, etestado;
+    EditText etdni,etapellido, etnombres, etestadocivil,etemail, etpassword, etestado, etlu;
     Spinner spinnerProvincias, spinnerSexos;
     Button btn, btn_date_editarAlumno;
     private AsyncHttpClient cliente;
@@ -82,6 +82,7 @@ public class EditarAlumno extends AppCompatActivity {
         etemail= findViewById(R.id.etEmailEditarAlumno);
         etpassword=findViewById(R.id.etPasswordEditarAlumno);
         etestado= findViewById(R.id.etEstadoEditarAlumno);
+        etlu=findViewById(R.id.etLueditaralumno);
         spinnerProvincias = findViewById(R.id.spinnerProvinciaEditarAlumno);
         spinnerSexos = findViewById(R.id.spinnerSexosEditarAlumno);
         btn= findViewById(R.id.btneditaralumno);
@@ -100,6 +101,7 @@ public class EditarAlumno extends AppCompatActivity {
         etemail.setText(FragmentListarAlumnos.persons.get(position).getEmail());
         etpassword.setText(FragmentListarAlumnos.persons.get(position).getPassword());
         etestado.setText(FragmentListarAlumnos.persons.get(position).getEstado());
+        etlu.setText(FragmentListarAlumnos.persons.get(position).getLu());
         btn_date_editarAlumno.setText(FragmentListarAlumnos.persons.get(position).getFechaNac());
 
         String sexo_guardado= FragmentListarAlumnos.persons.get(position).getSexo();
@@ -133,7 +135,7 @@ public class EditarAlumno extends AppCompatActivity {
                 NetworkInfo networkInfo = con.getActiveNetworkInfo();
                 if(networkInfo!=null && networkInfo.isConnected()) {
                     if (validarCampos()) {
-                        actualizar("http://medinamagali.com.ar/gimnasio_unne/editarpersona.php");
+                        actualizar("http://medinamagali.com.ar/gimnasio_unne/editarestudiante.php");
                     }
                 }
                 else {
@@ -180,6 +182,10 @@ public class EditarAlumno extends AppCompatActivity {
             etnombres.setError("Ingrese nombres");
             return false;
         }
+        if(etlu.getText().toString().isEmpty()) {
+            etlu.setError("Ingrese Libreta Universitaria");
+            return false;
+        }
         if (etemail.getText().toString().isEmpty()) {
             etemail.setError("Ingrese email");
             return false;
@@ -214,8 +220,7 @@ public class EditarAlumno extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 if(response.length()==0) {
-                    Toast.makeText(EditarAlumno.this, "Alumno modificado correctamente", Toast.LENGTH_LONG).show();
-                    //startActivity(new Intent(getApplicationContext(), PersonalActivity.class));
+                    Toast.makeText(EditarAlumno.this, "Estudiante modificado correctamente", Toast.LENGTH_LONG).show();
                     finish();
                 }
                 else {
@@ -243,6 +248,7 @@ public class EditarAlumno extends AppCompatActivity {
                 parametros.put("estado_civil", etestadocivil.getText().toString());
                 parametros.put("email", etemail.getText().toString());
                 parametros.put("password", etpassword.getText().toString());
+                parametros.put("lu", etlu.getText().toString());
                 return parametros;
             }
         };

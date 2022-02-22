@@ -48,7 +48,7 @@ import cz.msebera.android.httpclient.Header;
 
 public class AltaAlumno extends AppCompatActivity {
 
-    EditText etdni,etapellido, etnombres, etestadocivil,etemail, etpassword;
+    EditText etdni,etapellido, etnombres, etestadocivil,etemail, etpassword,etlu;
     Spinner spinnerProvincias, spinnerSexos;
     Button btn, btnDate;
     private AsyncHttpClient cliente;
@@ -72,6 +72,7 @@ public class AltaAlumno extends AppCompatActivity {
         etestadocivil= findViewById(R.id.etestadocivilaltaalumno);
         etemail= findViewById(R.id.etemailaltaalumno);
         etpassword=findViewById(R.id.etpassaltaalumno);
+        etlu= findViewById(R.id.etlualtaalumno);
         spinnerProvincias = findViewById(R.id.spinnerProvinciaAltaAlumno);
         spinnerSexos=findViewById(R.id.spsexoaltaalumno);
         btnDate= findViewById(R.id.btn_date);
@@ -99,7 +100,7 @@ public class AltaAlumno extends AppCompatActivity {
             public void onClick(View v) {
                 if(tieneConexionInternet()) {
                     if (validarCampos()) {
-                        altapersona("http://medinamagali.com.ar/gimnasio_unne/altapersona.php");
+                        altapersona("http://medinamagali.com.ar/gimnasio_unne/altaestudiante.php");
                     }
                 }else {
                     Toast.makeText(getApplicationContext(), "No se pudo conectar, revise el " +
@@ -202,6 +203,7 @@ public class AltaAlumno extends AppCompatActivity {
                     etestadocivil.setText("");
                     etemail.setText("");
                     etpassword.setText("");
+                    etlu.setText("");
                 }
                 else {
                     Toast.makeText(getApplicationContext(), "Usuario existente con ese DNI", Toast.LENGTH_SHORT).show();
@@ -227,6 +229,7 @@ public class AltaAlumno extends AppCompatActivity {
                 parametros.put("usuario_id", "3"); //usuario alumno
                 parametros.put("email", etemail.getText().toString());
                 parametros.put("password", etpassword.getText().toString());
+                parametros.put("lu", etlu.getText().toString());
                 return parametros;
             }
         };
@@ -245,6 +248,10 @@ public class AltaAlumno extends AppCompatActivity {
         }
         if(etnombres.getText().toString().isEmpty()) {
             etnombres.setError("Ingrese nombres");
+            return false;
+        }
+        if(etlu.getText().toString().isEmpty()) {
+            etlu.setError("Ingrese Libreta Universitaria");
             return false;
         }
         if (etemail.getText().toString().isEmpty()) {

@@ -51,6 +51,14 @@ public class FragmentListarCuposLibres extends Fragment {
 
     public FragmentListarCuposLibres() {  }
 
+    //para volver a refrescar la lista del fragment
+    @Override
+    public void onResume() {
+        super.onResume();
+        mostrarDatos();
+        adaptador.notifyDataSetChanged();
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_listar_cupos_libres, container, false);

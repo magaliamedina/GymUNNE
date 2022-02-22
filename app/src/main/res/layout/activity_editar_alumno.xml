@@ -59,6 +59,25 @@
             android:layout_height="wrap_content"
             android:hint="Nombres"
             android:inputType="text" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="@color/grey"
+                android:text="LU: "/>
+
+            <EditText
+                android:id="@+id/etLueditaralumno"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="N° de Libreta Universitaria"
+                android:inputType="number"
+                android:textSize="18sp" />
+        </LinearLayout>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

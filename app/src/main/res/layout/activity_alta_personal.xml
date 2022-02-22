@@ -15,7 +15,7 @@
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
-            app:title="Nuevo"
+            app:title="Nuevo personal administrativo"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
@@ -30,7 +30,7 @@
         android:padding="10dp">
         <EditText
             android:id="@+id/etdnialtaPersonal"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/txt_dni"
@@ -39,7 +39,7 @@
 
         <EditText
             android:id="@+id/etapellidoaltaPersonal"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:fontFamily="sans-serif"
@@ -49,7 +49,7 @@
 
         <EditText
             android:id="@+id/etnombresaltaPersonal"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/txt_nombres"
@@ -118,7 +118,7 @@
 
         <EditText
             android:id="@+id/etestadocivilaltaPersonal"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Estado Civil"
@@ -127,7 +127,7 @@
 
         <EditText
             android:id="@+id/etemailaltaPersonal"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/txt_email"
@@ -136,7 +136,7 @@
 
         <EditText
             android:id="@+id/etpassaltaPersonal"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/txt_password"

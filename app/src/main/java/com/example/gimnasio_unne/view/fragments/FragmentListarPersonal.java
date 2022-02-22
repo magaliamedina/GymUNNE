@@ -54,6 +54,14 @@ public class FragmentListarPersonal extends Fragment {
     String url="https://medinamagali.com.ar/gimnasio_unne/listar_personal.php";
     public FragmentListarPersonal() {  }
 
+    //para volver a refrescar la lista del fragment
+    @Override
+    public void onResume() {
+        super.onResume();
+        mostrarDatos(url);
+        adaptador.notifyDataSetChanged();
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view= inflater.inflate(R.layout.fragment_listar_personal, container, false);

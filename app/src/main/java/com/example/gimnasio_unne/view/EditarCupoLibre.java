@@ -190,7 +190,6 @@ public class EditarCupoLibre extends AppCompatActivity {
             public void onResponse(String response) {
                 Toast.makeText(EditarCupoLibre.this, "Modificado exitosamente", Toast.LENGTH_SHORT).show();
                 finish();
-                startActivity(new Intent(getApplicationContext(), PersonalActivity.class));
                 progressDialog.dismiss();
             }
         }, new Response.ErrorListener() {

@@ -14,7 +14,7 @@
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
-            app:title="Nuevo"
+            app:title="Nuevo profesor"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
@@ -29,7 +29,7 @@
         android:padding="10dp">
     <EditText
         android:id="@+id/etdnialtapersona"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/txt_dni"
@@ -38,7 +38,7 @@
 
     <EditText
         android:id="@+id/etapellidoaltapersona"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:fontFamily="sans-serif"
@@ -48,7 +48,7 @@
 
     <EditText
         android:id="@+id/etnombresaltapersona"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/txt_nombres"
@@ -118,7 +118,7 @@
 
         <EditText
             android:id="@+id/etestadocivilaltapersona"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Estado Civil"
@@ -127,7 +127,7 @@
 
     <EditText
         android:id="@+id/etemailaltapersona"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/txt_email"
@@ -136,7 +136,7 @@
 
     <EditText
         android:id="@+id/etpassaltapersona"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/txt_password"

@@ -46,12 +46,11 @@ import cz.msebera.android.httpclient.Header;
 
 public class EditarGrupos extends AppCompatActivity {
     EditText etnombre,etcupototal, etestado;
-    TextView tvid;
     Spinner spinnerProf, spinnerHorario;
     Button btn1;
     private AsyncHttpClient cliente, cliente2;
     int position;
-    private String idprof, idhorario;
+    private String idprof, idhorario, id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +62,6 @@ public class EditarGrupos extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        tvid = findViewById(R.id.tvideditargrupo);
         etnombre = findViewById(R.id.etnombreeditargrupo);
         spinnerProf = findViewById(R.id.spinnerProfeditargrupo);
         spinnerHorario = findViewById(R.id.spinnerhorarioeditargrupo);
@@ -75,7 +73,7 @@ public class EditarGrupos extends AppCompatActivity {
 
         Intent intent =getIntent();
         position=intent.getExtras().getInt("position");
-        tvid.setText(FragmentListarGrupos.groups.get(position).getId());
+        id=FragmentListarGrupos.groups.get(position).getId();
         etnombre.setText(FragmentListarGrupos.groups.get(position).getDescripcion());
         etcupototal.setText(FragmentListarGrupos.groups.get(position).getCupototal());
         etestado.setText(FragmentListarGrupos.groups.get(position).getEstado());
@@ -131,7 +129,6 @@ public class EditarGrupos extends AppCompatActivity {
             public void onResponse(String response) {
                 Toast.makeText(EditarGrupos.this, "Grupo modificado correctamente", Toast.LENGTH_LONG).show();
                 finish();
-                startActivity(new Intent(getApplicationContext(), AdministradorActivity.class));
                 progressDialog.dismiss();
             }
         }, new Response.ErrorListener() {
@@ -144,7 +141,7 @@ public class EditarGrupos extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params= new HashMap<String, String>();
-                params.put("grupo_id", tvid.getText().toString());
+                params.put("grupo_id", id);
                 params.put("horario_id", idhorario);
                 params.put("profesor_id", idprof);
                 params.put("total_cupos", etcupototal.getText().toString());
@@ -158,7 +155,7 @@ public class EditarGrupos extends AppCompatActivity {
     }
 
     private void llenarSpinnerHorario() {
-        String url = "https://medinamagali.com.ar/gimnasio_unne/consultarhorarios.php?grupo_id="+tvid.getText().toString()+"";
+        String url = "https://medinamagali.com.ar/gimnasio_unne/consultarhorarios.php?grupo_id="+id+"";
         cliente2.post(url, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -203,7 +200,7 @@ public class EditarGrupos extends AppCompatActivity {
     }
 
     private void llenarSpinnerProfesor() {
-        String url = "https://medinamagali.com.ar/gimnasio_unne/consultarProfesor.php?grupo_id="+tvid.getText().toString()+"";
+        String url = "https://medinamagali.com.ar/gimnasio_unne/consultarProfesor.php?grupo_id="+id+"";
         cliente.post(url, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {

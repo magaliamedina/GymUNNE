@@ -59,6 +59,14 @@ public class FragmentListarAlumnos extends Fragment implements SearchView.OnQuer
 
     public FragmentListarAlumnos() {   }
 
+    //para volver a refrescar la lista del fragment
+    @Override
+    public void onResume() {
+        super.onResume();
+        mostrarDatos(url);
+        adaptador.notifyDataSetChanged();
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view= inflater.inflate(R.layout.fragment_listar_alumnos, container, false);
@@ -180,9 +188,10 @@ public class FragmentListarAlumnos extends Fragment implements SearchView.OnQuer
                             String usuario_id = object.getString("usuario_id");
                             String email = object.getString("email");
                             String pass = object.getString("pass");
+                            String lu = object.getString("lu");
 
                             Personas personas = new Personas(id, dni, apellido, nombres, sexo, fechaNac, localidad, provincia,
-                                    estado, estadoCivil, usuario_id, email, pass);
+                                    estado, estadoCivil, usuario_id, email, pass,lu);
                             persons.add(personas);
                             adaptador.notifyDataSetChanged();
                         }

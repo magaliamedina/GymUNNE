@@ -52,8 +52,8 @@
         style="@style/textos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="12dp"
         android:text="Apellido y Nombre: "
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -64,12 +64,35 @@
         style="@style/textos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="58dp"
+        android:layout_marginTop="56dp"
         android:text="Apellido y nombre"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.086"
+        app:layout_constraintHorizontal_bias="0.147"
         app:layout_constraintStart_toEndOf="@+id/tvApeYNom_DetalleAlumno"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
+
+    <TextView
+        android:id="@+id/tvLu_DetalleAlumno"
+        style="@style/textos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="12dp"
+        android:text="LU: "
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvApeYNom_DetalleAlumno" />
+
+    <TextView
+        android:id="@+id/txtLualumnodetalle"
+        style="@style/textos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="12dp"
+        android:text="LU"
+        app:layout_constraintStart_toEndOf="@+id/tvLu_DetalleAlumno"
+        app:layout_constraintTop_toBottomOf="@+id/tvApeYNom_DetalleAlumno" />
 
     <TextView
         android:id="@+id/txtsexo_alumnodetalle"
@@ -77,28 +100,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="12dp"
         android:text="Sexo:"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvApeYNom_DetalleAlumno" />
+        app:layout_constraintTop_toBottomOf="@+id/tvLu_DetalleAlumno" />
 
     <TextView
         android:id="@+id/txtsexoalumnodetalle"
         style="@style/textos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
         android:text="Sexo"
         app:layout_constraintStart_toEndOf="@+id/txtsexo_alumnodetalle"
-        app:layout_constraintTop_toBottomOf="@+id/tvApeYNom_DetalleAlumno" />
+        app:layout_constraintTop_toBottomOf="@+id/txtLualumnodetalle" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="19dp"
-        android:layout_marginTop="18dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="52dp"
         android:text="(Como figura en el documento)"
         android:textColor="@color/grey"
         android:textSize="14sp"
@@ -122,8 +145,8 @@
         style="@style/textos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="92dp"
         android:text="Fecha"
         app:layout_constraintStart_toEndOf="@+id/txtfechnac_alumnodetalle"
         app:layout_constraintTop_toBottomOf="@+id/txtApeYNomalumnodetalle" />

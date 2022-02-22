@@ -80,7 +80,7 @@ public class AltaPersonal extends AppCompatActivity {
 
         llenarSpinnerProvincias();
 
-        String [] sexos = {"Masculino", "Femenino", "Otro"};
+        String [] sexos = {"Masculino", "Femenino"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, sexos);
         spinnerSexos.setAdapter(adapter);
 
@@ -221,9 +221,6 @@ public class AltaPersonal extends AppCompatActivity {
         }
         if(seleccion.equals("Femenino")) {
             sexoBD="2";
-        }
-        if(seleccion.equals("Otro")) {
-            sexoBD="3";
         }
         StringRequest stringRequest= new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override

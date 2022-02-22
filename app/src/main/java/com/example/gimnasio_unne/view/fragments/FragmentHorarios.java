@@ -55,6 +55,13 @@ public class FragmentHorarios extends Fragment {
     public FragmentHorarios() {
     }
 
+    //para volver a refrescar la lista del fragment
+    @Override
+    public void onResume() {
+        super.onResume();
+        mostrarDatos();
+        adaptador.notifyDataSetChanged();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -195,8 +202,6 @@ public class FragmentHorarios extends Fragment {
             @Override
             public void onResponse(String response) {
                 Toast.makeText(getActivity().getApplicationContext(), "Modificado exitosamente", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(getActivity().getApplicationContext(), AdministradorActivity.class);
-                startActivity(intent);
             }
         }, new Response.ErrorListener() {
             @Override

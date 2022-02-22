@@ -14,7 +14,7 @@
         android:theme="@style/AppTheme.AppBarOverlay">
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
-            app:title="Nuevo"
+            app:title="Nuevo estudiante"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
@@ -29,7 +29,7 @@
         android:padding="10dp">
         <EditText
             android:id="@+id/etdnialtaalumno"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/txt_dni"
@@ -38,7 +38,7 @@
 
         <EditText
             android:id="@+id/etapellidoaltaalumno"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:fontFamily="sans-serif"
@@ -48,12 +48,21 @@
 
         <EditText
             android:id="@+id/etnombresaltaalumno"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/txt_nombres"
             android:inputType="textPersonName"
             android:importantForAutofill="no" />
+
+        <EditText
+            android:id="@+id/etlualtaalumno"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="LU (Libreta Universitaria)"
+            android:inputType="number"
+            android:autofillHints="" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -118,7 +127,7 @@
 
         <EditText
             android:id="@+id/etestadocivilaltaalumno"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Estado Civil"
@@ -127,7 +136,7 @@
 
         <EditText
             android:id="@+id/etemailaltaalumno"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/txt_email"
@@ -136,7 +145,7 @@
 
         <EditText
             android:id="@+id/etpassaltaalumno"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/txt_password"
