@@ -109,8 +109,9 @@ public class FragmentHorarios extends Fragment {
                                     Toast.makeText(getActivity().getApplicationContext(), "Ingrese una hora de fin", Toast.LENGTH_SHORT).show();
                                 } else {
                                     String nueva_horafin = etHoraFin.getText().toString();
+                                    mostrarDatos(); //actualizar el list
+                                    adaptador.notifyDataSetChanged();
                                     cambiarEstado(horariosArrayList.get(position).getId(), horariosArrayList.get(position).getEstado(), nueva_horafin);
-                                    Toast.makeText(getActivity().getApplicationContext(), "Modificado exitosamente", Toast.LENGTH_SHORT).show();
                                 }
                             } //fin if tiene conexion
                             else {
@@ -201,6 +202,8 @@ public class FragmentHorarios extends Fragment {
                 , new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+                mostrarDatos();
+                adaptador.notifyDataSetChanged();
                 Toast.makeText(getActivity().getApplicationContext(), "Modificado exitosamente", Toast.LENGTH_LONG).show();
             }
         }, new Response.ErrorListener() {

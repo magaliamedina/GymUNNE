@@ -202,6 +202,8 @@ public class FragmentListarPersonal extends Fragment {
                 , new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+                mostrarDatos(url);
+                adaptador.notifyDataSetChanged();
                 Toast.makeText(getActivity().getApplicationContext(), "Se dió de baja exitosamente", Toast.LENGTH_LONG).show();
             }
         }, new Response.ErrorListener() {
