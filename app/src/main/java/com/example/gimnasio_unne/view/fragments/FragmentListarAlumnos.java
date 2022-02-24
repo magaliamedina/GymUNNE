@@ -8,6 +8,8 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
@@ -55,7 +57,7 @@ public class FragmentListarAlumnos extends Fragment implements SearchView.OnQuer
     AdaptadorPersonas adaptador;
     public static ArrayList<Personas> persons= new ArrayList<>();
     String url="https://medinamagali.com.ar/gimnasio_unne/listar_alumnos.php";
-    SearchView txtBuscar;
+    //SearchView txtBuscar;
 
     public FragmentListarAlumnos() {   }
 
@@ -72,7 +74,7 @@ public class FragmentListarAlumnos extends Fragment implements SearchView.OnQuer
         View view= inflater.inflate(R.layout.fragment_listar_alumnos, container, false);
         list = view.findViewById(R.id.listviewAlumnos);
         progressBar=view.findViewById(R.id.progressBarAlumnos);
-        txtBuscar= view.findViewById(R.id.txtBuscarAlumno);
+        //txtBuscar= view.findViewById(R.id.txtBuscarAlumno);
 
         //sin internet
         ImageView imgSinConexion=view.findViewById(R.id.imgSinConexion);
@@ -95,7 +97,7 @@ public class FragmentListarAlumnos extends Fragment implements SearchView.OnQuer
             adaptador = new AdaptadorPersonas(getActivity().getApplicationContext(), persons);
             list.setAdapter(adaptador);
             mostrarDatos(url);
-            txtBuscar.setOnQueryTextListener(this);
+            //txtBuscar.setOnQueryTextListener(this);
 
             //items para editar, eliminar y ver detalles
             list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -151,11 +153,13 @@ public class FragmentListarAlumnos extends Fragment implements SearchView.OnQuer
     }
 
     //los metodos sirve para buscar en tiempo real
+    //este metodo sirve para ejecutar cuando se pone buscar en el teclado
     @Override
     public boolean onQueryTextSubmit(String query) {
         return false;
     }
 
+    //este metodo es el que esta a la escucha
     @Override
     public boolean onQueryTextChange(String newText) {
         adaptador.filtrado(newText);

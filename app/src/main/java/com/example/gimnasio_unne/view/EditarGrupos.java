@@ -16,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -51,6 +52,8 @@ public class EditarGrupos extends AppCompatActivity {
     private AsyncHttpClient cliente, cliente2;
     int position;
     private String idprof, idhorario, id;
+    private ProgressBar progressBar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +71,7 @@ public class EditarGrupos extends AppCompatActivity {
         etcupototal = findViewById(R.id.ettotaleditargrupo);
         etestado= findViewById(R.id.etEditarGrupoEstado);
         btn1= findViewById(R.id.btneditargrupo);
+        progressBar=findViewById(R.id.progressBarEdGrupo);
         cliente = new AsyncHttpClient();
         cliente2 = new AsyncHttpClient();
 
@@ -86,6 +90,7 @@ public class EditarGrupos extends AppCompatActivity {
             public void onClick(View v) {
                 ConnectivityManager con = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
                 NetworkInfo networkInfo = con.getActiveNetworkInfo();
+                progressBar.setVisibility(View.GONE);
                 if(networkInfo!=null && networkInfo.isConnected()) {
                     if (validarCampos()) {
                         actualizar("https://medinamagali.com.ar/gimnasio_unne/editargrupo.php");
@@ -224,6 +229,7 @@ public class EditarGrupos extends AppCompatActivity {
                 p.setId(jsonArray.getJSONObject(i).getString("personas_id"));
                 //en el metodo tostring de la clase persona se define lo que se va a mostrar
                 listaPersonas.add(p);
+                progressBar.setVisibility(View.GONE);
             }
             ArrayAdapter<Personas> personas = new ArrayAdapter<Personas>(this, android.R.
                     layout.simple_dropdown_item_1line, listaPersonas);

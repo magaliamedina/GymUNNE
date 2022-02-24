@@ -66,8 +66,7 @@ public class AdaptadorPersonas extends ArrayAdapter<Personas> {
                 arrayListPersons.addAll(coleccion);
             }
             else {
-
-               for (Personas p: listaOriginal){
+                for (Personas p: listaOriginal){
                    if(p.getApellido().toLowerCase().contains(txtBuscar.toLowerCase())) {
                        arrayListPersons.add(p);
                    }

@@ -52,10 +52,13 @@ public class FragmentReportePorSexo extends Fragment {
         View view= inflater.inflate(R.layout.fragment_reporte_por_sexo, container, false);
         pieChart=view.findViewById(R.id.pieChartEdadAlumnos);
         progressBar=view.findViewById(R.id.progressBarReportePorSexo);
+        progressBar.setVisibility(View.VISIBLE);
         if(tieneConexionInternet()) {
+            progressBar.setVisibility(View.GONE);
             mostrarDatos();
         }
         else {
+            progressBar.setVisibility(View.GONE);
             Toast.makeText(getActivity().getApplicationContext(), "No se pudo conectar, revise el " +
                     "acceso a Internet e intente nuevamente", Toast.LENGTH_SHORT).show();
         }
@@ -105,7 +108,6 @@ public class FragmentReportePorSexo extends Fragment {
             @Override
             public void onResponse(String response) {
                 try {
-                    progressBar.setVisibility(View.GONE);
                     JSONArray jsonArray = new JSONArray(response);
                     masculino = jsonArray.getJSONObject(0).getString("masculino");
                     femenino = jsonArray.getJSONObject(1).getString("femenino");

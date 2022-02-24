@@ -49,7 +49,7 @@ import java.util.Map;
 public class FragmentListarProfesores extends Fragment implements SearchView.OnQueryTextListener{
     private ListView list;
     AdaptadorPersonas adaptador;
-    SearchView txtBuscar;
+    //SearchView txtBuscar;
     private ProgressBar progressBar;
     public static ArrayList<Personas> persons= new ArrayList<>();
     String url="https://medinamagali.com.ar/gimnasio_unne/mostrarpersonas.php";
@@ -59,7 +59,7 @@ public class FragmentListarProfesores extends Fragment implements SearchView.OnQ
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_listar_profesor, container, false);
         list = view.findViewById(R.id.listviewPersonas);
-        txtBuscar= view.findViewById(R.id.txtBuscarProfesor);
+        //txtBuscar= view.findViewById(R.id.txtBuscarProfesor);
         progressBar=view.findViewById(R.id.progressBarListarProf);
 
         //sin internet
@@ -83,7 +83,7 @@ public class FragmentListarProfesores extends Fragment implements SearchView.OnQ
             adaptador = new AdaptadorPersonas(getActivity().getApplicationContext(), persons);
             list.setAdapter(adaptador);
             mostrarDatos(url);
-            txtBuscar.setOnQueryTextListener(this);
+            //txtBuscar.setOnQueryTextListener(this);
 
             //items para editar, eliminar y ver detalles
             list.setOnItemClickListener(new AdapterView.OnItemClickListener() {

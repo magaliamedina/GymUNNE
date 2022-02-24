@@ -17,12 +17,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <SearchView
+        <!--SearchView
             android:id="@+id/txtBuscarAlumno"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:queryHint="Buscar apellido"
-            android:iconifiedByDefault="false"/>
+            android:iconifiedByDefault="false"/-->
 
         <ListView
         android:layout_marginTop="5dp"

@@ -29,6 +29,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.gimnasio_unne.AlumnoActivity;
 import com.example.gimnasio_unne.Login;
 import com.example.gimnasio_unne.R;
+import com.example.gimnasio_unne.Utiles;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
@@ -75,7 +76,7 @@ public class FragmentMisReservas extends Fragment {
         NetworkInfo networkInfo = con.getActiveNetworkInfo();
         if(networkInfo!=null && networkInfo.isConnected()) {
             //mostrar datos
-            url = "https://medinamagali.com.ar/gimnasio_unne/mi_reserva.php?personas_id=" + Login.personas_id + "";
+            url = "https://medinamagali.com.ar/gimnasio_unne/mi_reserva.php?personas_id="+Login.personas_id+"";
             mostrarDatos();
             btnCancelarReservaMisReservas.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -170,7 +171,16 @@ public class FragmentMisReservas extends Fragment {
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(getActivity().getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
             }
-        });
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> parametros= new HashMap<String, String>();
+                parametros.put("personas_id", Login.personas_id);
+                parametros.put("mes", Utiles.obtenerMesActual());
+                parametros.put("anio", Utiles.obtenerAnio());
+                return parametros;
+            }
+        };
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         requestQueue.add(request);
     }

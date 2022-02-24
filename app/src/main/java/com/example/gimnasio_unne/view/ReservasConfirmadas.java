@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,6 +37,7 @@ public class ReservasConfirmadas extends AppCompatActivity {
     AdaptadorPersonas adaptador;
     Personas personas;
     TextView tv;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +45,7 @@ public class ReservasConfirmadas extends AppCompatActivity {
         setContentView(R.layout.activity_reservas_confirmadas);
         list = findViewById(R.id.lv_reservasConfirmadas);
         tv= findViewById(R.id.tvAlumnosInscriptosAlCupo);
+        progressBar=findViewById(R.id.progressBarReservasConfirmadas);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -65,6 +68,7 @@ public class ReservasConfirmadas extends AppCompatActivity {
                 arrayList.clear();
                 try {
                     JSONArray jsonArray = new JSONArray(response);
+                    progressBar.setVisibility(View.GONE);
                     list.setVisibility(View.VISIBLE);
                         for (int i=0;i<jsonArray.length();i++) {
                             String id= jsonArray.getJSONObject(i).getString("personas_id");

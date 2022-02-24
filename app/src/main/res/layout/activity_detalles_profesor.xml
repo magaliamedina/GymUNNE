@@ -94,10 +94,11 @@
         app:layout_constraintTop_toBottomOf="@+id/tvApeYNom_DetallePersona" />
 
     <TextView
+        android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="15dp"
         android:text="(Como figura en el documento)"
         android:textColor="@color/grey"
         android:textSize="14sp"
@@ -122,10 +123,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="20dp"
         android:text="Fecha"
         app:layout_constraintStart_toEndOf="@+id/txtfechnac_personadetalle"
-        app:layout_constraintTop_toBottomOf="@+id/txtApeYNompersonadetalle" />
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <TextView
         android:id="@+id/txtprovincia_personadetalle"
@@ -134,7 +135,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="15dp"
-        android:text="Provincia"
+        android:text="Provincia: "
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtfechnac_personadetalle" />
@@ -146,7 +147,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:layout_marginTop="15dp"
-        android:text="Provincia:"
+        android:text="Provincia"
         app:layout_constraintStart_toEndOf="@+id/txtprovincia_personadetalle"
         app:layout_constraintTop_toBottomOf="@+id/txtfechnac_personadetalle" />
 
