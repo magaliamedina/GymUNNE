@@ -1,12 +1,14 @@
 package com.example.gimnasio_unne.view.fragments;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
@@ -62,6 +64,7 @@ public class FragmentMisReservas extends Fragment {
         tvNingunaReserva = view.findViewById(R.id.tvNingunaReserva);
         cvMisReservas= view.findViewById(R.id.cvMisReservas);
         btnCancelarReservaMisReservas = view.findViewById(R.id.btnCancelarReservaMisReservas);
+        btnCancelarReservaMisReservas.setVisibility(View.GONE);
         progressBar=view.findViewById(R.id.progressBarMiReserva);
         //sin conexion a internet
         ImageView imgSinConexion=view.findViewById(R.id.imgSinConexion);
@@ -76,21 +79,8 @@ public class FragmentMisReservas extends Fragment {
         NetworkInfo networkInfo = con.getActiveNetworkInfo();
         if(networkInfo!=null && networkInfo.isConnected()) {
             //mostrar datos
-            url = "https://medinamagali.com.ar/gimnasio_unne/mi_reserva.php?personas_id="+Login.personas_id+"";
+            url = "https://medinamagali.com.ar/gimnasio_unne/mi_reserva.php?personas_id=" + Login.personas_id + "";
             mostrarDatos();
-            btnCancelarReservaMisReservas.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (tieneConexionInternet()) {
-                        cancelarReserva(urlEliminarReserva);
-                        tvNingunaReserva.setVisibility(View.VISIBLE);
-                        cvMisReservas.setVisibility(View.INVISIBLE);
-                    } else {
-                        Toast.makeText(getActivity().getApplicationContext(), "No se pudo conectar, revise el " +
-                                "acceso a Internet e intente nuevamente", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
         }
         else {
             // no hay internet
@@ -109,7 +99,7 @@ public class FragmentMisReservas extends Fragment {
         StringRequest request=new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(getActivity().getApplicationContext(), "Se dió de baja exitosamente", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity().getApplicationContext(), "Se canceló la reserva", Toast.LENGTH_LONG).show();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -153,6 +143,8 @@ public class FragmentMisReservas extends Fragment {
                             String estado_reserva = object.getString("estado_reserva");
                             if (estado_reserva.equals("0")) {
                                 tvEstadoReserva.setText("Estado de la reserva: PENDIENTE");
+                                btnCancelarReservaMisReservas.setVisibility(View.VISIBLE);
+                                mostrarBotonCancelar();
                             } else if (estado_reserva.equals("1")) {
                                 tvEstadoReserva.setText("Estado de la reserva: CONFIRMADA");
                             } else {
@@ -192,6 +184,37 @@ public class FragmentMisReservas extends Fragment {
             return true;
         }
         return false;
+    }
+
+    private void mostrarBotonCancelar() {
+        btnCancelarReservaMisReservas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tieneConexionInternet()) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                    builder.setTitle("Selecciona una respuesta.")
+                            .setMessage("Estas seguro que desea cancelar?");
+                    builder.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            cancelarReserva(urlEliminarReserva);
+                            tvNingunaReserva.setVisibility(View.VISIBLE);
+                            cvMisReservas.setVisibility(View.INVISIBLE);
+                        }
+                    });
+                    builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    });
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                } else {
+                    Toast.makeText(getActivity().getApplicationContext(), "No se pudo conectar, revise el " +
+                            "acceso a Internet e intente nuevamente", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
 }

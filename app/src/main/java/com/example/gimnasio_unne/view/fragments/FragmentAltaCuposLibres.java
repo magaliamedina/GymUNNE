@@ -68,6 +68,8 @@ public class FragmentAltaCuposLibres extends Fragment {
 
         tvFechaReserva.setText(Utiles.obtenerFechaActual("GMT-3")
                 + " " +Utiles.obtenerHoraActual("GMT-3"));
+        etMes.setText(Utiles.obtenerMesActual());
+        etAnio.setText(Utiles.obtenerAnio());
         btnguardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

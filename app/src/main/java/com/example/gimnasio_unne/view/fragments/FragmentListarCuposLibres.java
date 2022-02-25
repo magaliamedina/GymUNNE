@@ -101,6 +101,7 @@ public class FragmentListarCuposLibres extends Fragment {
                     builder.create().show();
                 }
             }); //fin list.setOnItemClickListener
+            adaptador.notifyDataSetChanged();
             mostrarDatos();
         }
         else {

@@ -46,7 +46,6 @@ public class Login extends AppCompatActivity {
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
     CheckBox cbRecordarUsuario;
-    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,8 +88,6 @@ public class Login extends AppCompatActivity {
                 if(networkInfo!=null && networkInfo.isConnected()) {
                     //cargar web service
                     if (!usuario.isEmpty() && !password.isEmpty()) {
-                        progressDialog= new ProgressDialog(Login.this);
-                        progressDialog.show();
                         validarUsuario("https://medinamagali.com.ar/gimnasio_unne/validar_usuario.php");
                     } else {
                         edtUsuario.setError("Ingrese usuario");

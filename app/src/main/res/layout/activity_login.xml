@@ -12,20 +12,20 @@
         android:id="@+id/imglogoSGASLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="30dp"
         app:srcCompat="@drawable/sgas" />
 
     <EditText
         android:id="@+id/txt_emailLogin"
         android:layout_width="match_parent"
-        android:layout_marginTop="40dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
         android:autofillHints=""
         android:drawableStart="@drawable/vector_person"
         android:ems="10"
-        android:textSize="18dp"
         android:hint="@string/txt_email"
-        android:inputType="textEmailAddress" />
+        android:inputType="textEmailAddress"
+        android:textSize="18dp" />
 
     <EditText
         android:id="@+id/txt_passLogin"
@@ -33,68 +33,69 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="23dp"
         android:autofillHints=""
-        android:textSize="18dp"
         android:drawableStart="@drawable/vector_lock"
         android:ems="10"
         android:hint="@string/txt_password"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        android:textSize="18dp" />
 
     <CheckBox
         android:id="@+id/cbRecordarUsuario"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
         android:layout_marginTop="20dp"
+        android:ems="10"
         android:text="Recordar usuario y contraseña" />
 
     <Button
         android:id="@+id/btn_iniciarsesion"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:textSize="18dp"
         android:layout_marginTop="20dp"
         android:background="@color/colorPrimary"
         android:text="@string/btn_iniciar_sesion"
-        android:textColor="#ffffff" />
+        android:textColor="#ffffff"
+        android:textSize="18dp" />
 
     <Button
         android:id="@+id/btn_recuperar_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorPrimary"
         android:layout_gravity="center_horizontal"
-        android:stateListAnimator="@null"
-        android:textAllCaps="false"
-        android:background="#0000"
         android:layout_marginTop="10dp"
-        android:text="Recuperar mi contraseña"/>
+        android:background="#0000"
+        android:stateListAnimator="@null"
+        android:text="Recuperar mi contraseña"
+        android:textAllCaps="false"
+        android:textColor="@color/colorPrimary" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/grey"
         android:layout_marginTop="20dp"
-        android:textStyle="bold"
-        android:text="Ante cualquier consulta comunicarse al: "/>
+        android:text="Ante cualquier consulta comunicarse al: "
+        android:textColor="@color/grey"
+        android:textStyle="bold" />
+
     <Button
-            android:id="@+id/btnCallPhone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="onClickLlamada"
-            android:background="#0000"
-            android:text="  379-4439627 "
-            android:stateListAnimator="@null"
-            android:drawableStart="@drawable/ic_phone"/>
+        android:id="@+id/btnCallPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#0000"
+        android:drawableStart="@drawable/ic_phone"
+        android:onClick="onClickLlamada"
+        android:stateListAnimator="@null"
+        android:text="  379-4439627 " />
     <!--- para quitarle bordes sombreados android:stateListAnimator="@null"-->
     <Button
-            android:id="@+id/btnSendEmail"
-            android:layout_width="wrap_content"
-            android:background="#0000"
-            android:layout_height="wrap_content"
-            android:onClick="onClickEmail"
-            android:text="  secretaria.sociales.unne@gmail.com  "
-            android:stateListAnimator="@null"
-            android:textAllCaps="false"
-            android:drawableStart="@drawable/ic_email" />
+        android:id="@+id/btnSendEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#0000"
+        android:drawableStart="@drawable/ic_email"
+        android:onClick="onClickEmail"
+        android:stateListAnimator="@null"
+        android:text="  secretaria.sociales.unne@gmail.com  "
+        android:textAllCaps="false" />
 
 </LinearLayout>
