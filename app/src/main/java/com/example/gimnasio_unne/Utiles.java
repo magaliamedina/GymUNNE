@@ -14,6 +14,12 @@ public class Utiles {
         return obtenerFechaConFormato(formato, zonaHoraria);
     }
 
+    //para generar PDF no me permite con 2 puntos
+    public static String getHoraActual(String zonaHoraria) {
+        String formato = "HH-mm-ss";
+        return obtenerFechaConFormato(formato, zonaHoraria);
+    }
+
     public static String obtenerFechaActual(String zonaHoraria) {
         String formato = "yyyy-MM-dd";
         return obtenerFechaConFormato(formato, zonaHoraria);

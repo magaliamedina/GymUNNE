@@ -68,17 +68,12 @@ public class FragmentReporteAlumnosPorGrupo extends Fragment {
 
     private BarChart barChart, barChartMeses;
     private String URL="https://medinamagali.com.ar/gimnasio_unne/consulta_alumnos_por_grupo.php";
-    private String URL_MESES="https://medinamagali.com.ar/gimnasio_unne/consulta_alumnos_por_grupo_mes.php";
-    private String total_reservas, total_reservas2;
-    private String[] grupos, grupos2;
+    private String total_reservas;
+    private String[] grupos;
     private Button btnGenerar;
     private ProgressBar progressBar;
-    //para el spinner
-    private Spinner spinner;
-    private Integer mes_seleccionado;
     //creamos la lista con los valores de entrada
     List<BarEntry> entradas = new ArrayList<>();
-    List<BarEntry> entradas2 = new ArrayList<>();
 
 
     public FragmentReporteAlumnosPorGrupo() {  }
@@ -92,10 +87,8 @@ public class FragmentReporteAlumnosPorGrupo extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view= inflater.inflate(R.layout.fragment_reporte_alumnos_por_grupo, container, false);
         barChart=view.findViewById(R.id.barChartAlumnosPorGrupo);
-        //barChartMeses=view.findViewById(R.id.barChartAlumnosPorGrupoPorMes);
         btnGenerar=view.findViewById(R.id.btnGenerarPDF);
         progressBar=view.findViewById(R.id.progressBarReportePorGrupo);
-        //spinner= view.findViewById(R.id.spinnerMesReporte);
 
         //Permisos
         if(ActivityCompat.checkSelfPermission(getActivity().getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -105,10 +98,6 @@ public class FragmentReporteAlumnosPorGrupo extends Fragment {
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,},1000);
         }
 
-        //spinnerMeses();
-        //mostrarDatosGruposPorMeses();
-        //Toast.makeText(getActivity().getApplicationContext(), mes_seleccionado+"mes", Toast.LENGTH_SHORT).show();
-
         //Genera el documento
         GenerarPDF generarPDF = new GenerarPDF();
         if (tieneConexionInternet()) {
@@ -117,7 +106,7 @@ public class FragmentReporteAlumnosPorGrupo extends Fragment {
                 @Override
                 public void onClick(View v) {
                     barChart.buildDrawingCache();
-                    Bitmap bm = barChart.getDrawingCache();
+                    Bitmap bm = barChart.getDrawingCache(); //convertir graph a bitmap
                     generarPDF.crearPDF(bm);
                     Toast.makeText(getActivity().getApplicationContext(), "Se generó el PDF en la carpeta de Descargas", Toast.LENGTH_SHORT).show();
                 }
@@ -128,60 +117,6 @@ public class FragmentReporteAlumnosPorGrupo extends Fragment {
                     "acceso a Internet e intente nuevamente", Toast.LENGTH_SHORT).show();
         }
         return view;
-    }
-
-    public void spinnerMeses() {
-        ArrayAdapter<CharSequence> adapter=ArrayAdapter.createFromResource(getActivity().getApplicationContext(),
-                R.array.spinner_meses, android.R.layout.simple_list_item_1);
-        spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                //Toast.makeText(getActivity().getApplicationContext(), parent.getItemAtPosition(position).toString(), Toast.LENGTH_SHORT).show();
-                mes_seleccionado = spinner.getSelectedItemPosition() + 1;
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
-    }
-
-    public void mostrarDatosGruposPorMeses() {
-        StringRequest request = new StringRequest(Request.Method.POST, URL_MESES, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    progressBar.setVisibility(View.GONE);
-                    JSONArray jsonArray = new JSONArray(response);
-                    grupos2= new String[jsonArray.length()];
-                    for (int i=0;i<jsonArray.length();i++) {
-                        total_reservas2 = jsonArray.getJSONObject(i).getString("total_reservas");
-                        grupos2[i] = jsonArray.getJSONObject(i).getString("descripcion") ;
-                        entradas2.add(new BarEntry(i, Float.parseFloat(total_reservas2)));
-                    }
-                    crearGraficoBarraMeses();
-                    legend(barChartMeses); //metodo leyenda
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getActivity().getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        }) //INICIO DEL POST
-        {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> parametros= new HashMap<String, String>();
-                parametros.put("mes", "1");
-                parametros.put("anio", Utiles.obtenerAnio());
-                return parametros;
-            }
-        };
-        RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
-        requestQueue.add(request);
     }
 
     public void mostrarDatos() {
@@ -211,36 +146,6 @@ public class FragmentReporteAlumnosPorGrupo extends Fragment {
         });
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         requestQueue.add(request);
-    }
-
-    private void crearGraficoBarraMeses() {
-        //mandamos los datos para crear la gráfica
-        BarDataSet datos = new BarDataSet(entradas2 ,"");
-
-        BarData data = new BarData(datos);
-
-        //ponemos color a cada barra
-        datos.setColors(ColorTemplate.COLORFUL_COLORS);
-        datos.setValueTextSize(18);
-        datos.setValueTextColor(Color.BLACK);
-
-        //separacion entre las barras
-        data.setBarWidth(0.45f);
-        barChartMeses.setData(data);
-
-        barChartMeses.setFitBars(true); //pone las barras centradas
-        barChartMeses.setDrawGridBackground(true); //las lineas que sean horizontales unicamente
-        barChartMeses.getLegend().setEnabled(false); //no mostrar las leyendas
-
-        Description description = new Description();
-        description.setText(""); //para que no muestre descripcion
-        barChart.setDescription(description);
-
-        ejeX(barChartMeses.getXAxis());
-        ejeY(barChartMeses.getAxisRight()); //que muestre a la izquierda
-        //LAS 2 siguientes lineas son para que cargue los datos sin hacer clic en el grafico
-        barChartMeses.notifyDataSetChanged();
-        barChartMeses.invalidate();
     }
 
     private void crearGraficoBarra() {
