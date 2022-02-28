@@ -61,6 +61,13 @@ public class FragmentReservasPendientes extends Fragment {
     TextView tvSinReservasPendientes;
     public FragmentReservasPendientes(){}
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        mostrarDatos();
+        adaptador.notifyDataSetChanged();
+    }
+
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_reservas_pendientes, container, false);
         list = view.findViewById(R.id.lvListarReservas);
@@ -102,8 +109,8 @@ public class FragmentReservasPendientes extends Fragment {
                                     if(tieneConexionInternet()) {
                                         confirmarCancelarReserva(arrayReservas.get(position).getId_reserva(), "1", "Reserva confirmada exitosamente", total_cupolibre);
                                         //para eliminar el elemento del arreglo y refrescar la lista
-                                        arrayReservas.remove(which_item);
                                         adaptador.notifyDataSetChanged();
+                                        arrayReservas.remove(which_item);
                                     } else {
                                         Toast.makeText(getActivity().getApplicationContext(), "No se pudo conectar, revise el " +
                                                 "acceso a Internet e intente nuevamente", Toast.LENGTH_SHORT).show();
@@ -117,8 +124,8 @@ public class FragmentReservasPendientes extends Fragment {
                                         String totalCupoLibreString = total + "";
                                         confirmarCancelarReserva(arrayReservas.get(position).getId_reserva(), "2", "Reserva cancelada", totalCupoLibreString);
                                         //para eliminar el elemento del arreglo y refrescar la lista
-                                        arrayReservas.remove(which_item);
                                         adaptador.notifyDataSetChanged();
+                                        arrayReservas.remove(which_item);
                                     } else {
                                         Toast.makeText(getActivity().getApplicationContext(), "No se pudo conectar, revise el " +
                                                 "acceso a Internet e intente nuevamente", Toast.LENGTH_SHORT).show();
@@ -131,6 +138,7 @@ public class FragmentReservasPendientes extends Fragment {
                 }
             });
             mostrarDatos();
+            adaptador.notifyDataSetChanged();
         } // cierre de si hay internet
         else {
             // no hay internet
@@ -165,7 +173,7 @@ public class FragmentReservasPendientes extends Fragment {
                     JSONArray jsonArray=jsonObject.getJSONArray("listarreservas");
                     if (sucess.equals("1")) {
                         list.setVisibility(View.VISIBLE);
-                        tvSinReservasPendientes.setVisibility(View.INVISIBLE);
+                        //tvSinReservasPendientes.setVisibility(View.INVISIBLE);
                         for (int i=0;i<jsonArray.length();i++) {
                             JSONObject object= jsonArray.getJSONObject(i);
                             String reserva_id= object.getString("reserva_id");
