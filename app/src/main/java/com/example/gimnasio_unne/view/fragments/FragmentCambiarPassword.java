@@ -64,8 +64,6 @@ public class FragmentCambiarPassword extends Fragment {
                    Toast.makeText(getActivity().getApplicationContext(), "Algunos campos están vacios", Toast.LENGTH_SHORT).show();
                 } else {
                     validarPassword();
-                    //Intent i = new Intent(getApplicationContext(), AlumnoActivity.class);
-                    //startActivity(i);
                 }
             }
         });

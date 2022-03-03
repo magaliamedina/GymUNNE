@@ -87,8 +87,6 @@ public class Reservar extends AppCompatActivity {
                         reservarCupoLibre("https://medinamagali.com.ar/gimnasio_unne/reservar_cupo_libre.php");
                         descontarCupoLibre("https://medinamagali.com.ar/gimnasio_unne/descontar_cupo_libre.php");
                         finish();
-                        Intent i = new Intent(getApplicationContext(), AlumnoActivity.class);
-                        startActivity(i);
                     } else {
                         Toast.makeText(getApplicationContext(), "No se pudo conectar, revise el " +
                                 "acceso a Internet e intente nuevamente", Toast.LENGTH_SHORT).show();

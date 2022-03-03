@@ -1,7 +1,5 @@
 package com.example.gimnasio_unne.view.fragments;
 
-import android.app.AlertDialog;
-import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,14 +9,12 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -30,36 +26,31 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.gimnasio_unne.AlumnoActivity;
-import com.example.gimnasio_unne.Login;
 import com.example.gimnasio_unne.R;
-import com.example.gimnasio_unne.Utiles;
-import com.example.gimnasio_unne.model.Provincias;
 import com.google.android.material.textfield.TextInputLayout;
 import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
 
 import org.json.JSONArray;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
+import org.json.JSONException;
 import java.util.HashMap;
 import java.util.Map;
-
-import cz.msebera.android.httpclient.Header;
 
 public class FragmentMiPerfil extends Fragment {
 
     TextInputLayout etlu,etdni,etnya, etestadocivil,etemail, etFacultades;
     Spinner spinnerSexos;
-    Button btn, btnFechaNac;
+    Button btn;
     private String  sexoBD,idpersona, facultad;
     String [] sexos;
-    DatePickerDialog datePickerDialog;
     private AsyncHttpClient cliente;
+    String url="https://medinamagali.com.ar/gimnasio_unne/consulta_mi_perfil.php";
     public FragmentMiPerfil() {   }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mostrarDatos();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,  Bundle savedInstanceState) {
@@ -72,10 +63,10 @@ public class FragmentMiPerfil extends Fragment {
         spinnerSexos = view.findViewById(R.id.spSexoMiPerfil);
         etFacultades= view.findViewById(R.id.etFacultadMiPerfil);
         btn= view.findViewById(R.id.btnModificarMiPerfil);
-        //btnFechaNac = view.findViewById(R.id.btnFechaNacMiPerfil);
         cliente = new AsyncHttpClient();
 
         getSharedPreferences();
+
         if(sexoBD.equals("2")) {
             sexos= new String [] {"Femenino", "Masculino"};
         } else if(sexoBD.equals("1")) {
@@ -84,18 +75,6 @@ public class FragmentMiPerfil extends Fragment {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),
                 android.R.layout.simple_list_item_1, sexos);
         spinnerSexos.setAdapter(adapter);
-
-        /*try {
-            initDatePicker();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        btnFechaNac.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                datePickerDialog.show();
-            }
-        });*/
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,40 +98,10 @@ public class FragmentMiPerfil extends Fragment {
     //que pasa con el recordar usuario y contraseña y sin??
     public void getSharedPreferences() {
         SharedPreferences sharedPreferences = getActivity().getApplicationContext().getSharedPreferences("datosusuario",Context.MODE_PRIVATE);
-        etnya.getEditText().setText(sharedPreferences.getString("nya", ""));
-        etdni.getEditText().setText(sharedPreferences.getString("dni", ""));
-        etlu.getEditText().setText(sharedPreferences.getString("lu", ""));
-        etestadocivil.getEditText().setText(sharedPreferences.getString("estado_civil", ""));
-        sexoBD = sharedPreferences.getString("sexo", "");
-        //idprovincia = sharedPreferences.getString("provincia", "");
-        etemail.getEditText().setText(sharedPreferences.getString("email",""));
+                sexoBD = sharedPreferences.getString("sexo", "");
         idpersona= sharedPreferences.getString("personas_id", "");
         facultad= sharedPreferences.getString("facultad_id", "");
-        //btnFechaNac.setText(sharedPreferences.getString("fecha_nac", ""));
         asignarFacultades();
-    }
-
-    private void initDatePicker() throws ParseException {
-        DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                month= month+1;
-                String date= year+"-"+month+"-"+day;
-                btnFechaNac.setText(date);
-            }
-        };
-        Calendar calendar = Calendar.getInstance();
-        int style= AlertDialog.THEME_HOLO_LIGHT;
-        int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH);
-        int day = calendar.get(Calendar.DAY_OF_MONTH);
-        datePickerDialog = new DatePickerDialog(getActivity().getApplicationContext(), style,dateSetListener,year,month,day);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        long dateMillis;
-        Date dateHoy;
-        dateHoy= sdf.parse(Utiles.obtenerFechaActual("GMT -3"));
-        dateMillis=dateHoy.getTime();
-        datePickerDialog.getDatePicker().setMaxDate(dateMillis);
     }
 
     private void asignarFacultades() {
@@ -229,7 +178,6 @@ public class FragmentMiPerfil extends Fragment {
                 parametros.put("sexo_id", sexoBD);
                 parametros.put("estado_civil", etestadocivil.getEditText().getText().toString());
                 parametros.put("email", etemail.getEditText().getText().toString());
-                //parametros.put("fecha_nac", btnFechaNac.getText().toString());
                 return parametros;
             }
         };
@@ -237,15 +185,57 @@ public class FragmentMiPerfil extends Fragment {
         requestQueue.add(request);
     }
 
-   public boolean validarCampos() {
-        if (etestadocivil.toString().isEmpty()) {
+    public boolean validarCampos() {
+        if (etestadocivil.getEditText().getText().toString().isEmpty()) {
             etestadocivil.setError("Ingrese estado civil");
             return false;
         }
-        if (etemail.toString().isEmpty()) {
+        if (etemail.getEditText().getText().toString().isEmpty()) {
             etemail.setError("Ingrese email");
             return false;
         }
+        if(!Patterns.EMAIL_ADDRESS.matcher(etemail.getEditText().getText()).matches()) { //si no es correo electronico valido
+            etemail.setError("Formato de correo electrónico incorrecto");
+            return false;
+        }
         return true;
+    }
+
+    public void mostrarDatos() {
+        StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONArray jsonArray = new JSONArray(response);
+                    int i=0;
+                    etdni.getEditText().setText(jsonArray.getJSONObject(i).getString("dni"));
+                    etnya.getEditText().setText(jsonArray.getJSONObject(i).getString("apellido")+" " +
+                            jsonArray.getJSONObject(i).getString("nombres"));
+                    sexoBD = jsonArray.getJSONObject(i).getString("sexo_id");
+                    etestadocivil.getEditText().setText(jsonArray.getJSONObject(i).getString("estado_civil"));
+                    etemail.getEditText().setText(jsonArray.getJSONObject(i).getString("email"));
+                    etlu.getEditText().setText(jsonArray.getJSONObject(i).getString("lu"));
+                    facultad = jsonArray.getJSONObject(i).getString("facultad_id");
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getActivity().getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams()
+            {
+                Map<String, String>  params = new HashMap<String, String>();
+                params.put("persona_id", idpersona);
+                return params;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
+        requestQueue.add(request);
     }
 }

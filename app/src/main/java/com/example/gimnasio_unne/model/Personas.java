@@ -33,6 +33,7 @@ public class Personas {
         this.password=pass;
     }
 
+
     public Personas(String id, String dni, String apellido, String nombres, String sexo, String fechaNac,
                     String localidad, String provincia, String estado, String estadoCivil, String usuarioId,
                     String email, String pass, String lu) {

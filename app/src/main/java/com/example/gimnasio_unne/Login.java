@@ -223,13 +223,8 @@ public class Login extends AppCompatActivity {
         editor.putString("lu", lu);
         editor.putString("personas_id", personas_id);
         //agregados para mi perfil
-        editor.putString("dni", dni);
         editor.putString("sexo", sexo);
-        editor.putString("provincia", pcia);
-        editor.putString("estado_civil", estadocivil);
-        editor.putString("email", email);
         editor.putString("facultad_id", facultad);
-        editor.putString("fecha_nac", fecha_nac);
         //agregado para cambiar password
         editor.putString("password", password);
         editor.apply();

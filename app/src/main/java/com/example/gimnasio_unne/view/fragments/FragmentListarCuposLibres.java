@@ -55,8 +55,8 @@ public class FragmentListarCuposLibres extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        mostrarDatos();
         adaptador.notifyDataSetChanged();
+        mostrarDatos();
     }
 
     @Override
@@ -124,7 +124,12 @@ public class FragmentListarCuposLibres extends Fragment {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     String sucess=jsonObject.getString("sucess");
-                    if (sucess.equals("1")) {
+                    if(sucess.equals("2")) {
+                        list.setVisibility(View.GONE);
+                        progressBar.setVisibility(View.GONE);
+                        tvReservaRealizada.setVisibility(View.VISIBLE);
+                    }
+                    else if (sucess.equals("1")) {
                         progressBar.setVisibility(View.GONE);
                         list.setVisibility(View.VISIBLE);
                         JSONArray jsonArray=jsonObject.getJSONArray("cuposlibres");
@@ -145,10 +150,6 @@ public class FragmentListarCuposLibres extends Fragment {
                             arrayCuposLibres.add(cuposLibres);
                             adaptador.notifyDataSetChanged();
                         }
-                    }
-                    if(sucess.equals("2")) {
-                        progressBar.setVisibility(View.GONE);
-                        tvReservaRealizada.setVisibility(View.VISIBLE);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
