@@ -159,7 +159,6 @@ public class FragmentMiPerfil extends Fragment {
             public void onResponse(String response) {
                 if(response.length()==0) {
                     Toast.makeText(getActivity().getApplicationContext(), "Modificado correctamente", Toast.LENGTH_LONG).show();
-                    startActivity(new Intent(getActivity().getApplicationContext(), AlumnoActivity.class));
                 }
                 else {
                     Toast.makeText(getActivity().getApplicationContext(), "Usuario existente con ese DNI", Toast.LENGTH_SHORT).show();
