@@ -14,41 +14,75 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="15dp"
         android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="15dp"
             android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="Ingresar filtro por fechas:" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
-                <TextView
+                <Button
+                    android:id="@+id/btnDsdGrupos"
+                    style="?android:spinnerStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Histórico"
-                    android:textSize="24sp"
-                    android:textStyle="bold" />
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:text="Desde"
+
+                    android:textAlignment="center"
+                    android:textColor="@color/grey"
+                    android:textSize="18sp" />
+
+                <Button
+                    android:id="@+id/btnHstGrupos"
+                    style="?android:spinnerStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:text="Hasta"
+                    android:textAlignment="center"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnFiltrarGrupos"
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content"
+                android:text="Filtrar"
+                android:textSize="18sp"
+                android:background="@color/colorPrimary"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+
+                android:textAlignment="center" />
 
                 <Button
                     android:id="@+id/btnGenerarPDF"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
                     android:background="@color/colorPrimary"
                     android:text="Descargar PDF"
+                    android:layout_marginTop="10dp"
                     android:textColor="@color/white"
+                    android:paddingLeft="20dp"
                     android:drawableStart="@drawable/ic_pdf"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
                     android:textSize="18sp" />
-            </LinearLayout>
 
             <com.github.mikephil.charting.charts.BarChart
                 android:id="@+id/barChartAlumnosPorGrupo"
@@ -56,37 +90,6 @@
                 android:layout_height="450dp" >
 
             </com.github.mikephil.charting.charts.BarChart>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
-                android:orientation="vertical">
-
-                <!--LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Elegir mes:"
-                        android:textSize="24sp"
-                        android:textStyle="bold" />
-
-                    <Spinner
-                        android:id="@+id/spinnerMesReporte"
-                        android:layout_width="wrap_content"
-                        android:layout_marginLeft="15dp"
-                        android:layout_height="30dp" />
-
-                </LinearLayout>
-
-                <com.github.mikephil.charting.charts.BarChart
-                    android:id="@+id/barChartAlumnosPorGrupoPorMes"
-                    android:layout_width="match_parent"
-                    android:layout_height="450dp"/-->
-            </LinearLayout>
         </LinearLayout>
 
     </ScrollView>
