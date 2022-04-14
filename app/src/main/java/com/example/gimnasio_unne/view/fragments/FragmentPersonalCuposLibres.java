@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -29,6 +30,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.gimnasio_unne.AdministradorActivity;
 import com.example.gimnasio_unne.PersonalActivity;
 import com.example.gimnasio_unne.view.EditarCupoLibre;
 import com.example.gimnasio_unne.R;
@@ -52,6 +54,7 @@ public class FragmentPersonalCuposLibres extends Fragment {
     public static ArrayList<CuposLibres> arrayCuposLibres= new ArrayList<>();
     String url = "https://medinamagali.com.ar/gimnasio_unne/listarcuposlibres_personal.php";
     String url_limpiar_cupos = "https://medinamagali.com.ar/gimnasio_unne/limpiar_cupos.php";
+    String usuario_id;
     AdaptadorPersonalCupos adaptador;
     CuposLibres cuposLibres;
     public FragmentPersonalCuposLibres() {
@@ -78,6 +81,8 @@ public class FragmentPersonalCuposLibres extends Fragment {
         imgSinConexion.setVisibility(View.INVISIBLE);
         tvSinConexion1.setVisibility(View.INVISIBLE);
         tvSinConexion2.setVisibility(View.INVISIBLE);
+
+        getSharedPreferences();
 
         if(tieneConexionInternet()) {
             //cargar el web service
@@ -172,16 +177,14 @@ public class FragmentPersonalCuposLibres extends Fragment {
     }
 
     public void limpiarCupoMes() {
-        /*final ProgressDialog progressDialog= new ProgressDialog(getActivity().getApplicationContext());
-        progressDialog.setMessage("Cargando....");
-        progressDialog.show();*/
-
         StringRequest request=new StringRequest(Request.Method.POST, url_limpiar_cupos, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Toast.makeText(getActivity().getApplicationContext(), "Cupos actualizados", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(getActivity().getApplicationContext(), PersonalActivity.class));
-                //progressDialog.dismiss();
+                if(usuario_id.equals("1"))
+                    startActivity(new Intent(getActivity().getApplicationContext(), AdministradorActivity.class));
+                else if(usuario_id.equals("4"))
+                    startActivity(new Intent(getActivity().getApplicationContext(), PersonalActivity.class));
             }
         }, new Response.ErrorListener() {
             @Override
@@ -275,5 +278,10 @@ public class FragmentPersonalCuposLibres extends Fragment {
         });
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         requestQueue.add(request);
+    }
+
+    public void getSharedPreferences() {
+        SharedPreferences sharedPreferences = getActivity().getApplicationContext().getSharedPreferences("datosusuario",Context.MODE_PRIVATE);
+        usuario_id= sharedPreferences.getString("usuario_id", "");
     }
 }

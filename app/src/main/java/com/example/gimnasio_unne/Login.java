@@ -42,7 +42,7 @@ public class Login extends AppCompatActivity {
     EditText edtUsuario, edtPassword;
     Button btnLogin, btnCallPhone, btnSendMail, btn_recuperar_password;
     public static String usuario = "", password = "", personas_id = "", apellido = "", nombres = "", lu = "",
-            sexo="", pcia="", estadocivil="", dni="", email="", facultad="", fecha_nac="";
+            sexo="", pcia="", estadocivil="", dni="", email="", facultad="", fecha_nac="", tipousuario="";
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
     CheckBox cbRecordarUsuario;
@@ -145,7 +145,7 @@ public class Login extends AppCompatActivity {
                         if (estado.equals("0")){
                             Toast.makeText(Login.this, "Usuario dado de baja. Consulte al correo electrónico", Toast.LENGTH_LONG).show();
                         } else {
-                            guardarSharedPreferences();
+                            guardarSharedPreferences(usuario_id);
                             edtUsuario.setText("");
                             edtPassword.setText("");
                             guardarSesion(cbRecordarUsuario.isChecked(), usuario_id);
@@ -216,7 +216,7 @@ public class Login extends AppCompatActivity {
         editor.apply();
     }
 
-    public void guardarSharedPreferences() {
+    public void guardarSharedPreferences(String tipousuario) {
         SharedPreferences preferences = getSharedPreferences("datosusuario", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("nya", nombres + " " + apellido);
@@ -227,6 +227,8 @@ public class Login extends AppCompatActivity {
         editor.putString("facultad_id", facultad);
         //agregado para cambiar password
         editor.putString("password", password);
+        //agregar para saber el usuario en personalcuposlibres
+        editor.putString("usuario_id", tipousuario);
         editor.apply();
     }
 
